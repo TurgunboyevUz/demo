@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/');
 
 require_once __DIR__ . '/web/oauth.php';
 require_once __DIR__ . '/web/student.php';

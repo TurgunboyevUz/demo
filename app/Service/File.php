@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserService
+class File
 {
     protected $request;
     protected $user;
