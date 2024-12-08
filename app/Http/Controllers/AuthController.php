@@ -19,13 +19,25 @@ class AuthController extends Controller
         return redirect($url);
     }
 
-    public function student_url()
+    public function student_url(Request $request)
     {
+        if ($request->user()?->hasRole('student')) {
+            return redirect()->route('student.dashboard');
+        }
+
         return $this->url('student');
     }
 
-    public function employee_url()
+    public function employee_url(Request $request)
     {
+        $roles = ['teacher', 'dean', 'inspector', 'admin', 'super_admin'];
+
+        foreach ($roles as $role) {
+            if ($request->user()?->hasRole($role)) {
+                return redirect()->route('employee.' . $role . '.dashboard');
+            }
+        }
+
         return $this->url('employee');
     }
 
@@ -36,7 +48,5 @@ class AuthController extends Controller
         if (!$auth) {
             return redirect()->route($type . '.login');
         }
-
-        
     }
 }
