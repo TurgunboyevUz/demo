@@ -1,0 +1,208 @@
+Array
+(
+    [token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI4IiwianRpIjoiMmJkNTdhZDliZjRiZWY4ZWEwZDgyYzE0OWJiMjlhYzdhOGE5Y2FmZTlkYTE2MDllYzBiMjFlODdhMGFlOTY5YzQ5NTM3MjFkZWQ3NzFlMjAiLCJpYXQiOjE3MzM2Njk5NjcsIm5iZiI6MTczMzY2OTk2NywiZXhwIjoxNzMzNjczNTY3LCJzdWIiOiI2Nzk5Iiwic2NvcGVzIjpbXX0.GaDgs7TY7BOZ_fbbEXtu5VDhI-rBikdxPYXuVmmW6A-VJF572lMSgVQjxBklFY-Uu_TZyakD9j7ZRIDyhRK8SlbDBJvgTjJmAQBu5MGB7ng90nl_kLk0dof42-EIZvknrk3SEi2YA_yhQn-XD60msKq6hdpXd2BftzIDKvYG-iT0wbYsKGHc1yKU-aMEpFgvAGsDj3WGiWIUFFIRrWrA3VDWCdtqMmsT8vFSZn9oqKRiTPTsZBD5f93RZlrga4hCQYRWLi6DCsGdoW2cGfApWgxtyPWj451J7NPQK06AIL_zEQIf-W86wExtbUBtZZr3a7-0dTRthigv_R7GXZWjBcUbLgGK6usBYqozMQ0KumyE0L93xLlzsQjfM1E-kn78DobfCtdw1-73TZFeyv2Fn5A_W2T-xFdg6ALeO0DlZfyP4-fNt3rCTraP4bhyLDxZ_Tg6Dl21vDzM8PheMMjCiPkh1FjBpC8lYUatwIvasZx8sbKfgZhGg2ZY6sDq2qXL2d61HpEziRpfQPcETv98MbsPlDdAl8cRcwSVLtQPzojBOw0SlvmKsI_zKWC-h2-x8BuEqBJFAm4LUd6mAXfjMun618s99oraUoY1njJ93sSJcUKxICcdNgElodedKqoIVG4kjESGF-sADEQd34w5iMowHvhezMpHV-pYil1a_B4
+    [user] => Array
+        (
+            [id] => 6799
+            [uuid] => 76d0ce92-0e38-3a84-dbc1-a01b1c986709
+            [student_id_number] => 303211100651
+            [type] => student
+            [roles] => Array
+                (
+                )
+
+            [name] => Oyatillo Anvarov
+            [login] => 303211100651
+            [email] => anoyatillo16@gmail.com
+            [phone] => +998934466752
+            [passport_pin] => 50704048040011
+            [passport_number] => AC2805749
+            [picture] => https://hemis.andmiedu.uz/static/crop/2/1/120_120_90_2170006031.jpg
+            [firstname] => OYATILLO
+            [surname] => ANVAROV
+            [patronymic] => OZODBEK O‘G‘LI
+            [birth_date] => 07-04-2004
+            [university_id] => 303
+            [groups] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 375
+                            [name] => K-33-22
+                            [curriculum] => Array
+                                (
+                                    [id] => 243
+                                    [name] => Intellektual muhandislik tizimlari (tarmoqlar va sohalar bo‘yicha) [3-kurs]
+                                )
+
+                            [education_lang] => Array
+                                (
+                                    [code] => 11
+                                    [name] => O‘zbek
+                                )
+
+                            [education_form] => Array
+                                (
+                                    [code] => 11
+                                    [name] => Kunduzgi
+                                )
+
+                            [education_type] => Array
+                                (
+                                    [code] => 11
+                                    [name] => Bakalavr
+                                )
+
+                        )
+
+                )
+
+            [data] => Array
+                (
+                    [first_name] => OYATILLO
+                    [second_name] => ANVAROV
+                    [third_name] => OZODBEK O‘G‘LI
+                    [full_name] => ANVAROV OYATILLO OZODBEK O‘G‘LI
+                    [short_name] => ANVAROV O. O.
+                    [student_id_number] => 303211100651
+                    [image] => https://hemis.andmiedu.uz/static/crop/2/1/320_320_90_2170006031.jpg
+                    [birth_date] => 1081296000
+                    [email] => anoyatillo16@gmail.com
+                    [phone] => +998934466752
+                    [gender] => Array
+                        (
+                            [code] => 11
+                            [name] => Erkak
+                        )
+
+                    [university] => Andijon mashinasozlik instituti
+                    [specialty] => Array
+                        (
+                            [id] => 54bcc595-bc77-4d9c-a9a6-2e9e291e08c4
+                            [code] => 60711600
+                            [name] => Intellektual muhandislik tizimlari (tarmoqlar va sohalar bo‘yicha)
+                        )
+
+                    [studentStatus] => Array
+                        (
+                            [code] => 11
+                            [name] => O‘qimoqda
+                        )
+
+                    [educationForm] => Array
+                        (
+                            [code] => 11
+                            [name] => Kunduzgi
+                        )
+
+                    [educationType] => Array
+                        (
+                            [code] => 11
+                            [name] => Bakalavr
+                        )
+
+                    [paymentForm] => Array
+                        (
+                            [code] => 12
+                            [name] => To‘lov-shartnoma
+                        )
+
+                    [group] => Array
+                        (
+                            [id] => 375
+                            [name] => K-33-22
+                            [educationLang] => Array
+                                (
+                                    [code] => 11
+                                    [name] => O‘zbek
+                                )
+
+                        )
+
+                    [faculty] => Array
+                        (
+                            [id] => 5
+                            [name] => Intellektual boshqaruv va kompyuter tizimlari fakulteti
+                            [code] => 303-105
+                            [structureType] => Array
+                                (
+                                    [code] => 11
+                                    [name] => Fakultet
+                                )
+
+                            [localityType] => Array
+                                (
+                                    [code] => 11
+                                    [name] => Mahalliy
+                                )
+
+                            [parent] => 
+                            [active] => 1
+                        )
+
+                    [educationLang] => Array
+                        (
+                            [code] => 11
+                            [name] => O‘zbek
+                        )
+
+                    [level] => Array
+                        (
+                            [code] => 13
+                            [name] => 3-kurs
+                        )
+
+                    [semester] => Array
+                        (
+                            [id] => 1882
+                            [code] => 15
+                            [name] => 5-semestr
+                            [current] => 1
+                            [education_year] => Array
+                                (
+                                    [code] => 2024
+                                    [name] => 2024-2025
+                                    [current] => 1
+                                )
+
+                        )
+
+                    [address] => S.Nematullayev
+                    [country] => Array
+                        (
+                            [code] => UZ
+                            [name] => O‘zbekiston
+                        )
+
+                    [province] => Array
+                        (
+                            [code] => 1703
+                            [name] => Andijon viloyati
+                            [_parent] => 1703
+                        )
+
+                    [district] => Array
+                        (
+                            [code] => 1703401
+                            [name] => Andijon shahri
+                            [_parent] => 1703
+                        )
+
+                    [socialCategory] => Array
+                        (
+                            [code] => 10
+                            [name] => Boshqa
+                        )
+
+                    [accommodation] => Array
+                        (
+                            [code] => 11
+                            [name] => O‘z uyida
+                        )
+
+                    [hash] => 8be1c37ee09e3c813406c36586a58f88ff0af89d47fca0296e4aed1fd372ce8e
+                )
+
+        )
+
+)

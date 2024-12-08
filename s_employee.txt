@@ -1,0 +1,129 @@
+Array
+(
+    [token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI4IiwianRpIjoiZmZhNDMxMDY2YTM4ZTgxZWNiZWFlNzVmMWJjMTk4ZDU1YjJhN2ZhOWEyMTk1MTMzMTkwMTU0NTI4ZWYwZTM4YjAxMThjMmQ5ZWE2NjQ5ZWUiLCJpYXQiOjE3MzM2NzAwNDEsIm5iZiI6MTczMzY3MDA0MSwiZXhwIjoxNzMzNjczNjQxLCJzdWIiOiI3Iiwic2NvcGVzIjpbXX0.naZ2RyZmwsPcN1I23BgXMRUy8qxnT1WoBcFS3Knct4wtHeAIvJqRv8pbHC-wdmd_1MocjaDcz0C9SdFLnADqR4PIKJ-XubuTadx2CtuqG4XEGAHrGVoCbAIjUrskqwx0hkZN_azrAy8rO_vwwX_u-TRzQ9bfgi5j7fYVdHOl7-EGUmnJ6nH4tqgKhVQvKSh0tAeh-3jgjtadGar_ZIivW-csAkS_WCEtsmOcijlfy6y0QScSqi6KNpu41QU6rzq4lS0QpK4oQqwPK_s3JOAwQNHHHSHtBvxqpBG-cFa6QqafbjbAP9qCYnI7gdUZ5UEF5apqZcrJdQD4KOEPtG20XLbCG6yy2LTWvGXrc-P5H3KhBJgZ52oatmJXi4NMlOc181zhrCDm89QZ20Mflhj2CWvBCJNCofMiJrh1yBAsWn_ITUkRD4u5dyoizCLMMLR0h31AOPkUWENtCwir0ItlLO0le3AX69LFSv4QvdA1wGx0tSpEPagzTq5hAJY4cCsoIwHCpUIsY-c86FZFA_qVj2a5wLlEQ1mrDRzymE8wyV5qO56jD5_FK2D82wkZji6h9xxtT44UMDGvgplpGaZidE8UydrqENX6fS8MUGKEuHIB5ojHRnmQQVXNImgMKCH8NnIzP1OBef0S_FI19QUAaqXs9yk7tVVHCszdvMZqVUo
+    [user] => Array
+        (
+            [id] => 7
+            [uuid] => f41f5502-dc0e-c1e4-34bf-13c47b02f468
+            [employee_id_number] => 3032011106
+            [employee_id] => 164
+            [type] => employee
+            [roles] => Array
+                (
+                    [0] => Array
+                        (
+                            [code] => teacher
+                            [name] => O'qituvchi
+                        )
+
+                    [1] => Array
+                        (
+                            [code] => direction
+                            [name] => Rahbariyat
+                        )
+
+                )
+
+            [departments] => Array
+                (
+                    [0] => Array
+                        (
+                            [department] => Array
+                                (
+                                    [name] => Transport vositalari muhandisligi kafedrasi
+                                    [id] => 27
+                                    [code] => 303-103-10
+                                )
+
+                            [employmentForm] => Array
+                                (
+                                    [name] => O‘rindoshlik (ichki-qo'shimcha)
+                                    [code] => 12
+                                )
+
+                            [employmentStaff] => Array
+                                (
+                                    [name] => 0,25 stavka
+                                    [code] => 14
+                                )
+
+                            [staffPosition] => Array
+                                (
+                                    [name] => Dotsent
+                                    [code] => 14
+                                )
+
+                            [employeeType] => Array
+                                (
+                                    [name] => Professor-o‘qituvchi xodim
+                                    [code] => 12
+                                )
+
+                            [employeeStatus] => Array
+                                (
+                                    [name] => Ishlamoqda
+                                    [code] => 11
+                                )
+
+                            [active] => 1
+                        )
+
+                    [1] => Array
+                        (
+                            [department] => Array
+                                (
+                                    [name] => Ma'muriyat
+                                    [id] => 38
+                                    [code] => 303-211
+                                )
+
+                            [employmentForm] => Array
+                                (
+                                    [name] => Asosiy ish joy
+                                    [code] => 11
+                                )
+
+                            [employmentStaff] => Array
+                                (
+                                    [name] => 1,00 stavka
+                                    [code] => 11
+                                )
+
+                            [staffPosition] => Array
+                                (
+                                    [name] => Axborot texnologiyalari bo'yicha prorektor
+                                    [code] => 28
+                                )
+
+                            [employeeType] => Array
+                                (
+                                    [name] => Boshqa
+                                    [code] => 10
+                                )
+
+                            [employeeStatus] => Array
+                                (
+                                    [name] => Ishlamoqda
+                                    [code] => 11
+                                )
+
+                            [active] => 1
+                        )
+
+                )
+
+            [name] => SHERBOYEV MURODBEK FOZILJON O‘G‘LI
+            [login] => ab0801144
+            [email] => sherboyevmf@gmail.com
+            [passport_pin] => 30608901240128
+            [passport_number] => AB0801144
+            [picture] => https://hemis.andmiedu.uz/static/crop/2/5/120_120_90_2599919129.jpg
+            [firstname] => MURODBEK
+            [surname] => SHERBOYEV
+            [patronymic] => FOZILJON O‘G‘LI
+            [birth_date] => 06-08-1990
+            [university_id] => 303
+            [phone] => +998994356909
+        )
+
+)
