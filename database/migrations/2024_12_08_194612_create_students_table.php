@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('faculty_id')->nullable();
+            $table->foreignId('specialty_id')->nullable();
+            $table->foreignId('group_id')->nullable();
+            $table->foreignId('nation_id')->nullable();
+            $table->foreignId('employee_id')->nullable();
+            $table->string('address');
+            
             $table->timestamps();
         });
     }
