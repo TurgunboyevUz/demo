@@ -22,7 +22,7 @@
                             <div class="widget-user-image">
                                 <img class="img-circle elevation-2" src="../dist/img/user8-128x128.jpg" alt="User Avatar">
                             </div>
-                            <h3 class="widget-user-username">{{ $user->first_name . ' ' . $user->second_name . ' ' . $user->third_name }}</h3>
+                            <h3 class="widget-user-username">{{ $user->full_name() }}</h3>
                             <h5 class="widget-user-desc">Talaba</h5>
                         </div>
                         <div class="card-body">
@@ -57,31 +57,31 @@
                                         <td>
                                             <i class="fas fa-user"></i> Ism
                                         </td>
-                                        <td>{{ $user->first_name }}</td>
+                                        <td>{{ $user->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-user-tag"></i> Familiya
                                         </td>
-                                        <td>{{ $user->second_name }}</td>
+                                        <td>{{ $user->surname }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-flag"></i> Millati
                                         </td>
-                                        <td>{{ $user->nationality ?? "O'zbek" }}</td>
+                                        <td>{{ $user->student->nation->name ?? "O'zbek" }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-graduation-cap"></i> Guruh
                                         </td>
-                                        <td>{{ $user->group }}</td>
+                                        <td>{{ $user->student->group->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-level-up-alt"></i> Bosqich
                                         </td>
-                                        <td>{{ $user->level ?? '3'}} kurs</td>
+                                        <td>{{ $user->student->level }} kurs</td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -99,13 +99,13 @@
                                         <td>
                                             <i class="fas fa-university"></i> Fakultet
                                         </td>
-                                        <td>{{ $user->faculty }}</td>
+                                        <td>{{ $user->student->faculty->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-home"></i> Doimiy yashash manzili
                                         </td>
-                                        <td>{{ $user->address }}</td>
+                                        <td>{{ $user->student->address }}</td>
                                     </tr>
                                     <tr>
                                         <td>

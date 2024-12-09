@@ -43,6 +43,7 @@ class UserUtil
             $faculty = Faculty::firstOrCreate(['name' => $response['data']['faculty']['name']]);
             $specialty = Specialty::firstOrCreate(['name' => $response['data']['specialty']['name']]);
             $group = Group::firstOrCreate(['name' => $response['data']['group']['name']]);
+            $level = str_replace('-kurs', '', $response['data']['level']['name']);
             $address = $response['data']['province']['name'] . ' ' . $response['data']['district']['name'] . ' ' . $response['data']['address'];
 
             $student = Student::updateOrCreate(['user_id' => $user->id], [
@@ -51,6 +52,7 @@ class UserUtil
                 'group_id' => $group->id,
                 'nation_id' => $nation->id,
                 'address' => $address,
+                'level' => $level
             ]);
 
             $user->syncRoles(['student']);

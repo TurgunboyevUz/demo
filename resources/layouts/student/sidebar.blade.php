@@ -23,73 +23,73 @@
                 </li>
                 <!-- Maqolalar Yuklash Dropdown Menu -->
                 <li class="nav-item">
-                    <a href="{{ route('student.article.index') }}" class="nav-link {{ request()->routeIs('student.upload-article') ? 'active' : ''}}">
+                    <a href="{{ route('student.article') }}" class="nav-link {{ request()->routeIs('student.upload-article') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-upload"></i>
                         <p>Maqolalar yuklash</p>
                     </a>
                 </li>
                 <!-- Stipendiyat Dropdown Menu -->
                 <li class="nav-item">
-                    <a href="{{ route('student.scholarship.index') }}" class="nav-link {{ request()->routeIs('student.scholarship') ? 'active' : ''}}">
+                    <a href="{{ route('student.scholarship') }}" class="nav-link {{ request()->routeIs('student.scholarship') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-money-check"></i>
                         <p>Stipendiyat</p>
                     </a>
                 </li>
                 <!-- Ixtro/DGU/Foydali model Dropdown Menu -->
                 <li class="nav-item">
-                    <a href="{{ route('student.invention.index') }}" class="nav-link {{ request()->routeIs('student.invention-dgus') ? 'active' : ''}}">
+                    <a href="{{ route('student.invention') }}" class="nav-link {{ request()->routeIs('student.invention-dgus') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-lightbulb"></i>
                         <p>Ixtro/DGU/Foydali model</p>
                     </a>
                 </li>
                 <!-- Startup/Tanlov Dropdown Menu -->
                 <li class="nav-item has-treeview">
-                    <a href="{{ route('student.startup.index') }}" class="nav-link {{ request()->routeIs('student.startup') ? 'active' : ''}}">
+                    <a href="{{ route('student.startup') }}" class="nav-link {{ request()->routeIs('student.startup') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-rocket"></i>
                         <p>Startup/Tanlov</p>
                     </a>
                 </li>
                 <!-- Grand/Xo'jalik shartonmalar Dropdown Menu -->
                 <li class="nav-item">
-                    <a href="{{ route('student.grand-economy.index') }}" class="nav-link {{ request()->routeIs('student.grand-economy') ? 'active' : ''}}">
+                    <a href="{{ route('student.grand-economy') }}" class="nav-link {{ request()->routeIs('student.grand-economy') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-handshake"></i>
                         <p>Grant/Xo'jalik shartonmalar</p>
                     </a>
                 </li>
                 <!-- Olimpiyadalar Dropdown Menu -->
                 <li class="nav-item has-treeview">
-                    <a href="{{ route('student.olympics.index') }}" class="nav-link {{ request()->routeIs('student.olympics') ? 'active' : ''}}">
+                    <a href="{{ route('student.olympics') }}" class="nav-link {{ request()->routeIs('student.olympics') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-medal"></i>
                         <p>Olimpiyadalar</p>
                     </a>
                 </li>
                 <!-- Til sertifikati Dropdown Menu -->
                 <li class="nav-item has-treeview">
-                    <a href="{{ route('student.lang-certificate.index') }}" class="nav-link {{ request()->routeIs('student.lang-certificate') ? 'active' : ''}}">
+                    <a href="{{ route('student.lang-certificate') }}" class="nav-link {{ request()->routeIs('student.lang-certificate') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-language"></i>
                         <p>Til Sertifikatlari</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('student.distinguished-scholarship.index') }}" class="nav-link {{ request()->routeIs('student.distinguished-scholarship') ? 'active' : ''}}">
+                    <a href="{{ route('student.distinguished-scholarship') }}" class="nav-link {{ request()->routeIs('student.distinguished-scholarship') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-trophy"></i>
                         <p>Nomdor stipendiyaga ariza topshirish</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('student.achievement.index') }}" class="nav-link {{ request()->routeIs('student.achievement') ? 'active' : ''}}">
+                    <a href="{{ route('student.achievement') }}" class="nav-link {{ request()->routeIs('student.achievement') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-award"></i>
                         <p>O’quv yili davomida erishgan <br>boshqa yutuqlari</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('student.evaluation-criteria.index') }}" class="nav-link {{ request()->routeIs('student.evaluation-criteria') ? 'active' : ''}}">
+                    <a href="{{ route('student.evaluation-criteria') }}" class="nav-link {{ request()->routeIs('student.evaluation-criteria') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-star"></i>
                         <p>Baholash me'zoni</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('student.chat.index') }}" class="nav-link {{ request()->routeIs('student.chat') ? 'active' : ''}}">
+                    <a href="{{ route('student.chat') }}" class="nav-link {{ request()->routeIs('student.chat') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-comments"></i>
                         <p>Professor o'qituvchi bilan chat</p>
                     </a>

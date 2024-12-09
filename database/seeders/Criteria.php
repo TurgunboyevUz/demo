@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Criteria\Category;
 use Illuminate\Database\Seeder;
 
 class Criteria extends Seeder
@@ -64,7 +63,7 @@ class Criteria extends Seeder
                         'name' => "Respublika",
                         'code' => "republic",
                         'score' => 20,
-                    ]
+                    ],
                 ],
             ],
 
@@ -91,7 +90,7 @@ class Criteria extends Seeder
                         'name' => "Xalqaro bosqich",
                         'code' => "international",
                         'score' => 30,
-                    ]
+                    ],
                 ],
             ],
 
@@ -128,7 +127,7 @@ class Criteria extends Seeder
                         'name' => "Tovar belgisi",
                         'code' => "product",
                         'score' => 0,
-                    ]
+                    ],
                 ],
             ],
 
@@ -155,7 +154,7 @@ class Criteria extends Seeder
                         'name' => "Xalqaro bosqich",
                         'code' => "international",
                         'score' => 30,
-                    ]
+                    ],
                 ],
             ],
 
@@ -172,7 +171,7 @@ class Criteria extends Seeder
                         'name' => "Grand",
                         'code' => "grand",
                         'score' => 15,
-                    ]
+                    ],
                 ],
             ],
 
@@ -199,7 +198,7 @@ class Criteria extends Seeder
                         'name' => "C2",
                         'code' => "c2",
                         'score' => 0,
-                    ]
+                    ],
                 ],
             ],
         ];
@@ -207,7 +206,7 @@ class Criteria extends Seeder
         foreach ($criterias as $criteria) {
             $category = Category::create([
                 'name' => $criteria['name'],
-                'code' => $criteria['code']
+                'code' => $criteria['code'],
             ]);
 
             foreach ($criteria['criterias'] as $criterion) {

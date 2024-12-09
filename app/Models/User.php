@@ -16,6 +16,11 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    public function full_name()
+    {
+        return $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
+    }
+
     public function employee()
     {
         return $this->hasOne(Employee::class);

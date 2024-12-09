@@ -11,26 +11,26 @@ class Student extends Model
 
     public function employee()
     {
-        $this->belongsTo(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 
     public function faculty()
     {
-        $this->belongsTo(Faculty::class);
+        return $this->belongsTo(Faculty::class);
     }
 
     public function specialty()
     {
-        $this->belongsTo(Specialty::class);
+        return $this->belongsTo(Specialty::class);
     }
 
     public function group()
     {
-        $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function nation()
     {
-        $this->belongsTo(Nation::class);
+        return $this->belongsTo(Nation::class);
     }
 }

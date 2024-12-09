@@ -76,8 +76,8 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px; padding-right: 8px;">
-                <span class="d-none d-md-inline">ANVAROV OYATILLO OZODBEK O'G'LI</span>
-                <span class="d-inline d-md-none">ANVAROV O.</span>
+                <span class="d-none d-md-inline">{{ $user->full_name() }}</span>
+                <span class="d-inline d-md-none">{{ $user->short_name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="profile-edit.html" class="dropdown-item">
