@@ -17,9 +17,18 @@ class PageController
     public function article(Request $request)
     {
         $user = $request->user();
-        $criteria = Category::where('code', 'article')->first()->criterias;
-        $data = $user->articles()->get();
+        $criterias = Category::where('code', 'article')->first()->criterias;
+        $data = [];
 
-        return view('student.article', compact('user', 'criteria', 'data'));
+        return view('student.article', compact('user', 'criterias', 'data'));
+    }
+
+    public function scholarship(Request $request)
+    {
+        $user = $request->user();
+        $criterias = Category::where('code', 'scholarship')->first()->criterias;
+        $data = [];
+
+        return view('student.scholarship', compact('user', 'criterias', 'data'));
     }
 }

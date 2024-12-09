@@ -1,9 +1,5 @@
 @extends('layouts::student.app')
 
-@if($errors->any())
-    {{ dd($errors) }}
-@endif
-
 @section('content')
 <div class="content-wrapper">
     <div class="content-header">
@@ -29,13 +25,14 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="full_name"><i class="fas fa-user"></i> Talaba FIO</label>
-                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ $user->first_name . ' ' . $user->second_name . ' ' . $user->third_name }}" disabled>
+
+                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ $user->full_name() }}" disabled>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="ilmiy_ish_nomi"><i class="fas fa-book"></i> Ilmiy ish nomi</label>
-                                <input type="text" class="form-control" id="title" name="ilmiy_ish_nomi" required>
+                                <input type="text" class="form-control" id="title" name="title" required>
                             </div>
                         </div>
                     </div>
@@ -50,13 +47,10 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label for="nashr_turi"><i class="fas fa-list-alt"></i> Ilmiy nashr turi</label>
-                                <select id="nashr_turi" class="form-control" name="type" required>
-                                    <option value="other">Boshqa</option>
-                                    <option value="scopus">SCOPUS</option>
-                                    <option value="local">Maqola (Mahalliy jurnal)</option>
-                                    <option value="foreign">Maqola (Xorijiy jurnal)</option>
-                                    <option value="conference">Maqola (Konferensiya)</option>
-                                    <option value="tezis">Tezis (Respublika)</option>
+                                <select id="nashr_turi" class="form-control" name="criteria_id" required>
+                                    @foreach ($criterias as $criteria)
+                                    <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -83,7 +77,8 @@
                             <div class="form-group">
                                 <label for="mualliflar"><i class="fas fa-user-friends"></i> Mualliflar</label>
                                 <input type="text" class="form-control" id="mualliflar" name="authors" placeholder="Masalan: Samadov, Anvarov Oyatillo, Diyorbek Turg'unboyev">
-                                <small class="form-text text-muted">Masalan: Samadov, Anvarov Oyatillo, Diyorbek Turg'unboyev</small>
+                                <small class="form-text text-muted">Masalan: Samadov, Anvarov Oyatillo, Diyorbek
+                                    Turg'unboyev</small>
                             </div>
                         </div>
                     </div>
@@ -172,7 +167,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($articles as $article)
+                            @foreach($data as $article)
                             <tr>
                                 <td>{{ $user->first_name }} {{ $user->second_name }}</td>
                                 <td>{{ $article->title }}</td>
@@ -188,7 +183,7 @@
                                 <td>{{ $article->academic_year }}</td>
                                 <td>
                                     @foreach($article->files as $file)
-                                        {{ $file->name }}
+                                    {{ $file->name }}
                                     @endforeach
                                 </td>
                                 <td><span class="badge badge-success" style="margin-left: -8px;">Tasdiqlandi</span></td>

@@ -13,18 +13,18 @@
                 <div class="card-header">
                     <h3 class="card-title">Yutuq ma'lumotlarini kiritish</h3>
                 </div>
-                <form action="{{ route('student.scholarship.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('student.scholarship') }}" method="POST" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="row">
                             <!-- Yutuq turi -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="awardType"><i class="fas fa-trophy"></i> Yutuq turi</label>
-                                    <select class="form-control" id="awardType" name="type" required>
+                                    <select class="form-control" id="awardType" name="criteria_id" required>
                                         <option selected disabled>Yutuq turini tanlang:</option>
-                                        <option value="institutional">Institut miqyosida</option>
-                                        <option value="regional">Viloyat miqyosida</option>
-                                        <option value="national">Respublika miqyosida</option>
+                                        @foreach($criterias as $criteria)
+                                            <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($awards as $award)
+                                @foreach($data as $award)
                                 <tr>
                                     <td>{{ $award->achievement_type }}</td>
                                     <td>{{ $award->awarded_date }}</td>
