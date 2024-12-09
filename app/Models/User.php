@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Auth\Employee;
+use App\Models\Auth\Student;
+use App\Models\File\Article;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,5 +24,10 @@ class User extends Authenticatable
     public function student()
     {
         return $this->hasOne(Student::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
     }
 }

@@ -19,8 +19,16 @@ class File
         $this->user = $request->user();
     }
 
-    public function create(array $data)
+    public function create(array $data, $type)
     {
-        
+        switch($type)
+        {
+            case 'article':
+                $model = $this->user->articles();
+                break;
+        }
+
+        $model->create($data);
+        $model->upload_file($this->request);
     }
 }

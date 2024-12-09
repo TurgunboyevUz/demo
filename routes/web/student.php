@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('student')->middleware(['auth', 'role:student'])->group(function () {
-    Route::get('dashboard', function () {
-        return 'Dashboard';
-    })->name('student.dashboard');
-});
+$routes = function () {
+    Route::get('dashboard', []);
+
+    Route::get('article');
+    Route::get('');
+};
+
+Route::prefix('student')->middleware(['auth', 'role:student'])->group($routes);
