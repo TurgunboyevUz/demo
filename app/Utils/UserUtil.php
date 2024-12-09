@@ -2,13 +2,13 @@
 
 namespace App\Utils;
 
-use App\Models\Department;
-use App\Models\Employee;
-use App\Models\Faculty;
-use App\Models\Group;
-use App\Models\Nation;
-use App\Models\Specialty;
-use App\Models\Student;
+use App\Models\Auth\Department;
+use App\Models\Auth\Employee;
+use App\Models\Auth\Faculty;
+use App\Models\Auth\Group;
+use App\Models\Auth\Nation;
+use App\Models\Auth\Specialty;
+use App\Models\Auth\Student;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +19,10 @@ class UserUtil
 {
     public static function create(array $response)
     {
-        $picture_path = Storage::put('pictures', file_get_contents($response['picture']));
+        $path = 'image_' . now()->format('d-m-Y') . uniqid(true) . '.jpg';
+        $picture = file_get_contents($response['picture']);
+
+        $picture_path = Storage::disk('public')->put($path, $picture);
         $uuid = Str::uuid();
         $hemis_id = $response['student_id_number'] ?? $response['employee_id_number'];
         $name = $response['firstname'];
