@@ -1,15 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Utils\UserUtil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function index()
     {
         return view('auth.login');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 
     public function url($type)
@@ -48,5 +60,13 @@ class AuthController extends Controller
         if (!$auth) {
             return redirect()->route($type . '.login');
         }
+
+        $util = UserUtil::create($auth['user']);
+        $user = $util['user'];
+        $redirect = $util['redirect'];
+
+        Auth::login($user, true);
+
+        return redirect()->route($redirect);
     }
 }

@@ -12,4 +12,14 @@ class User extends Authenticatable
     use HasFactory, HasRoles, Notifiable;
 
     protected $guarded = [];
+
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
 }

@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        View::addNamespace('layouts');
+        View::addNamespace('layouts', resource_path('layouts'));
 
         $this->app->bind('oauth', function () {
             return new OAuth;

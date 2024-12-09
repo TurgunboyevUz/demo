@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('passport_pin');
             $table->string('picture_path');
 
+            $table->rememberToken();
             $table->timestamps();
         });
 
