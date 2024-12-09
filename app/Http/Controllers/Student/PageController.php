@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Criteria\Category;
 use Illuminate\Http\Request;
 
 class PageController
@@ -13,8 +14,12 @@ class PageController
         ]);
     }
 
-    public function article()
+    public function article(Request $request)
     {
-        return view('student.article');
+        $user = $request->user();
+        $criteria = Category::where('code', 'article')->first()->criterias;
+        $data = $user->articles()->get();
+
+        return view('student.article', compact('user', 'criteria', 'data'));
     }
 }
