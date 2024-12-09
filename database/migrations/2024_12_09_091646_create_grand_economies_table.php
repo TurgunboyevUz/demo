@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('grand_economies', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('criteria_id')->constrained('criterias')->cascadeOnDelete();
+
+            $table->string('name');
+            $table->string('order_number');
+            $table->double('amount');
+            
             $table->timestamps();
         });
     }

@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('lang_certificates', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('criteria_id')->constrained('criterias')->cascadeOnDelete();
+
+            $table->enum('lang', ['ru', 'en', 'de']);
+            $table->enum('type', ['national', 'cambridge', 'toefl-itp', 'toefl-ibt', 'ielts', 'itep']);
+            $table->date('given_date');
+            
             $table->timestamps();
         });
     }

@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('scholarships', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('criteria_id')->constrained('criterias')->cascadeOnDelete();
+
+            $table->string('name');
+            $table->date('given_date');
+            $table->string('certificate_number');
+            
             $table->timestamps();
         });
     }

@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('inventions', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('criteria_id')->constrained('criterias')->cascadeOnDelete();
+
+            $table->string('title');
+            $table->string('property_number');
+            $table->integer('authors_count');
+            $table->text('authors');
+            $table->text('publish_params');
+            $table->integer('education_year');
+            
             $table->timestamps();
         });
     }
