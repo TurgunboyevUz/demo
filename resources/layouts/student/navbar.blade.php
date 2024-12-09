@@ -75,7 +75,7 @@
         <!-- Profile Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px; padding-right: 8px;">
+                <img src="{{ asset('storage/' . $user->picture_path) }}" alt="User" class="img-circle" style="height: 30px; padding-right: 8px;">
                 <span class="d-none d-md-inline">{{ $user->full_name() }}</span>
                 <span class="d-inline d-md-none">{{ $user->short_name }}</span>
             </a>
@@ -83,7 +83,7 @@
                 <a href="profile-edit.html" class="dropdown-item">
                     <i class="nav-icon fas fa-pencil"></i> Profilni tahrirlash
                 </a>
-                <a href="index.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Chiqish</a>
+                <a href="{{ route('logout') }}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Chiqish</a>
             </div>
         </li>
     </ul>

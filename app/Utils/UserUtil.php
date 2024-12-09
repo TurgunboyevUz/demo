@@ -19,10 +19,6 @@ class UserUtil
 {
     public static function create(array $response)
     {
-        $path = 'image_' . now()->format('d-m-Y') . uniqid(true) . '.jpg';
-        $picture = file_get_contents($response['picture']);
-
-        $picture_path = Storage::disk('public')->put($path, $picture);
         $uuid = Str::uuid();
         $hemis_id = $response['student_id_number'] ?? $response['employee_id_number'];
         $name = $response['firstname'];
@@ -33,8 +29,21 @@ class UserUtil
         $email = $response['email'];
         $passport_number = $response['passport_number'];
         $passport_pin = $response['passport_pin'];
+        $picture_path = '';
 
-        $user = User::updateOrCreate(['hemis_id' => $hemis_id], compact('uuid', 'hemis_id', 'name', 'surname', 'patronymic', 'short_name', 'phone', 'email', 'picture_path', 'passport_number', 'passport_pin'));
+        $user = User::firstOrCreate(['hemis_id' => $hemis_id], compact('uuid', 'hemis_id', 'name', 'surname', 'patronymic', 'short_name', 'phone', 'email', 'passport_number', 'passport_pin', 'picture_path'));
+
+        if ($user->picture_path) {
+            Storage::disk('public')->delete($user->picture_path);
+        }
+
+        $picture_path = 'profile/image_' . now()->format('d-m-Y') . '_' . uniqid(true) . '.jpg';
+        $picture = file_get_contents($response['picture']);
+
+        self::makeDir(storage_path('app/public/profile'));
+        file_put_contents(storage_path('app/public/' . $picture_path), $picture);
+
+        $user->update(compact('name', 'surname', 'patronymic', 'short_name', 'phone', 'email', 'picture_path', 'passport_number', 'passport_pin'));
 
         $nation = $response['data']['educationLang']['name'] ?? "O'zbek";
         $nation = Nation::firstOrCreate(['name' => $nation]);
@@ -52,7 +61,7 @@ class UserUtil
                 'group_id' => $group->id,
                 'nation_id' => $nation->id,
                 'address' => $address,
-                'level' => $level
+                'level' => $level,
             ]);
 
             $user->syncRoles(['student']);
@@ -86,7 +95,14 @@ class UserUtil
 
         return [
             'user' => $user,
-            'redirect' => $redirect
+            'redirect' => $redirect,
         ];
+    }
+
+    public static function makeDir($dir)
+    {
+        if (!is_dir($dir)) {
+            mkdir($dir);
+        }
     }
 }
