@@ -18,7 +18,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'article')->first()->criterias;
-        $data = [];
+        $data = $user->articles()->get();
 
         return view('student.article', compact('user', 'criterias', 'data'));
     }
@@ -27,7 +27,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'scholarship')->first()->criterias;
-        $data = [];
+        $data = $user->scholarships()->get();
 
         return view('student.scholarship', compact('user', 'criterias', 'data'));
     }
@@ -36,7 +36,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'invention')->first()->criterias;
-        $data = [];
+        $data = $user->inventions()->get();
 
         return view('student.invention', compact('user', 'criterias', 'data'));
     }
@@ -45,7 +45,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'startup')->first()->criterias;
-        $data = [];
+        $data = $user->startups()->get();
 
         return view('student.startup', compact('user', 'criterias', 'data'));
     }
@@ -54,7 +54,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'grand-economy')->first()->criterias;
-        $data = [];
+        $data = $user->grand_economies()->get();
 
         return view('student.grand-economy', compact('user', 'criterias', 'data'));
     }
@@ -63,7 +63,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'olympics')->first()->criterias;
-        $data = [];
+        $data = $user->olympics()->get();
 
         return view('student.olympics', compact('user', 'criterias', 'data'));
     }
@@ -72,7 +72,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'lang-certificate')->first()->criterias;
-        $data = [];
+        $data = $user->lang_certificates()->get();
 
         return view('student.lang-certificate', compact('user', 'criterias', 'data'));
     }
@@ -88,7 +88,7 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'achievement')->first()->criterias;
-        $data = [];
+        $data = $user->achievements()->get();
 
         return view('student.achievement', compact('user', 'criterias', 'data'));
     }

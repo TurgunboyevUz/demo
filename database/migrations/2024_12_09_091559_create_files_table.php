@@ -13,7 +13,33 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
+            $table->string('name');
+            $table->string('path');
+            $table->string('mime_type')->nullable();
+            $table->unsignedBigInteger('size');
+            $table->unsignedBigInteger('uploaded_by')->nullable();
+            $table->string('type')->nullable();
+            $table->nullableMorphs('fileable');
+
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->unsignedBigInteger('inspector_id')->nullable();
+
+            $table->text('reject_reason')->nullable();
+            $table->unsignedBigInteger('rejected_by')->nullable();
+
+            $table->enum('status', ['pending', 'reviewed', 'approved', 'rejected'])->default('pending');
+
+            $table->timestamp('reviewed_at')->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamp('rejected_at')->nullable();
+
             $table->timestamps();
+
+            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('inspector_id')->references('id')->on('users');
+            $table->foreign('rejected_by')->references('id')->on('users');
+            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

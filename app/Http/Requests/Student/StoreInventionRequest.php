@@ -14,7 +14,13 @@ class StoreInventionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'criteria_id' => ['required', 'exists:criterias,id'],
+            'title' => ['required', 'string'],
+            'property_number' => ['required', 'string'],
+            'authors_count' => ['required', 'integer'],
+            'authors' => ['required', 'string'],
+            'publish_params' => ['required', 'string'],
+            'education_year' => ['required', 'integer'],
         ];
     }
 }

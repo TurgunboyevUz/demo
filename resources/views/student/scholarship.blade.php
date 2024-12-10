@@ -14,6 +14,7 @@
                     <h3 class="card-title">Yutuq ma'lumotlarini kiritish</h3>
                 </div>
                 <form action="{{ route('student.scholarship') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="card-body">
                         <div class="row">
                             <!-- Yutuq turi -->
@@ -88,13 +89,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($data as $award)
+                                @foreach($data as $item)
                                 <tr>
-                                    <td>{{ $award->achievement_type }}</td>
-                                    <td>{{ $award->awarded_date }}</td>
-                                    <td>{{ $award->certificate_number }}</td>
-                                    <td>{{ $award->name }}</td>
-                                    <td>{{ $award->file }}</td>
+                                    <td>{{ $item->criteria->name }}</td>
+                                    <td>{{ $item->given_date }}</td>
+                                    <td>{{ $item->certificate_number }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->file->name }}</td>
                                     <td><span class="badge badge-success">Tasdiqlandi</span></td>
                                     <td>
                                         <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>

@@ -167,25 +167,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $article)
+                            @foreach($data as $item)
                             <tr>
-                                <td>{{ $user->first_name }} {{ $user->second_name }}</td>
-                                <td>{{ $article->title }}</td>
-                                <td>{{ $article->keywords }}</td>
-                                <td>{{ $article->article_type }}</td>
-                                <td>{{ $article->language }}</td>
-                                <td>{{ $article->authors }}</td>
-                                <td>{{ $article->doi }}</td>
-                                <td>{{ $article->journal_name }}</td>
-                                <td>{{ $article->international_database }}</td>
-                                <td>{{ $article->publication_year }}</td>
-                                <td>{{ $article->publication_parameters }}</td>
-                                <td>{{ $article->academic_year }}</td>
-                                <td>
-                                    @foreach($article->files as $file)
-                                    {{ $file->name }}
-                                    @endforeach
-                                </td>
+                                <td>{{ $user->fio() }}</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->keywords }}</td>
+                                <td>{{ $item->criteria->name }}</td>
+                                <td>{{ $item->lang }}</td>
+                                <td>{{ $item->authors }}</td>
+                                <td>{{ $item->doi }}</td>
+                                <td>{{ $item->journal_name }}</td>
+                                <td>{{ $item->international_databases }}</td>
+                                <td>{{ $item->published_year }}</td>
+                                <td>{{ $item->publish_params }}</td>
+                                <td>{{ $item->education_year }}</td>
+                                <td>{{ $item->file->name }}</td>
                                 <td><span class="badge badge-success" style="margin-left: -8px;">Tasdiqlandi</span></td>
                                 <td>
                                     <button class="btn btn-danger btn-sm" style="margin-left: -10px;"><i class="fas fa-trash"></i> O'chirish</button>

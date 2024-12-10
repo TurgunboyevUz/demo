@@ -13,11 +13,12 @@
         </div>
         <div class="card-body">
             <form id="inventionForm" action="{{ route('student.invention') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
                     <!-- Talaba FIO -->
                     <div class="col-12 col-md-6 mb-3">
                         <label for="studentName"><i class="fas fa-user"></i> Talaba FIO</label>
-                        <input type="text" id="studentName" name="student_name" class="form-control" placeholder="{{ $user->first_name . ' ' . $user->second_name . ' ' . $user->third_name }}" disabled required>
+                        <input type="text" id="studentName" name="student_name" class="form-control" placeholder="{{ $user->fio() }}" disabled required>
                     </div>
                     <!-- Intellektual Mulk Nomi -->
                     <div class="col-12 col-md-6 mb-3">
@@ -96,15 +97,17 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Ismoilov Anvar</td>
-                        <td>Yangi dasturiy ta'minot</td>
-                        <td>Ixtiro</td>
-                        <td>12345</td>
-                        <td>3</td>
-                        <td>Samadov, Anvarov Oyatillo, Diyorbek Turg'unboyev</td>
-                        <td>O'zbekiston nashriyoti, 2023</td>
-                        <td>2023-2024</td>
-                        <td>mulk.pdf</td>
+                        @foreach($data as $item)
+                            <td>{{ $user->fio() }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->criteria->name }}</td>
+                            <td>{{ $item->property_number }}</td>
+                            <td>{{ $item->authors_count }}</td>
+                            <td>{{ $item->authors }}</td>
+                            <td>{{ $item->publish_params }}</td>
+                            <td>{{ $item->education_year }}</td>
+                            <td>{{ $item->file->name }}</td>
+                        @endforeach
                         <td>
                             <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
                         </td>
