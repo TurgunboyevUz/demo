@@ -14,6 +14,7 @@ use App\Http\Requests\Student\StoreStartupRequest;
 use App\Models\File\Article;
 use App\Models\File\Invention;
 use App\Models\File\Scholarship;
+use App\Models\File\Startup;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -99,6 +100,21 @@ class File
     public function startup(StoreStartupRequest $request)
     {
         $data = $request->validated();
+
+        $startup = new Startup();
+
+        $startup->user_id = $this->user->id;
+        $startup->criteria_id = $data['criteria_id'];
+        $startup->name = $data['name'];
+        $startup->type = $data['type'];
+        $startup->participant = $data['participant'];
+        $startup->team_members = $data['team_members'];
+        $startup->location = $data['location'];
+        $startup->save();
+
+        $startup->upload_file($request, 'startups');
+
+        return $startup;
     }
 
     public function grand_economy(StoreGrandEconomyRequest $request)

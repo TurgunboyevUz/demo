@@ -14,7 +14,12 @@ class StoreStartupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'criteria_id' => 'required|exists:criterias,id',
+            'name' => 'required|string|max:255',
+            'type' => 'required|in:startup,contest',
+            'participant' => 'required|in:individual,team',
+            'team_members' => 'nullable|string',
+            'location' => 'required|in:tashkent,andijan',
         ];
     }
 }

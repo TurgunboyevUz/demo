@@ -13,6 +13,7 @@
         </div>
         <div class="card-body">
             <form id="startupForm" action="{{ route('student.startup') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
                     <!-- Yutuq turi -->
                     <div class="col-12 col-md-6 mb-3">
@@ -119,16 +120,23 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Startup</td>
-                        <td>Xalqaro</td>
-                        <td>Yakalik</td>
-                        <td>Toshkent</td>
-                        <td>Yashil texnologiyalar</td>
-                        <td>document1.pdf</td>
-                        <td><span class="badge badge-success">Tasdiqlandi</span></td>
-                        <td>
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                        </td>
+                        @foreach($data as $item)
+                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->criteria->name }}</td>
+                            <td>{{ $item->team_members() }}</td>
+                            <td>{{ $item->location }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->file->name }}</td>
+                            
+                            <td>
+                                <span class="badge badge-success">Tasdiqlandi</span>
+                            </td>
+                            
+                            <td>
+                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                            </td>
+                        @endforeach
+                        
                     </tr>
                     <!-- Qo'shimcha yutuqlar ma'lumotlari qo'shiladi -->
                 </tbody>

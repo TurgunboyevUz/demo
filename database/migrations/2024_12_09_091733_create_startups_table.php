@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('type', ['startup', 'contest']);
             $table->enum('participant', ['individual', 'team']);
-            $table->text('team_members');
+            $table->text('team_members')->nullable();
             $table->enum('location', ['tashkent', 'andijan']);
 
             $table->timestamps();
