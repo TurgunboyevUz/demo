@@ -12,7 +12,7 @@
                     <h3 class="card-title">Ariza uchun Kerakli Hujjatlar</h3>
                 </div>
                 <div class="card-body">
-                    <form id="stipendiyaForm" action="{{ route('student.distinguished-scholarship.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="stipendiyaForm" action="{{ route('student.distinguished-scholarship') }}" method="POST" enctype="multipart/form-data">
                         <!-- Talabaning ma’lumotnomasi -->
                         <div class="form-group mb-4 p-3 border rounded">
                             <label for="obektivka">

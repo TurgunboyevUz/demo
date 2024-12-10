@@ -69,7 +69,7 @@ class Criteria extends Seeder
 
             [
                 'name' => "Olimpiadalar",
-                'code' => 'olympiad',
+                'code' => 'olympics',
                 'criterias' => [
                     [
                         'name' => "Institut bosqichi",
@@ -201,6 +201,33 @@ class Criteria extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'name' => "O'quv yil davomidagi boshqa yutuqlari",
+                'code' => 'achievement',
+                'criterias' => [
+                    [
+                        'name' => "Institut miqyosida", 
+                        'code' => "institute",
+                        'score' => 3,
+                    ],
+                    [
+                        'name' => "Viloyat miqyosida",
+                        'code' => "regional",
+                        'score' => 6,
+                    ],
+                    [
+                        'name' => "Respublika miqyosida",
+                        'code' => "republic",
+                        'score' => 12,
+                    ],
+                    [
+                        'name' => "Xalqaro miqyosida",
+                        'code' => "international",
+                        'score' => 20,
+                    ]
+                ]
+            ]
         ];
 
         foreach ($criterias as $criteria) {

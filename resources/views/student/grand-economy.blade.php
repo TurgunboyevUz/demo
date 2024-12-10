@@ -11,17 +11,18 @@
             <!-- Shartnoma Tafsilotlari formasi -->
             <div class="card mt-3 p-4">
                 <h3 class="card-title mb-3">Shartnoma Tafsilotlari</h3>
-                <form id="contractForm" action="{{ route('student.grand-economy.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="contractForm" action="{{ route('student.grand-economy') }}" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <!-- Shartnoma turi -->
                         <div class="col-12 col-md-6 mb-3">
                             <label for="contractType" class="form-label">
                                 <i class="fas fa-file-contract"></i> Shartnoma turi
                             </label>
-                            <select id="contractType" class="form-control" name="type" required>
+                            <select id="contractType" class="form-control" name="criteria_id" required>
                                 <option value="" disabled selected>Tanlang</option>
-                                <option value="grant">Grand shartnoma</option>
-                                <option value="economic">Xo'jalik shartnoma</option>
+                                @foreach ($criterias as $criteria)
+                                    <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 

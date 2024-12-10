@@ -12,7 +12,7 @@
             <h3 class="card-title">Yutuq qo'shish</h3>
         </div>
         <div class="card-body">
-            <form id="achievementForm" action="{{ route('student.achievement.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="achievementForm" action="{{ route('student.achievement') }}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <!-- Yutuq turi -->
                     <div class="col-md-6 mb-3">
@@ -31,12 +31,11 @@
                         <label for="degree" class="form-label">
                             <i class="fas fa-layer-group"></i> Darajasi
                         </label>
-                        <select id="level" class="form-control" name="level" required>
+                        <select id="level" class="form-control" name="criteria_id" required>
                             <option value="" disabled selected>Tanlang</option>
-                            <option value="institutional">Institut</option>
-                            <option value="regional">Viloyat</option>
-                            <option value="national">Respublika</option>
-                            <option value="international">Xalqaro</option>
+                            @foreach ($criterias as $criteria)
+                                <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 

@@ -21,6 +21,11 @@ class User extends Authenticatable
         return $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
     }
 
+    public function fio()
+    {
+        return $this->surname . ' ' . $this->name . ' ' . $this->patronymic;
+    }
+
     public function employee()
     {
         return $this->hasOne(Employee::class);

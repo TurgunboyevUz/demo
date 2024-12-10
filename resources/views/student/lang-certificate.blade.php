@@ -11,7 +11,7 @@
             <!-- Til Sertifikati Tafsilotlari -->
             <div class="card mt-3 p-4">
                 <h3 class="card-title mb-3">Til Sertifikati Tafsilotlari</h3>
-                <form id="languageCertificateForm" action="{{ route('student.lang-certificate.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="languageCertificateForm" action="{{ route('student.lang-certificate') }}" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <!-- Chet tili -->
                         <div class="col-md-6 mb-3">
@@ -48,12 +48,11 @@
                             <label for="certificateLevelType" class="form-label">
                                 <i class="fas fa-landmark"></i> Sertifikat darajasi
                             </label>
-                            <select id="certificateLevelType" name="degree" class="form-control" required>
+                            <select id="certificateLevelType" name="criteria_id" class="form-control" required>
                                 <option value="" disabled selected>Tanlang</option>
-                                <option value="b1">B1</option>
-                                <option value="b2">B2</option>
-                                <option value="c1">C1</option>
-                                <option value="c2">C2</option>
+                                @foreach ($criterias as $criteria)
+                                    <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 

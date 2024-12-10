@@ -12,7 +12,7 @@
             <h3 class="card-title">Intellektual Mulk Yaratish</h3>
         </div>
         <div class="card-body">
-            <form id="inventionForm" action="{{ route('student.invention.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="inventionForm" action="{{ route('student.invention') }}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <!-- Talaba FIO -->
                     <div class="col-12 col-md-6 mb-3">
@@ -27,14 +27,11 @@
                     <!-- Intellektual Mulk Turi -->
                     <div class="col-12 col-md-6 mb-3">
                         <label for="propertyType"><i class="fas fa-file-alt"></i> Intellektual Mulk Turi</label>
-                        <select id="propertyType" name="type" class="form-control" required>
-                            <option value="">Tanlang...</option>
-                            <option value="invention">Ixtiro</option>
-                            <option value="model">Foydali model</option>
-                            <option value="dgu">DGU</option>
-                            <option value="industria">Sanoat namunasi</option>
-                            <option value="selection">Seleksiya yutuqlari</option>
-                            <option value="patent">Tovar belgisi</option>
+                        <select id="propertyType" name="criteria_id" class="form-control" required>
+                            <option value="" disabled selected>Tanlang...</option>
+                            @foreach ($criterias as $criteria)
+                                <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <!-- Intellektual Mulk Raqami -->

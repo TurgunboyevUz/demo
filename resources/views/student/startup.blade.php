@@ -12,7 +12,7 @@
             <h3 class="card-title">Startup Selection</h3>
         </div>
         <div class="card-body">
-            <form id="startupForm" action="{{ route('student.startup.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="startupForm" action="{{ route('student.startup') }}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <!-- Yutuq turi -->
                     <div class="col-12 col-md-6 mb-3">
@@ -31,12 +31,11 @@
                         <label for="level" class="form-label">
                             <i class="fas fa-layer-group"></i> Darajasi
                         </label>
-                        <select id="level" name="degree" class="form-control" required>
+                        <select id="level" name="criteria_id" class="form-control" required>
                             <option value="" disabled selected>Tanlang</option>
-                            <option value="institutional">Institut</option>
-                            <option value="regional">Viloyat</option>
-                            <option value="national">Respublika</option>
-                            <option value="international">Xalqaro</option>
+                            @foreach ($criterias as $criteria)
+                                <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -48,7 +47,7 @@
                         <select id="participants" name="participant" class="form-control" required onchange="toggleTeamInputs()">
                             <option value="" disabled selected>Tanlang</option>
                             <option value="team">Jamoaviy</option>
-                            <option value="individual">Yakalik</option>
+                            <option value="individual">Yakkalik</option>
                         </select>
                     </div>
 

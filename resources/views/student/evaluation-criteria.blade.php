@@ -22,7 +22,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @foreach($categories as $category)
+                                @php
+                                    $count = $category->criterias->count();
+                                @endphp
+
+                                @foreach($category->criterias as $index => $criteria)
+                                    <tr>
+                                        @if($index == 0)
+                                            <td rowspan="{{ $count }}"> {{ $category->name }} </td>
+                                        @endif
+                                        <td> {{ $criteria->name }} </td>
+                                        <td> {{ $criteria->score }} ball</td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+
+                            <!--<tr>
                                 <td rowspan="5"><strong>Maqolalar uchun</strong></td>
                                 <td>Maqola Xalqaro</td>
                                 <td>5 ball</td>
@@ -126,7 +142,7 @@
                             <tr>
                                 <td>B2 daraja</td>
                                 <td>20 ball</td>
-                            </tr>
+                            </tr>-->
                         </tbody>
                     </table>
                 </div>

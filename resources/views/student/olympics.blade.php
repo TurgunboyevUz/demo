@@ -16,18 +16,18 @@
                     <h3 class="card-title">Olimpiadada qatnashish ma'lumotlarini kiriting</h3>
                 </div>
                 <div class="card-body p-4">
-                    <form id="olympiadForm" action="{{ route('student.olympics.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="olympiadForm" action="{{ route('student.olympics') }}" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <!-- Olimpiyada turi -->
                             <div class="col-md-6 mb-3">
                                 <label for="olympiadType" class="form-label">
                                     <i class="fas fa-trophy"></i> Olimpiyada turi
                                 </label>
-                                <select id="olympiadType" name="type" class="form-control" required>
+                                <select id="olympiadType" name="criteria_id" class="form-control" required>
                                     <option value="" disabled selected>Tanlang</option>
-                                    <option value="institutional">Institut Olimpiyada</option>
-                                    <option value="regional">Viloyat Olimpiyada</option>
-                                    <option value="international">Xalqaro Olimpiyada</option>
+                                    @foreach ($criterias as $criteria)
+                                        <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!-- Olimpiyada o'tkazilgan sana -->

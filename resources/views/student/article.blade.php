@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label for="full_name"><i class="fas fa-user"></i> Talaba FIO</label>
 
-                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ $user->full_name() }}" disabled>
+                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ $user->fio() }}" disabled>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
