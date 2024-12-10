@@ -12,6 +12,7 @@
             <div class="card mt-3 p-4">
                 <h3 class="card-title mb-3">Til Sertifikati Tafsilotlari</h3>
                 <form id="languageCertificateForm" action="{{ route('student.lang-certificate') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <!-- Chet tili -->
                         <div class="col-md-6 mb-3">
@@ -99,14 +100,16 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Ingliz tili</td>
-                                <td>IELTS</td>
-                                <td>C1</td>
-                                <td>2023-09-15</td>
-                                <td>IELTS_Certificate.pdf</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                                </td>
+                                @foreach ($data as $item)
+                                    <td>{{ $item->lang }}</td>
+                                    <td>{{ $item->type }}</td>
+                                    <td>{{ $item->criteria->name }}</td>
+                                    <td>{{ $item->given_date }}</td>
+                                    <td>{{ $item->file->name }}</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                    </td>
+                                @endforeach
                             </tr>
                             <!-- Qo'shimcha sertifikatlar qo'shiladi -->
                         </tbody>

@@ -22,7 +22,7 @@ class Startup extends Model
         if($this->participant == 'team') {
             return $this->team_members;
         }else{
-            return $this->user()->fio();
+            return $this->user->fio();
         }
     }
 }

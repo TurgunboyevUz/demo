@@ -11,8 +11,12 @@ use App\Http\Requests\Student\StoreLangCertificateRequest;
 use App\Http\Requests\Student\StoreOlympicRequest;
 use App\Http\Requests\Student\StoreScholarshipRequest;
 use App\Http\Requests\Student\StoreStartupRequest;
+use App\Models\File\Achievement;
 use App\Models\File\Article;
+use App\Models\File\GrandEconomy;
 use App\Models\File\Invention;
+use App\Models\File\LangCertificate;
+use App\Models\File\Olympic;
 use App\Models\File\Scholarship;
 use App\Models\File\Startup;
 use App\Models\User;
@@ -105,7 +109,7 @@ class File
 
         $startup->user_id = $this->user->id;
         $startup->criteria_id = $data['criteria_id'];
-        $startup->name = $data['name'];
+        $startup->title = $data['title'];
         $startup->type = $data['type'];
         $startup->participant = $data['participant'];
         $startup->team_members = $data['team_members'];
@@ -120,16 +124,53 @@ class File
     public function grand_economy(StoreGrandEconomyRequest $request)
     {
         $data = $request->validated();
+
+        $grand_economy = new GrandEconomy();
+
+        $grand_economy->user_id = $this->user->id;
+        $grand_economy->criteria_id = $data['criteria_id'];
+        $grand_economy->title = $data['title'];
+        $grand_economy->order_number = $data['order_number'];
+        $grand_economy->amount = $data['amount'];
+        $grand_economy->save();
+
+        $grand_economy->upload_file($request, 'grand_economies');
+
+        return $grand_economy;
     }
 
     public function olympics(StoreOlympicRequest $request)
     {
         $data = $request->validated();
+
+        $olympic = new Olympic();
+
+        $olympic->user_id = $this->user->id;
+        $olympic->criteria_id = $data['criteria_id'];
+        $olympic->date = $data['date'];
+        $olympic->direction = $data['direction'];
+        $olympic->save();
+
+        $olympic->upload_file($request, 'olympics');
+
+        return $olympic;
     }
 
     public function lang_certificate(StoreLangCertificateRequest $request)
     {
         $data = $request->validated();
+
+        $certificate = new LangCertificate();
+        $certificate->user_id = $this->user->id;
+        $certificate->criteria_id = $data['criteria_id'];
+        $certificate->lang = $data['lang'];
+        $certificate->type = $data['type'];
+        $certificate->given_date = $data['given_date'];
+        $certificate->save();
+
+        $certificate->upload_file($request, 'lang_certificates');
+
+        return $certificate;
     }
 
     public function distinguished_scholarship(StoreDistinguishedScholarshipRequest $request)
@@ -140,5 +181,20 @@ class File
     public function achievement(StoreAchievementRequest $request)
     {
         $data = $request->validated();
+
+        $achievement = new Achievement();
+
+        $achievement->user_id = $this->user->id;
+        $achievement->criteria_id = $data['criteria_id'];
+        $achievement->type = $data['type'];
+        $achievement->participant = $data['participant'];
+        $achievement->team_members = $data['team_members'];
+        $achievement->location = $data['location'];
+        $achievement->document_type = $data['document_type'];
+        $achievement->save();
+
+        $achievement->upload_file($request, 'achievements');
+
+        return $achievement;
     }
 }

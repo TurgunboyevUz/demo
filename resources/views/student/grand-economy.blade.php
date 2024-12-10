@@ -12,6 +12,7 @@
             <div class="card mt-3 p-4">
                 <h3 class="card-title mb-3">Shartnoma Tafsilotlari</h3>
                 <form id="contractForm" action="{{ route('student.grand-economy') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <!-- Shartnoma turi -->
                         <div class="col-12 col-md-6 mb-3">
@@ -31,7 +32,7 @@
                             <label for="projectName" class="form-label">
                                 <i class="fas fa-project-diagram"></i> Grant/Loyiha nomi
                             </label>
-                            <input type="text" id="projectName" class="form-control" name="name" placeholder="Grant yoki loyiha nomini kiriting" required>
+                            <input type="text" id="projectName" class="form-control" name="title" placeholder="Grant yoki loyiha nomini kiriting" required>
                         </div>
 
                         <!-- Buyruq raqami -->
@@ -87,15 +88,17 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Grand shartnoma</td>
-                                <td>Loyiha nomi 1</td>
-                                <td>123456</td>
-                                <td>$10,000</td>
-                                <td>file1.pdf</td>
-                                <td><span class="badge badge-success">Tekshirildi</span></td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                                </td>
+                                @foreach ($data as $item)
+                                    <td>{{ $item->criteria->name }}</td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>{{ $item->order_number }}</td>
+                                    <td>{{ $item->amount }} </td>
+                                    <td>{{ $item->file->name }}</td>
+                                    <td><span class="badge badge-success">Tekshirildi</span></td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                    </td>
+                                @endforeach
                             </tr>
                         </tbody>
                     </table>

@@ -17,6 +17,7 @@
                 </div>
                 <div class="card-body p-4">
                     <form id="olympiadForm" action="{{ route('student.olympics') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <!-- Olimpiyada turi -->
                             <div class="col-md-6 mb-3">
@@ -82,12 +83,14 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Institut Olimpiyada</td>
-                                    <td>2024-10-10</td>
-                                    <td>Matematika</td>
-                                    <td>certificate1.pdf</td>
-                                    <td><span class="badge badge-success">Tasdiqlandi</span></td>
-                                    <td><button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button></td>
+                                    @foreach($data as $item)
+                                        <td>{{ $item->criteria->name }}</td>
+                                        <td>{{ $item->date }}</td>
+                                        <td>{{ $item->direction }}</td>
+                                        <td>{{ $item->file->name }}</td>
+                                        <td><span class="badge badge-success">Tasdiqlandi</span></td>
+                                        <td><button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button></td>
+                                    @endforeach
                                 </tr>
                                 <!-- Qo'shimcha olimpiada ma'lumotlari qo'shiladi -->
                             </tbody>

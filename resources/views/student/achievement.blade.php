@@ -13,6 +13,7 @@
         </div>
         <div class="card-body">
             <form id="achievementForm" action="{{ route('student.achievement') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
                     <!-- Yutuq turi -->
                     <div class="col-md-6 mb-3">
@@ -34,7 +35,7 @@
                         <select id="level" class="form-control" name="criteria_id" required>
                             <option value="" disabled selected>Tanlang</option>
                             @foreach ($criterias as $criteria)
-                                <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                            <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -44,10 +45,10 @@
                         <label for="participant" class="form-label">
                             <i class="fas fa-users"></i> Ishtirokchilar
                         </label>
-                        <select id="participants" class="form-control" name="participants" required onchange="toggleTeamInputs()">
+                        <select id="participant" class="form-control" name="participant" required onchange="toggleTeamInputs()">
                             <option value="" disabled selected>Tanlang</option>
                             <option value="team">Jamoaviy</option>
-                            <option value="individual">Yakalik</option>
+                            <option value="individual">Yakkalik</option>
                         </select>
                     </div>
 
@@ -122,16 +123,17 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Sport</td>
-                        <td>Respublika</td>
-                        <td>Jamoaviy</td>
-                        <td>Toshkent</td>
-                        <td>Sertifikat</td>
-                        <td>certificate.pdf</td>
+                        @foreach($data as $item)
+                        <td>{{ $item->type }}</td>
+                        <td>{{ $item->criteria->name }}</td>
+                        <td>{{ $item->team_members() }}</td>
+                        <td>{{ $item->location }}</td>
+                        <td>{{ $item->document_type }}</td>
+                        <td>{{ $item->file->name }}</td>
                         <td>
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>
-                                O'chirish</button>
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>O'chirish</button>
                         </td>
+                        @endforeach
                     </tr>
                 </tbody>
             </table>
@@ -141,8 +143,9 @@
 @endsection
 
 @section('scripts')
+<script>
     function toggleTeamInputs() {
-        const participants = document.getElementById('participants');
+        const participants = document.getElementById('participant');
         const teamMembers = document.getElementById('teamMembers');
 
         if (participants.value === 'team') {
@@ -151,4 +154,6 @@
             teamMembers.style.display = 'none';
         }
     }
+
+</script>
 @endsection

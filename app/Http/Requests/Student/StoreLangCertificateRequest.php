@@ -14,7 +14,10 @@ class StoreLangCertificateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'criteria_id' => 'required|exists:criterias,id',
+            'lang' => 'required|in:ru,en,de',
+            'type' => 'required|in:national,cambridge,toefl-itp,toefl-ibt,ielts,itep',
+            'given_date' => 'required|date',
         ];
     }
 }

@@ -14,7 +14,9 @@ class StoreOlympicRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'criteria_id' => 'required|exists:criterias,id',
+            'date' => 'required|date',
+            'direction' => 'required|string',
         ];
     }
 }

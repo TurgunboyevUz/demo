@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->enum('type', ['sport', 'cultural']);
             $table->enum('participant', ['individual', 'team']);
-            $table->text('team_members');
+            $table->text('team_members')->nullable();
             $table->enum('location', ['tashkent', 'andijan']);
             $table->enum('document_type', ['certificate', 'diploma']);
             
