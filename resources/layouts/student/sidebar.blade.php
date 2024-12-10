@@ -23,7 +23,7 @@
                 </li>
                 <!-- Maqolalar Yuklash Dropdown Menu -->
                 <li class="nav-item">
-                    <a href="{{ route('student.article') }}" class="nav-link {{ request()->routeIs('student.upload-article') ? 'active' : ''}}">
+                    <a href="{{ route('student.article') }}" class="nav-link {{ request()->routeIs('student.article') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-upload"></i>
                         <p>Maqolalar yuklash</p>
                     </a>
@@ -37,7 +37,7 @@
                 </li>
                 <!-- Ixtro/DGU/Foydali model Dropdown Menu -->
                 <li class="nav-item">
-                    <a href="{{ route('student.invention') }}" class="nav-link {{ request()->routeIs('student.invention-dgus') ? 'active' : ''}}">
+                    <a href="{{ route('student.invention') }}" class="nav-link {{ request()->routeIs('student.invention') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-lightbulb"></i>
                         <p>Ixtro/DGU/Foydali model</p>
                     </a>

@@ -67,7 +67,7 @@
                         <input type="file" id="fileUpload" name="file" class="form-control-file" required>
                     </div>
                     <div class="col-12 mt-4">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Saqlash</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Saqlash</button>
                     </div>
                 </div>
             </form>
