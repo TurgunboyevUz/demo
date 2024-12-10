@@ -24,9 +24,9 @@ trait Fileable
         return $this->belongsTo(Criteria::class);
     }
 
-    public function upload_file(Request $request, $directory = null)
+    public function upload_file(Request $request, $directory = null, $key = 'file')
     {
-        $file = $request->file('file');
+        $file = $request->file($key);
         $name = $file->getClientOriginalName();
         $mime = $file->getClientMimeType();
 
@@ -38,6 +38,7 @@ trait Fileable
             'path' => $path,
             'mime_type' => $mime,
             'size' => $file->getSize(),
+            'type' => $key,
             'uploaded_by' => $request->user()->id,
         ]);
     }

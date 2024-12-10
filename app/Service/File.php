@@ -13,6 +13,7 @@ use App\Http\Requests\Student\StoreScholarshipRequest;
 use App\Http\Requests\Student\StoreStartupRequest;
 use App\Models\File\Achievement;
 use App\Models\File\Article;
+use App\Models\File\DistinguishedScholarship;
 use App\Models\File\GrandEconomy;
 use App\Models\File\Invention;
 use App\Models\File\LangCertificate;
@@ -176,6 +177,29 @@ class File
     public function distinguished_scholarship(StoreDistinguishedScholarshipRequest $request)
     {
         $data = $request->validated();
+
+        $scholarship = new DistinguishedScholarship();
+        $scholarship->user_id = $this->user->id;
+        $scholarship->save();
+
+        $files = [
+            'reference',
+            'passport',
+            'rating_book',
+            'dean_guarantee',
+            'dean_recommendation',
+            'faculty_statement',
+            'department_recommendation',
+            'supervisor_conclusion',
+            'list_of_works',
+            'certificates',
+        ];
+
+        foreach ($files as $file) {
+            $scholarship->upload_file($request, 'distinguished_scholarships', $file);
+        }
+
+        return $scholarship;
     }
 
     public function achievement(StoreAchievementRequest $request)

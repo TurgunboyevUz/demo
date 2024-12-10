@@ -10,7 +10,7 @@ class PageController
     public function dashboard(Request $request)
     {
         return view('student.dashboard', [
-            'user' => $request->user()
+            'user' => $request->user(),
         ]);
     }
 
@@ -80,8 +80,13 @@ class PageController
     public function distinguished_scholarship(Request $request)
     {
         $user = $request->user();
+        $data = $user->distinguished_scholarships()
+            ->with(['files' => function ($query) {
+                $query->whereIn('type', ['passport', 'rating_book', 'faculty_statement', 'department_recommendation']);
+            }])
+            ->get();
 
-        return view('student.distinguished-scholarship', compact('user'));
+        return view('student.distinguished-scholarship', compact('user', 'data'));
     }
 
     public function achievement(Request $request)
