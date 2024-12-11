@@ -31,6 +31,16 @@ $routes = function () {
     Route::post('achievement', [FileController::class, 'achievement']);
     Route::post('evaluation-criteria', [FileController::class, 'evaluation_criteria']);
     Route::post('chat', [FileController::class, 'chat']);
+
+    Route::delete('article/destroy', [FileController::class, 'article_destroy']);
+    Route::delete('scholarship/destroy', [FileController::class, 'scholarship_destroy']);
+    Route::delete('invention/destroy', [FileController::class, 'invention_destroy']);
+    Route::delete('startup/destroy', [FileController::class, 'startup_destroy']);
+    Route::delete('grand-economy/destroy', [FileController::class, 'grand_economy_destroy']);
+    Route::delete('olympics/destroy', [FileController::class, 'olympics_destroy']);
+    Route::delete('lang-certificate/destroy', [FileController::class, 'lang_certificate_destroy']);
+    Route::delete('distinguished-scholarship/destroy', [FileController::class, 'distinguished_scholarship_destroy']);
+    Route::delete('achievement/destroy', [FileController::class, 'achievement_destroy']);
 };
 
 Route::prefix('student')->middleware(['auth', 'role:student'])->group($routes);

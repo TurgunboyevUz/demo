@@ -187,7 +187,7 @@ class Criteria extends Seeder
                     [
                         'name' => "B2",
                         'code' => "b2",
-                        'score' => 20,
+                        'score' => 15,
                     ],
                     [
                         'name' => "C1",

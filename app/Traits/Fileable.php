@@ -30,6 +30,30 @@ trait Fileable
         return $this->belongsTo(Criteria::class);
     }
 
+    public function status()
+    {
+        $statuses = [
+            'pending' => [
+                'name' => 'Kutilmoqda',
+                'color' => 'warning'
+            ],
+            'reviewed' => [
+                'name' => 'Tasdiqlanmoqda',
+                'color' => 'info'
+            ],
+            'approved' => [
+                'name' => 'Tasdiqlandi',
+                'color' => 'success'
+            ],
+            'rejected' => [
+                'name' => 'Rad etildi',
+                'color' => 'danger'
+            ],
+        ];
+
+        return $statuses[$this->status];
+    }
+
     public function upload_file(Request $request, $directory = null, $key = 'file')
     {
         $file = $request->file($key);
