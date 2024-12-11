@@ -9,8 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $roles = ['teacher', 'dean', 'inspector', 'admin', 'super_admin'];
+
+        if ($request->user()?->hasRole('student')) {
+            return redirect()->route('student.dashboard');
+        }
+
+        foreach ($roles as $role) {
+            if ($request->user()?->hasRole($role)) {
+                return redirect()->route('employee.' . $role . '.dashboard');
+            }
+        }
+
         return view('auth.login');
     }
 
