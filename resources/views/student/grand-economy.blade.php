@@ -109,9 +109,21 @@
                                     <td>{{ $item->order_number }}</td>
                                     <td>{{ $item->amount }} </td>
                                     <td>{{ $item->file->name }}</td>
-                                    <td><span class="badge badge-success">Tekshirildi</span></td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                    <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+                                    
+                                    @if($item->file->status == 'pending')
+                                        <td>
+                                            <form action="{{ route('student.scholarship.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                            </form>
+                                        </td>
+                                    @else
+                                        <td>
+                                            Bu fayl uchun harakat imkonsiz
+                                        </td>
+                                    @endif
                                     </td>
                                 @endforeach
                             </tr>

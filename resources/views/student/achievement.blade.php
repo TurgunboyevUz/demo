@@ -145,15 +145,27 @@
                 <tbody>
                     <tr>
                         @foreach($data as $item)
-                        <td>{{ $item->type }}</td>
-                        <td>{{ $item->criteria->name }}</td>
-                        <td>{{ $item->team_members() }}</td>
-                        <td>{{ $item->location() }}</td>
-                        <td>{{ $item->document_type() }}</td>
-                        <td>{{ $item->file->name }}</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>O'chirish</button>
-                        </td>
+                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->criteria->name }}</td>
+                            <td>{{ $item->team_members() }}</td>
+                            <td>{{ $item->location() }}</td>
+                            <td>{{ $item->document_type() }}</td>
+                            <td>{{ $item->file->name }}</td>
+                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+                                    
+                            @if($item->file->status == 'pending')
+                                <td>
+                                    <form action="{{ route('student.scholarship.destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                    </form>
+                                </td>
+                            @else
+                                <td>
+                                    Bu fayl uchun harakat imkonsiz
+                                </td>
+                            @endif
                         @endforeach
                     </tr>
                 </tbody>

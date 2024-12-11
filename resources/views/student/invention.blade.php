@@ -107,9 +107,21 @@
                         <td>{{ $item->publish_params }}</td>
                         <td>{{ $item->education_year }}</td>
                         <td>{{ $item->file->name }}</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                        </td>
+                        <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+                                    
+                        @if($item->file->status == 'pending')
+                            <td>
+                                <form action="{{ route('student.scholarship.destroy', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                </form>
+                            </td>
+                        @else
+                            <td>
+                                Bu fayl uchun harakat imkonsiz
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
                     <!-- Qo'shimcha mulklar qo'shiladi -->
