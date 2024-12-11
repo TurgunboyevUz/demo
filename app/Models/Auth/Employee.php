@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
@@ -13,6 +14,11 @@ class Employee extends Model
         return $this->belongsToMany(Department::class)
             ->withPivot(['position', 'type'])
             ->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function nation()

@@ -64,7 +64,7 @@
                                         <td>
                                             <i class="fas fa-graduation-cap"></i> Kafedra
                                         </td>
-                                        <td>MICHA</td>
+                                        <td>{{ $user->employee->departments[0]->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>
