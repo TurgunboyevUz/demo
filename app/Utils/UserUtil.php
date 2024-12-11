@@ -74,7 +74,7 @@ class UserUtil
                 'nation_id' => $nation->id,
             ]);
 
-            $roles = array_map(function ($role, $department){
+            $roles = array_map(function ($role, $department) {
                 return [
                     'role' => $role,
                     'department' => $department
@@ -82,12 +82,15 @@ class UserUtil
             }, $response['roles'], $response['departments']);
 
             foreach ($roles as $role) {
-                if(Role::where('name', $role['role']['code'])->exists()) {
+                if (Role::where('name', $role['role']['code'])->exists()) {
                     $department_id = Department::firstOrCreate([
                         'name' => $role['department']['department']['name'],
                     ]);
 
+                    $role_id = Role::where('name', $role['role']['code'])->first()->id;
+
                     $employee->departments()->attach($department_id, [
+                        'role_id' => $role_id,
                         'type' => $role['department']['employeeType']['name'],
                         'position' => $role['department']['staffPosition']['name'],
                     ]);

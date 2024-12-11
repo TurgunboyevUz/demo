@@ -12,7 +12,7 @@ class Employee extends Model
     public function departments()
     {
         return $this->belongsToMany(Department::class)
-            ->withPivot(['position', 'type'])
+            ->withPivot(['position', 'type', 'role_id'])
             ->withTimestamps();
     }
 
