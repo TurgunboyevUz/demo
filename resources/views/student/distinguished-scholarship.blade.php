@@ -20,6 +20,9 @@
                                 <strong>1. Talabaning ma’lumotnomasi (obektivka)</strong>
                             </label>
                             <input type="file" id="obektivka" class="form-control-file mt-2" name="reference" required>
+                            @if($errors->has('reference'))
+                                <span class="text-danger">{{ $errors->first('reference') }}</span>
+                            @endif
                         </div>
                         <!-- Pasport nusxasi -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -27,6 +30,9 @@
                                 <strong>2. Pasport nusxasi (rangli)</strong>
                             </label>
                             <input type="file" id="pasport" class="form-control-file mt-2" name="passport" required>
+                            @if($errors->has('passport'))
+                                <span class="text-danger">{{ $errors->first('passport') }}</span>
+                            @endif
                         </div>
                         <!-- Reyting daftarchasi ko'chirma yoki HEMIS transkripti -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -34,6 +40,9 @@
                                 <strong>3. Reyting daftarchasidan ko‘chirma yoki HEMIS tizimidan transkript</strong>
                             </label>
                             <input type="file" id="reyt" name="rating_book" class="form-control-file mt-2" required>
+                            @if($errors->has('rating_book'))
+                                <span class="text-danger">{{ $errors->first('rating_book') }}</span>
+                            @endif
                         </div>
                         <!-- Dekanning kafolat xati -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -41,6 +50,9 @@
                                 <strong>4. Dekanning kafolat xati</strong>
                             </label>
                             <input type="file" id="kafolatXati" name="dean_guarantee" class="form-control-file mt-2" required>
+                            @if($errors->has('dean_guarantee'))
+                                <span class="text-danger">{{ $errors->first('dean_guarantee') }}</span>
+                            @endif
                         </div>
                         <!-- Dekan tavsiyanomasi -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -48,6 +60,9 @@
                                 <strong>5. Dekan tavsiyanomasi</strong>
                             </label>
                             <input type="file" id="dekanTavsiyanomasi" name="dean_recommendation" class="form-control-file mt-2" required>
+                            @if($errors->has('dean_recommendation'))
+                                <span class="text-danger">{{ $errors->first('dean_recommendation') }}</span>
+                            @endif
                         </div>
                         <!-- Fakultet bayonnomasidan ko‘chirma -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -55,6 +70,9 @@
                                 <strong>6. Fakultet bayonnomasidan ko‘chirma</strong>
                             </label>
                             <input type="file" id="fakultetBayonnoma" name="faculty_statement" class="form-control-file mt-2" required>
+                            @if($errors->has('faculty_statement'))
+                                <span class="text-danger">{{ $errors->first('faculty_statement') }}</span>
+                            @endif
                         </div>
                         <!-- Kafedra mudiri tavsiyanomasi -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -62,6 +80,9 @@
                                 <strong>7. Kafedra mudiri tavsiyanomasi</strong>
                             </label>
                             <input type="file" id="kafedraTavsiyanomasi" name="department_recommendation" class="form-control-file mt-2" required>
+                            @if($errors->has('department_recommendation'))
+                                <span class="text-danger">{{ $errors->first('department_recommendation') }}</span>
+                            @endif
                         </div>
                         <!-- Ilmiy rahbarining xulosasi -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -69,6 +90,9 @@
                                 <strong>8. Ilmiy rahbarining xulosasi</strong>
                             </label>
                             <input type="file" id="ilmiyRahbarXulosa" name="supervisor_conclusion" class="form-control-file mt-2" required>
+                            @if($errors->has('supervisor_conclusion'))
+                                <span class="text-danger">{{ $errors->first('supervisor_conclusion') }}</span>
+                            @endif
                         </div>
                         <!-- Ilmiy (ijodiy) ishlar ro‘yxati -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -76,6 +100,9 @@
                                 <strong>9. Ilmiy (ijodiy) ishlar ro‘yxati (2-ilova)</strong>
                             </label>
                             <input type="file" id="ijodiyIshlar" name="list_of_works" class="form-control-file mt-2" required>
+                            @if($errors->has('list_of_works'))
+                                <span class="text-danger">{{ $errors->first('list_of_works') }}</span>
+                            @endif
                         </div>
                         <!-- Diplom, sertifikat va faxriy yorliqlar -->
                         <div class="form-group mb-4 p-3 border rounded">
@@ -83,6 +110,9 @@
                                 <strong>10. Diplom, sertifikat va faxriy yorliqlar</strong>
                             </label>
                             <input type="file" id="diplomlar" name="certificates" class="form-control-file mt-2" required>
+                            @if($errors->has('certificates'))
+                                <span class="text-danger">{{ $errors->first('certificates') }}</span>
+                            @endif
                         </div>
                         <!-- Jo'natish tugmasi -->
                         <div class="form-group text-center mt-4">

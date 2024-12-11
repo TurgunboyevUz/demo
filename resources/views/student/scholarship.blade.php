@@ -27,6 +27,10 @@
                                             <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                                         @endforeach
                                     </select>
+
+                                    @if($errors->has('criteria_id'))
+                                        <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -35,6 +39,9 @@
                                 <div class="form-group">
                                     <label for="awardDate"><i class="fas fa-calendar-alt"></i> Yutuq berilgan sana</label>
                                     <input type="date" class="form-control" id="awardDate" name="given_date" required>
+                                    @if($errors->has('given_date'))
+                                        <span class="text-danger">{{ $errors->first('given_date') }}</span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -43,6 +50,9 @@
                                 <div class="form-group">
                                     <label for="certificateNumber"><i class="fas fa-id-card"></i> Guvohnoma raqami</label>
                                     <input type="text" class="form-control" id="certificateNumber" name="certificate_number" placeholder="Guvohnoma raqamini kiriting" required>
+                                    @if($errors->has('certificate_number'))
+                                        <span class="text-danger">{{ $errors->first('certificate_number') }}</span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -51,6 +61,9 @@
                                 <div class="form-group">
                                     <label for="awardName"><i class="fas fa-file-alt"></i> Yutuq nomi</label>
                                     <input type="text" class="form-control" id="awardName" name="name" placeholder="Yutuq nomini kiriting" required>
+                                    @if($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -59,6 +72,9 @@
                                 <div class="form-group">
                                     <label for="fileUpload"><i class="fas fa-upload"></i> Fayl yuklash</label>
                                     <input type="file" class="form-control-file" id="fileUpload" name="file" required>
+                                    @if($errors->has('file'))
+                                        <span class="text-danger">{{ $errors->first('file') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>

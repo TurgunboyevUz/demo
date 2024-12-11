@@ -25,6 +25,9 @@
                                     <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                                 @endforeach
                             </select>
+                            @if($errors->has('criteria_id'))
+                                <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                            @endif
                         </div>
 
                         <!-- Grant/Loyiha nomi -->
@@ -33,6 +36,9 @@
                                 <i class="fas fa-project-diagram"></i> Grant/Loyiha nomi
                             </label>
                             <input type="text" id="projectName" class="form-control" name="title" placeholder="Grant yoki loyiha nomini kiriting" required>
+                            @if($errors->has('title'))
+                                <span class="text-danger">{{ $errors->first('title') }}</span>
+                            @endif
                         </div>
 
                         <!-- Buyruq raqami -->
@@ -41,6 +47,9 @@
                                 <i class="fas fa-hashtag"></i> Buyruq raqami
                             </label>
                             <input type="text" id="orderNumber" class="form-control" name="order_number" placeholder="Buyruq raqamini kiriting" required>
+                            @if($errors->has('order_number'))
+                                <span class="text-danger">{{ $errors->first('order_number') }}</span>
+                            @endif
                         </div>
 
                         <!-- Mablag'i miqdori -->
@@ -49,6 +58,9 @@
                                 <i class="fas fa-dollar-sign"></i> Mablag'i miqdori
                             </label>
                             <input type="number" id="amount" class="form-control" name="amount" placeholder="Mablag' miqdorini kiriting" required>
+                            @if($errors->has('amount'))
+                                <span class="text-danger">{{ $errors->first('amount') }}</span>
+                            @endif
                         </div>
 
                         <!-- Buyruq (ko'chirma yuklash) -->
@@ -57,6 +69,9 @@
                                 <i class="fas fa-file-upload"></i> Buyruqdan ko'chirma
                             </label>
                             <input type="file" id="orderFile" class="form-control" name="file" required>
+                            @if($errors->has('file'))
+                                <span class="text-danger">{{ $errors->first('file') }}</span>
+                            @endif
                         </div>
                     </div>
 

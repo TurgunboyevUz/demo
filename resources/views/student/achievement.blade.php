@@ -25,6 +25,9 @@
                             <option value="sport">Sport</option>
                             <option value="cultural">Ma'naviy-ma'rifiy ishlar</option>
                         </select>
+                        @if($errors->has('type'))
+                            <span class="text-danger">{{ $errors->first('type') }}</span>
+                        @endif
                     </div>
 
                     <!-- Darajasi -->
@@ -38,6 +41,9 @@
                             <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                             @endforeach
                         </select>
+                        @if($errors->has('criteria_id'))
+                            <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                        @endif
                     </div>
 
                     <!-- Ishtirokchilar -->
@@ -50,6 +56,9 @@
                             <option value="team">Jamoaviy</option>
                             <option value="individual">Yakkalik</option>
                         </select>
+                        @if($errors->has('participant'))
+                            <span class="text-danger">{{ $errors->first('participant') }}</span>
+                        @endif
                     </div>
 
                     <!-- F.I.SH (agar jamoaviy tanlansa) -->
@@ -58,6 +67,9 @@
                             <i class="fas fa-user"></i> F.I.SH
                         </label>
                         <input type="text" id="teamMemberName" class="form-control" name="team_members" placeholder="Ishtirokchilar ismi, sharifi">
+                        @if($errors->has('team_members'))
+                            <span class="text-danger">{{ $errors->first('team_members') }}</span>
+                        @endif
                     </div>
 
                     <!-- O'tkazilgan joyi -->
@@ -70,6 +82,9 @@
                             <option value="tashkent">Toshkent</option>
                             <option value="andijan">Andijon</option>
                         </select>
+                        @if($errors->has('location'))
+                            <span class="text-danger">{{ $errors->first('location') }}</span>
+                        @endif
                     </div>
 
                     <!-- Hujjat turi -->
@@ -82,6 +97,9 @@
                             <option value="certificate">Sertifikat</option>
                             <option value="diploma">Diplom</option>
                         </select>
+                        @if($errors->has('document_type'))
+                            <span class="text-danger">{{ $errors->first('document_type') }}</span>
+                        @endif
                     </div>
 
                     <!-- Fayl yuklash -->
@@ -90,6 +108,9 @@
                             <i class="fas fa-file-upload"></i> Fayl yuklash
                         </label>
                         <input type="file" name="file" id="uploadFile" class="form-control" required>
+                        @if($errors->has('file'))
+                            <span class="text-danger">{{ $errors->first('file') }}</span>
+                        @endif
                     </div>
                 </div>
 

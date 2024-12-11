@@ -30,6 +30,9 @@
                                         <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                                     @endforeach
                                 </select>
+                                @if($errors->has('criteria_id'))
+                                    <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                                @endif
                             </div>
                             <!-- Olimpiyada o'tkazilgan sana -->
                             <div class="col-md-6 mb-3">
@@ -37,6 +40,9 @@
                                     <i class="fas fa-calendar-alt"></i> Olimpiyada o'tkazilgan sana
                                 </label>
                                 <input type="date" id="olympiadDate" name="date" class="form-control" required>
+                                @if($errors->has('date'))
+                                    <span class="text-danger">{{ $errors->first('date') }}</span>
+                                @endif
                             </div>
                             <!-- Olimpiyada yo'nalishi -->
                             <div class="col-md-6 mb-3">
@@ -44,6 +50,9 @@
                                     <i class="fas fa-book"></i> Olimpiyada yo'nalishi
                                 </label>
                                 <input type="text" id="olympiadDirection" name="direction" class="form-control" placeholder="Olimpiyada yo'nalishini kiriting" required>
+                                @if($errors->has('direction'))
+                                    <span class="text-danger">{{ $errors->first('direction') }}</span>
+                                @endif
                             </div>
                             <!-- Diplom yoki sertifikat -->
                             <div class="col-md-6 mb-3">
@@ -51,6 +60,9 @@
                                     <i class="fas fa-file-upload"></i> Diplom yoki sertifikat
                                 </label>
                                 <input type="file" id="certificateFile" name="file" class="form-control-file mt-2" required>
+                                @if($errors->has('file'))
+                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                @endif
                             </div>
                         </div>
                         <!-- Jo'natish tugmasi -->

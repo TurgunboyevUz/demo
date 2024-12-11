@@ -26,6 +26,9 @@
                                 <option value="de">Nemis tili</option>
                                 <option value="other">Boshqa</option>
                             </select>
+                            @if($errors->has('lang'))
+                                <span class="text-danger">{{ $errors->first('lang') }}</span>
+                            @endif
                         </div>
 
                         <!-- Sertifikat turi -->
@@ -42,6 +45,9 @@
                                 <option value="ielts">International English Language Testing System (IELTS)</option>
                                 <option value="itep">iTEP Academic — Plus</option>
                             </select>
+                            @if($errors->has('type'))
+                                <span class="text-danger">{{ $errors->first('type') }}</span>
+                            @endif
                         </div>
 
                         <!-- Sertifikat darajasi -->
@@ -55,6 +61,9 @@
                                     <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                                 @endforeach
                             </select>
+                            @if($errors->has('criteria_id'))
+                                <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                            @endif
                         </div>
 
                         <!-- Sertifikat berilgan sana -->
@@ -63,6 +72,9 @@
                                 <i class="fas fa-calendar"></i> Sertifikat berilgan sana
                             </label>
                             <input type="date" id="certificateDate" name="given_date" class="form-control" required>
+                            @if($errors->has('given_date'))
+                                <span class="text-danger">{{ $errors->first('given_date') }}</span>
+                            @endif
                         </div>
 
                         <!-- Sertifikat yuklash -->
@@ -71,6 +83,9 @@
                                 <i class="fas fa-file-upload"></i> Sertifikatni PDF formatda yuklash
                             </label>
                             <input type="file" id="certificateFile" name="file" class="form-control" accept=".pdf" required>
+                            @if($errors->has('file'))
+                                <span class="text-danger">{{ $errors->first('file') }}</span>
+                            @endif
                         </div>
                     </div>
 

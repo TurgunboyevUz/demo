@@ -96,22 +96,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        @foreach($data as $item)
-                            <td>{{ $user->fio() }}</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->criteria->name }}</td>
-                            <td>{{ $item->property_number }}</td>
-                            <td>{{ $item->authors_count }}</td>
-                            <td>{{ $item->authors }}</td>
-                            <td>{{ $item->publish_params }}</td>
-                            <td>{{ $item->education_year }}</td>
-                            <td>{{ $item->file->name }}</td>
-                        @endforeach
+                @foreach($data as $item)
+                    <tr>        
+                        <td>{{ $user->fio() }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->criteria->name }}</td>
+                        <td>{{ $item->property_number }}</td>
+                        <td>{{ $item->authors_count }}</td>
+                        <td>{{ $item->authors }}</td>
+                        <td>{{ $item->publish_params }}</td>
+                        <td>{{ $item->education_year }}</td>
+                        <td>{{ $item->file->name }}</td>
                         <td>
                             <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
                         </td>
                     </tr>
+                @endforeach
                     <!-- Qo'shimcha mulklar qo'shiladi -->
                 </tbody>
             </table>
