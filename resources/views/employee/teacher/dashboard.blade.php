@@ -22,7 +22,7 @@
                             <div class="widget-user-image">
                                 <img class="img-circle elevation-2" src="{{ asset('storage/' . $user->picture_path) }}" alt="User Avatar">
                             </div>
-                            <h3 class="widget-user-username">Anvarov Oyatillo</h3>
+                            <h3 class="widget-user-username">{{ $user->surname . ' ' . $user->name }}</h3>
                             <h5 class="widget-user-desc">Professor o'qituvchi</h5>
                         </div>
                         <div class="card-body">
