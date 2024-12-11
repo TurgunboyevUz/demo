@@ -17,11 +17,11 @@ class Employee extends Model
 
     public function nation()
     {
-        $this->belongsTo(Nation::class);
+        return $this->belongsTo(Nation::class);
     }
 
     public function students()
     {
-        $this->hasMany(Student::class);
+        return $this->hasMany(Student::class);
     }
 }

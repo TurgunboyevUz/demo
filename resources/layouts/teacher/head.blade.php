@@ -10,14 +10,14 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <!-- Toastify styles -->
-    <link rel="stylesheet" href="dist/css/toastify.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/toastify.css') }}">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
     <!-- Dashboard style -->
-    <link rel="stylesheet" href="dist/css/dashboard.css">
-
+    <link rel="stylesheet" href="{{ asset('dist/css/dashboard.css') }}">
+    
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>

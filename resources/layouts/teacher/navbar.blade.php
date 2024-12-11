@@ -78,9 +78,9 @@
         <!-- Profile Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px; padding-right: 8px;">
-                <span class="d-none d-md-inline">FALONCHIYEV FALONCHI FISTONCHI O'G'LI</span>
-                <span class="d-inline d-md-none">FALONCHIYEV F.</span>
+                <img src="{{ asset('storage/' . $user->picture_path) }}" alt="User" class="img-circle" style="height: 30px; padding-right: 8px;">
+                <span class="d-none d-md-inline">{{ $user->full_name() }}</span>
+                <span class="d-inline d-md-none">{{ $user->short_name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="teacher-profile-edit.html" class="dropdown-item">

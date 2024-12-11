@@ -20,7 +20,7 @@
                     <div class="card card-widget widget-user">
                         <div class="widget-user-header bg-info">
                             <div class="widget-user-image">
-                                <img class="img-circle elevation-2" src="../dist/img/user8-128x128.jpg" alt="User Avatar">
+                                <img class="img-circle elevation-2" src="{{ asset('storage/' . $user->picture_path) }}" alt="User Avatar">
                             </div>
                             <h3 class="widget-user-username">Anvarov Oyatillo</h3>
                             <h5 class="widget-user-desc">Professor o'qituvchi</h5>
@@ -46,19 +46,19 @@
                                         <td>
                                             <i class="fas fa-user"></i> Ism
                                         </td>
-                                        <td>Oyatillo</td>
+                                        <td>{{ $user->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-user-tag"></i> Familiya
                                         </td>
-                                        <td>Anvarov</td>
+                                        <td>{{ $user->surname }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-flag"></i> Millati
                                         </td>
-                                        <td>O'zbek</td>
+                                        <td>{{ $user->employee->nation->name}}</td>
                                     </tr>
                                     <tr>
                                         <td>

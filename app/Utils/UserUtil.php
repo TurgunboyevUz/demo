@@ -45,7 +45,7 @@ class UserUtil
 
         $user->update(compact('name', 'surname', 'patronymic', 'short_name', 'phone', 'email', 'picture_path', 'passport_number', 'passport_pin'));
 
-        $nation = $response['data']['educationLang']['name'] ?? "O'zbek";
+        $nation = $response['data']['educationLang']['name'] ?? "O‘zbek";
         $nation = Nation::firstOrCreate(['name' => $nation]);
 
         if ($response['type'] == 'student') {
@@ -74,15 +74,24 @@ class UserUtil
                 'nation_id' => $nation->id,
             ]);
 
-            foreach ($response['departments'] as $department) {
-                $department_id = Department::firstOrCreate([
-                    'name' => $department['department']['name'],
-                ])->id;
+            $roles = array_map(function ($role, $department){
+                return [
+                    'role' => $role,
+                    'department' => $department
+                ];
+            }, $response['roles'], $response['departments']);
 
-                $employee->departments()->attach($department_id, [
-                    'type' => $department['employeeType']['name'],
-                    'position' => $department['staffPosition']['name'],
-                ]);
+            foreach ($roles as $role) {
+                if(Role::where('name', $role['role']['code'])->exists()) {
+                    $department_id = Department::firstOrCreate([
+                        'name' => $role['department']['department']['name'],
+                    ]);
+
+                    $employee->departments()->attach($department_id, [
+                        'type' => $role['department']['employeeType']['name'],
+                        'position' => $role['department']['staffPosition']['name'],
+                    ]);
+                }
             }
 
             $arr = Arr::pluck($response['roles'], 'code');
