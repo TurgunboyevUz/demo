@@ -10,7 +10,8 @@ class PageController extends Controller
     public function dashboard(Request $request)
     {
         $user = $request->user();
+        $department = $user->employee->department('teacher');
 
-        return view('employee.teacher.dashboard', compact('user'));
+        return view('employee.teacher.dashboard', compact('user', 'department'));
     }
 }

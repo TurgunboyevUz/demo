@@ -116,17 +116,17 @@ class Criteria extends Seeder
                     [
                         'name' => "Sanoat namunasi",
                         'code' => "industry",
-                        'score' => 0,
+                        'score' => 5,
                     ],
                     [
                         'name' => "Seleksiya yutuqlari",
                         'code' => "selection",
-                        'score' => 0,
+                        'score' => 5,
                     ],
                     [
                         'name' => "Tovar belgisi",
                         'code' => "product",
-                        'score' => 0,
+                        'score' => 5,
                     ],
                 ],
             ],
@@ -192,12 +192,12 @@ class Criteria extends Seeder
                     [
                         'name' => "C1",
                         'code' => "c1",
-                        'score' => 0,
+                        'score' => 20,
                     ],
                     [
                         'name' => "C2",
                         'code' => "c2",
-                        'score' => 0,
+                        'score' => 30,
                     ],
                 ],
             ],

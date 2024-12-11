@@ -10,6 +10,7 @@ use App\Models\Auth\Nation;
 use App\Models\Auth\Specialty;
 use App\Models\Auth\Student;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -29,9 +30,10 @@ class UserUtil
         $email = $response['email'];
         $passport_number = $response['passport_number'];
         $passport_pin = $response['passport_pin'];
+        $birth_date = Carbon::parse($response['birth_date'])->format('Y-m-d');
         $picture_path = '';
 
-        $user = User::firstOrCreate(['hemis_id' => $hemis_id], compact('uuid', 'hemis_id', 'name', 'surname', 'patronymic', 'short_name', 'phone', 'email', 'passport_number', 'passport_pin', 'picture_path'));
+        $user = User::firstOrCreate(['hemis_id' => $hemis_id], compact('uuid', 'hemis_id', 'name', 'surname', 'patronymic', 'short_name', 'phone', 'email', 'birth_date', 'passport_number', 'passport_pin', 'picture_path'));
 
         if ($user->picture_path) {
             Storage::disk('public')->delete($user->picture_path);
@@ -83,11 +85,14 @@ class UserUtil
 
             foreach ($roles as $role) {
                 if(Role::where('name', $role['role']['code'])->exists()) {
+                    $role_id = Role::where('name', $role['role']['code'])->first()->id;
+
                     $department_id = Department::firstOrCreate([
                         'name' => $role['department']['department']['name'],
                     ]);
 
                     $employee->departments()->attach($department_id, [
+                        'role_id' => $role_id,
                         'type' => $role['department']['employeeType']['name'],
                         'position' => $role['department']['staffPosition']['name'],
                     ]);

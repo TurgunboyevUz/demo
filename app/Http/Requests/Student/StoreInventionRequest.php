@@ -21,6 +21,7 @@ class StoreInventionRequest extends FormRequest
             'authors' => ['required', 'string'],
             'publish_params' => ['required', 'string'],
             'education_year' => ['required', 'integer'],
+            'file' => ['required', 'file', 'mimes:pdf'],
         ];
     }
 }

@@ -18,6 +18,7 @@ class StoreGrandEconomyRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'order_number' => ['required', 'string', 'max:255'],
             'amount' => ['required', 'numeric'],
+            'file' => ['required', 'file', 'mimes:pdf'],
         ];
     }
 }

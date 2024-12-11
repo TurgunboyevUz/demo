@@ -20,6 +20,7 @@ class StoreAchievementRequest extends FormRequest
             'team_members' => ['nullable', 'string'],
             'location' => ['required', 'string', 'in:tashkent,andijan'],
             'document_type' => ['required', 'string', 'in:certificate,diploma'],
+            'file' => ['required', 'file', 'mimes:pdf'],
         ];
     }
 }

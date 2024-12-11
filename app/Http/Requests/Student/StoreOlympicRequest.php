@@ -17,6 +17,7 @@ class StoreOlympicRequest extends FormRequest
             'criteria_id' => 'required|exists:criterias,id',
             'date' => 'required|date',
             'direction' => 'required|string',
+            'file' => 'required|file|mimes:pdf',
         ];
     }
 }

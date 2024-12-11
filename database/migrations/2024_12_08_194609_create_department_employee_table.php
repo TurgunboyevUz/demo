@@ -16,6 +16,7 @@ return new class extends Migration
             
             $table->foreignId('department_id')->nullable();
             $table->foreignId('employee_id')->nullable();
+            $table->foreignId('role_id')->nullable();
 
             $table->string('position');
             $table->string('type');

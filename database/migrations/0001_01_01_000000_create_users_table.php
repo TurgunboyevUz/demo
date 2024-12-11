@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('short_name');
             $table->string('phone');
             $table->string('email')->unique();
+            $table->date('birth_date');
             $table->string('passport_number');
             $table->string('passport_pin');
             $table->string('picture_path');

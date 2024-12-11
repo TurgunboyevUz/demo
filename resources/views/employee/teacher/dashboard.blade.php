@@ -23,20 +23,10 @@
                                 <img class="img-circle elevation-2" src="{{ asset('storage/' . $user->picture_path) }}" alt="User Avatar">
                             </div>
                             <h3 class="widget-user-username">{{ $user->surname . ' ' . $user->name }}</h3>
-                            <h5 class="widget-user-desc">Professor o'qituvchi</h5>
+                            <h5 class="widget-user-desc">{{ $department->pivot->position }}</h5>
                         </div>
                         <div class="card-body">
                             <!-- Progress Bar with Count -->
-                            <div class="mt-3">
-                                <div class="d-flex justify-content-between">
-                                    <span>10 / <i class="fas fa-infinity"></i>
-                                    </span>
-                                    <span class="font-weight-bold">6.67%</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 6.67%" aria-valuenow="6.67" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
                             <hr>
                             <!-- Shaxsiy Ma'lumotlar -->
                             <h4 class="mt-4">Shaxsiy Ma'lumotlar</h4>
@@ -62,51 +52,46 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                            <i class="fas fa-university"></i> Fakultet
+                                        </td>
+                                        <td>Informatika</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
                                             <i class="fas fa-graduation-cap"></i> Kafedra
                                         </td>
-                                        <td>{{ $user->employee->departments[0]->name }}</td>
+                                        <td>{{ $department->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-level-up-alt"></i> Toifasi
                                         </td>
-                                        <td>Professor o'qituvchi</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="fas fa-calendar-alt"></i> Tug'ilgan yili
-                                        </td>
-                                        <td>1985</td>
+                                        <td> {{ $department->pivot->position }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-passport"></i> Pasport seriyasi
                                         </td>
-                                        <td>AB1234567</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="fas fa-university"></i> Fakultet
-                                        </td>
-                                        <td>Informatika</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="fas fa-home"></i> Doimiy yashash manzili
-                                        </td>
-                                        <td>Tashkent, Uzbekistan</td>
+                                        <td>{{ $user->passport_number }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-id-card"></i> JSHSHIR raqami
                                         </td>
-                                        <td>12345678901234</td>
+                                        <td>{{ $user->passport_pin }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i class="fas fa-calendar-alt"></i> Tug'ilgan sanasi
+                                        </td>
+                                        <td>{{ $user->birth_date }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fas fa-phone"></i> Telefon raqami
                                         </td>
-                                        <td>+998 90 123 45 67</td>
+                                        <td>{{ $user->phone }}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -18,6 +18,7 @@ class StoreLangCertificateRequest extends FormRequest
             'lang' => 'required|in:ru,en,de',
             'type' => 'required|in:national,cambridge,toefl-itp,toefl-ibt,ielts,itep',
             'given_date' => 'required|date',
+            'file' => 'required|file|mimes:pdf',
         ];
     }
 }

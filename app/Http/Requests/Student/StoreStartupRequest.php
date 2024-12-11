@@ -20,6 +20,7 @@ class StoreStartupRequest extends FormRequest
             'participant' => 'required|in:individual,team',
             'team_members' => 'nullable|string',
             'location' => 'required|in:tashkent,andijan',
+            'file' => 'required|mimes:pdf'
         ];
     }
 }

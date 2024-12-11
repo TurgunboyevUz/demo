@@ -86,7 +86,7 @@
                 <a href="teacher-profile-edit.html" class="dropdown-item">
                     <i class="nav-icon fas fa-pencil"></i> Profilni tahrirlash
                 </a>
-                <a href="login.html" class="dropdown-item">
+                <a href="{{ route('logout') }}" class="dropdown-item">
                     <i class="fas fa-sign-out-alt"></i> Chiqish
                 </a>
             </div>

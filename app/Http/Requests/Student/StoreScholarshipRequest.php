@@ -18,6 +18,7 @@ class StoreScholarshipRequest extends FormRequest
             'name' => 'required|string|max:255',
             'given_date' => 'required|date',
             'certificate_number' => 'required|string|max:255',
+            'file' => 'required|mimes:pdf'
         ];
     }
 }
