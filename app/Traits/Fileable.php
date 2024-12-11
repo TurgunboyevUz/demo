@@ -51,7 +51,7 @@ trait Fileable
             ],
         ];
 
-        return $statuses[$this->status];
+        return $statuses[$this->file->status];
     }
 
     public function upload_file(Request $request, $directory = null, $key = 'file')
