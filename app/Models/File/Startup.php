@@ -12,11 +12,6 @@ class Startup extends Model
 
     protected $guarded = [];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function team_members()
     {
         if($this->participant == 'team') {
@@ -24,5 +19,19 @@ class Startup extends Model
         }else{
             return $this->user->fio();
         }
+    }
+
+    public function type()
+    {
+        $arr = ['startup' => "StartUp", 'contest' => "Contest"];
+
+        return $arr[$this->type];
+    }
+
+    public function location()
+    {
+        $arr = ['tashkent' => "Toshkent", 'andijan' => "Andijan"];
+
+        return $arr[$this->location];
     }
 }

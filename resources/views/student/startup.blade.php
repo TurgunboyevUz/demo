@@ -142,10 +142,10 @@
                 <tbody>
                     <tr>
                         @foreach($data as $item)
-                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->type() }}</td>
                             <td>{{ $item->criteria->name }}</td>
                             <td>{{ $item->team_members() }}</td>
-                            <td>{{ $item->location }}</td>
+                            <td>{{ $item->location() }}</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->file->name }}</td>
                             

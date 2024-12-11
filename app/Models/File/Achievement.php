@@ -25,4 +25,25 @@ class Achievement extends Model
             return $this->user->fio();
         }
     }
+
+    public function type()
+    {
+        $arr = ['sport' => "Sport", 'cultural' => "Ma'naviy-ma'rifiy ishlar"];
+
+        return $arr[$this->type];
+    }
+
+    public function location()
+    {
+        $arr = ['tashkent' => "Toshkent", 'andijan' => "Andijon"];
+
+        return $arr[$this->location];
+    }
+
+    public function document_type()
+    {
+        $arr = ['certificate' => "Sertifikat", 'diploma' => "Diplom"];
+
+        return $arr[$this->document_type];
+    }
 }

@@ -116,8 +116,8 @@
                         <tbody>
                             <tr>
                                 @foreach ($data as $item)
-                                    <td>{{ $item->lang }}</td>
-                                    <td>{{ $item->type }}</td>
+                                    <td>{{ $item->lang() }}</td>
+                                    <td>{{ $item->type() }}</td>
                                     <td>{{ $item->criteria->name }}</td>
                                     <td>{{ $item->given_date }}</td>
                                     <td>{{ $item->file->name }}</td>

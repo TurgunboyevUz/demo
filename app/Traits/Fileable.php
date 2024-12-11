@@ -4,11 +4,17 @@ namespace App\Traits;
 
 use App\Models\Criteria\Criteria;
 use App\Models\File\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 trait Fileable
 {
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function files()
     {
         return $this->morphMany(File::class, 'fileable');

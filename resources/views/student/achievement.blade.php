@@ -148,8 +148,8 @@
                         <td>{{ $item->type }}</td>
                         <td>{{ $item->criteria->name }}</td>
                         <td>{{ $item->team_members() }}</td>
-                        <td>{{ $item->location }}</td>
-                        <td>{{ $item->document_type }}</td>
+                        <td>{{ $item->location() }}</td>
+                        <td>{{ $item->document_type() }}</td>
                         <td>{{ $item->file->name }}</td>
                         <td>
                             <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>O'chirish</button>
