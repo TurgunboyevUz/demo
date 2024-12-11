@@ -14,6 +14,14 @@ class PageController
         ]);
     }
 
+    public function assignments(Request $request)
+    {
+        $user = $request->user();
+        //$data = $user->assignments()->get();
+
+        return view('student.assignments', compact('user'));
+    }
+
     public function article(Request $request)
     {
         $user = $request->user();
@@ -104,5 +112,12 @@ class PageController
         $categories = Category::all();
 
         return view('student.evaluation-criteria', compact('user', 'categories'));
+    }
+
+    public function chat(Request $request)
+    {
+        $user = $request->user();
+
+        return view('student.chat', compact('user'));
     }
 }
