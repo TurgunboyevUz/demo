@@ -113,9 +113,10 @@
                                     
                                     @if($item->file->status == 'pending')
                                         <td>
-                                            <form action="{{ route('student.scholarship.destroy', $item->id) }}" method="POST">
+                                            <form action="{{ route('student.grand-economy.destroy') }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
+                                                <input type="hidden" name="id" value="{{ $item->id }}">
                                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
                                             </form>
                                         </td>

@@ -221,4 +221,58 @@ class File
 
         return $achievement;
     }
+
+    public function destroy_article($id)
+    {
+        $article = Article::findOrFail($id);
+        return $article->delete();
+    }
+
+    public function destroy_scholarship($id)
+    {
+        $scholarship = Scholarship::findOrFail($id);
+        return $scholarship->delete();
+    }
+
+    public function destroy_invention($id)
+    {
+        $invention = Invention::findOrFail($id);
+        return $invention->delete();
+    }
+
+    public function destroy_startup($id)
+    {
+        $startup = Startup::findOrFail($id);
+        return $startup->delete();
+    }
+
+    public function destroy_grand_economy($id)
+    {
+        $grand_economy = GrandEconomy::findOrFail($id);
+        return $grand_economy->delete();
+    }
+
+    public function destroy_olympics($id)
+    {
+        $olympic = Olympic::findOrFail($id);
+        return $olympic->delete();
+    }
+
+    public function destroy_lang_certificate($id)
+    {
+        $certificate = LangCertificate::findOrFail($id);
+        return $certificate->delete();
+    }
+
+    public function destroy_distinguished_scholarship($id)
+    {
+        $scholarship = DistinguishedScholarship::findOrFail($id);
+        return $scholarship->delete();
+    }
+
+    public function destroy_achievement($id)
+    {
+        $achievement = Achievement::findOrFail($id);
+        return $achievement->delete();
+    }
 }

@@ -32,15 +32,15 @@ $routes = function () {
     Route::post('evaluation-criteria', [FileController::class, 'evaluation_criteria']);
     Route::post('chat', [FileController::class, 'chat']);
 
-    Route::delete('article/destroy', [FileController::class, 'article_destroy']);
-    Route::delete('scholarship/destroy', [FileController::class, 'scholarship_destroy']);
-    Route::delete('invention/destroy', [FileController::class, 'invention_destroy']);
-    Route::delete('startup/destroy', [FileController::class, 'startup_destroy']);
-    Route::delete('grand-economy/destroy', [FileController::class, 'grand_economy_destroy']);
-    Route::delete('olympics/destroy', [FileController::class, 'olympics_destroy']);
-    Route::delete('lang-certificate/destroy', [FileController::class, 'lang_certificate_destroy']);
-    Route::delete('distinguished-scholarship/destroy', [FileController::class, 'distinguished_scholarship_destroy']);
-    Route::delete('achievement/destroy', [FileController::class, 'achievement_destroy']);
+    Route::delete('article/destroy', [FileController::class, 'destroy_article']);
+    Route::delete('scholarship/destroy', [FileController::class, 'destroy_scholarship']);
+    Route::delete('invention/destroy', [FileController::class, 'destroy_invention']);
+    Route::delete('startup/destroy', [FileController::class, 'destroy_startup']);
+    Route::delete('grand-economy/destroy', [FileController::class, 'destroy_grand_economy']);
+    Route::delete('olympics/destroy', [FileController::class, 'destroy_olympics']);
+    Route::delete('lang-certificate/destroy', [FileController::class, 'destroy_lang_certificate']);
+    Route::delete('distinguished-scholarship/destroy', [FileController::class, 'destroy_distinguished_scholarship']);
+    Route::delete('achievement/destroy', [FileController::class, 'destroy_achievement']);
 };
 
 Route::prefix('student')->middleware(['auth', 'role:student'])->group($routes);

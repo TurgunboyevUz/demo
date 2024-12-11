@@ -13,6 +13,7 @@ use App\Http\Requests\Student\StoreLangCertificateRequest;
 use App\Http\Requests\Student\StoreOlympicRequest;
 use App\Http\Requests\Student\StoreScholarshipRequest;
 use App\Http\Requests\Student\StoreStartupRequest;
+use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
@@ -77,5 +78,68 @@ class FileController extends Controller
         File::user($request)->achievement($request);
 
         return redirect()->route($request->route()->getName());
+    }
+
+    public function destroy_article($id)
+    {
+        File::destroy_article($id);
+
+        return redirect()->back();
+    }
+
+    public function destroy_scholarship(Request $request)
+    {
+        File::destroy_scholarship($request->input('id'));
+
+        return redirect()->back();
+    }
+
+    public function destroy_invention(Request $request)
+    {
+        File::destroy_invention($request->input('id'));
+
+        return redirect()->back();
+    }
+
+    public function destroy_startup(Request $request)
+    {
+        File::destroy_startup($request->input('id'));
+
+        return redirect()->back();
+    }
+
+    public function destroy_grand_economy(Request $request)
+    {
+        File::destroy_grand_economy($request->input('id'));
+
+        return redirect()->back();
+    }
+
+    public function destroy_olympics(Request $request)
+    {
+        File::destroy_olympics($request->input('id'));
+
+        return redirect()->back();
+    }
+
+    public function destroy_lang_certificate(Request $request)
+    {
+        File::destroy_lang_certificate($request->input('id'));
+
+        return redirect()->back();
+    }
+
+    public function destroy_distinguished_scholarship(Request $request)
+    {
+        File::destroy_distinguished_scholarship($request->input('id'));
+
+        return redirect()->back();
+    }
+
+    public function destroy_achievement(Request $request)
+    {
+        File::destroy_achievement($request->input('id'));
+
+        return redirect()->back();
     }
 }
