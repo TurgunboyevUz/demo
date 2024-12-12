@@ -57,48 +57,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($students as $student)
+                                        @foreach($student->articles as $article)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>1</td>
-                                            <td><img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>Abdullayev Muhammad</td>
-                                            <td>Ilmiy tadqiqot</td>
-                                            <td>Kalit so'z</td>
-                                            <td>O'zbekcha</td>
-                                            <td>Mualliflar ro'yxati</td>
-                                            <td>10.1234/abcde</td>
-                                            <td>Jurnal nomi</td>
-                                            <td>Xalqaro bazalar</td>
-                                            <td>2024</td>
-                                            <td>Parametrlari</td>
-                                            <td>2023/2024</td>
-                                            <td>ilmiy_ish.pdf</td>
+                                            <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>{{ $student->user->fio() }}</td>
+                                            <td>{{ $article->title }}</td>
+                                            <td>{{ $article->keywords }}</td>
+                                            <td>{{ $article->lang() }}</td>
+                                            <td>{{ $article->authors }}</td>
+                                            <td>{{ $article->doi }}</td>
+                                            <td>{{ $article->journal_name }}</td>
+                                            <td>{{ $article->international_databases }}</td>
+                                            <td>{{ $article->published_year }}</td>
+                                            <td>{{ $article->publish_params }}</td>
+                                            <td>{{ $article->education_year }}</td>
+                                            <td>{{ $article->file->name }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
                                                 <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
                                             </td>
                                         </tr>
+                                        @endforeach
+                                        @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" id="checkAll"></th>
-                                            <th>#</th>
-                                            <th>Rasmi</th>
-                                            <th>Talaba Ism, Familiyasi</th>
-                                            <th>Ilmiy Ish Nomi</th>
-                                            <th>Kalit So'zlar</th>
-                                            <th>Til</th>
-                                            <th>Mualliflar</th>
-                                            <th>DOI</th>
-                                            <th>Manba (Jurnal) Nomi</th>
-                                            <th>Xalqaro Ilmiy Bazalar</th>
-                                            <th>Nashr Yili</th>
-                                            <th>Nashr Parametrlari</th>
-                                            <th>O'quv Yili</th>
-                                            <th>Fayl Nomi</th>
-                                            <th>Harakatlar</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -107,5 +91,25 @@
             </div>
         </div>
     </section>
+</div>
+
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Bekor Qilish Izohi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" rows="4" placeholder="Bekor qilish sababini kiriting..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+                <button type="button" class="btn btn-primary">Saqlash</button>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

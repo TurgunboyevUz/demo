@@ -90,7 +90,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="student-list.html" class="nav-link">
+                <a href="{{ route('employee.teacher.student-list') }}" class="nav-link">
                     <i class="nav-icon fas fa-chalkboard-teacher"></i>
                     <p>Talabalar ro'yxati</p>
                 </a>
@@ -137,13 +137,13 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="teacher-create-task.html" class="nav-link">
+                <a href="{{ route('employee.teacher.create-task') }}" class="nav-link">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Topshiriq yaratish</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="teacher-chat-with-students.html" class="nav-link">
+                <a href="{{ route('employee.teacher.chat') }}" class="nav-link">
                     <i class="nav-icon fas fa-comments"></i>
                     <p>Talabalar bilan chat
                         <span class="right badge badge-danger">8</span>

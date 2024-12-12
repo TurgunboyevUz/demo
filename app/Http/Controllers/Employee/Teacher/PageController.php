@@ -19,7 +19,15 @@ class PageController extends Controller
     {
         $user = $request->user();
 
-        return view('employee.teacher.article', compact('user'));
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->articles = $student->articles()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
+        return view('employee.teacher.article', compact('user', 'students'));
     }
 
     public function assignments(Request $request)
@@ -33,6 +41,14 @@ class PageController extends Controller
     {
         $user = $request->user();
 
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->scholarships = $student->scholarships()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
         return view('employee.teacher.scholarship', compact('user'));
     }
 
@@ -40,56 +56,105 @@ class PageController extends Controller
     {
         $user = $request->user();
 
-        return view('employee.teacher.invention', compact('user'));
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->inventions = $student->inventions()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
+        return view('employee.teacher.invention', compact('user', 'students'));
     }
 
     public function startup(Request $request)
     {
         $user = $request->user();
 
-        return view('employee.teacher.startup', compact('user'));
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->startups = $student->startups()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
+        return view('employee.teacher.startup', compact('user', 'students'));
     }
 
     public function grand_economy(Request $request)
     {
         $user = $request->user();
 
-        return view('employee.teacher.grand-economy', compact('user'));
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->grand_economies = $student->grand_economies()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
+        return view('employee.teacher.grand-economy', compact('user', 'students'));
     }
 
     public function olympics(Request $request)
     {
         $user = $request->user();
 
-        return view('employee.teacher.olympics', compact('user'));
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->olympics = $student->olympics()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
+        return view('employee.teacher.olympics', compact('user', 'students'));
     }
 
     public function lang_certificate(Request $request)
     {
         $user = $request->user();
 
-        return view('employee.teacher.lang-certificate', compact('user'));
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->lang_certificates = $student->lang_certificates()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
+        return view('employee.teacher.lang-certificate', compact('user', 'students'));
     }
 
     public function distinguished_scholarship(Request $request)
     {
         $user = $request->user();
 
-        return view('employee.teacher.distinguished-scholarship', compact('user'));
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->distinguished_scholarships = $student->distinguished_scholarships()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
+
+        return view('employee.teacher.distinguished-scholarship', compact('user', 'students'));
     }
 
     public function achievement(Request $request)
     {
         $user = $request->user();
 
-        return view('employee.teacher.achievement', compact('user'));
-    }
+        $students = $user->employee->students()->get()->each(function (&$student) {
+            $student->achievements = $student->achievements()
+                ->with('files', function ($query) {
+                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
+                })
+                ->get();
+        });
 
-    public function evaluation_criteria(Request $request)
-    {
-        $user = $request->user();
-
-        return view('employee.teacher.evaluation-criteria', compact('user'));
+        return view('employee.teacher.achievement', compact('user', 'students'));
     }
 
     public function chat(Request $request)

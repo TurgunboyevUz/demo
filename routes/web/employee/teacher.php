@@ -15,5 +15,7 @@ Route::get('olympics', [PageController::class, 'olympics']);
 Route::get('lang-certificate', [PageController::class, 'lang_certificate']);
 Route::get('distinguished-scholarship', [PageController::class, 'distinguished_scholarship']);
 Route::get('achievement', [PageController::class, 'achievement']);
-Route::get('evaluation-criteria', [PageController::class, 'evaluation_criteria']);
 Route::get('chat', [PageController::class, 'chat']);
+
+Route::get('student-list', [PageController::class, 'student_list']);
+Route::get('create-task', [PageController::class, 'create_task']);
