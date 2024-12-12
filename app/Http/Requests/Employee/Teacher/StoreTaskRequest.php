@@ -14,6 +14,7 @@ class StoreTaskRequest extends FormRequest
     public function rules()
     {
         return [
+            'student_id' => 'required|exists:students,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'file' => 'required|file|mimes:pdf,doc,docx',

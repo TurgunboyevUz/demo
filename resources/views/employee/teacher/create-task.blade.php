@@ -27,7 +27,8 @@
                     <h3 class="card-title">Yangi Topshiriq Yaratish</h3>
                 </div>
                 <div class="card-body">
-                    <form id="assignmentForm">
+                    <form id="assignmentForm" action="{{ route('employee.teacher.create-task') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                             <label for="studentSelect">Talabani tanlang:</label>
                             <select name="student_id" id="studentSelect" class="form-control" required>
@@ -38,18 +39,30 @@
                                 <option value="4">Saidov Muhammad (1-kurs, Botanika va o'simlik fiziologiyasi)</option>
                                 <option value="5">Nazarov Diyorbek (3-kurs, Anorganik kimyo)</option>
                             </select>
+                            @if($errors->has('student_id'))
+                                <span class="text-danger">{{ $errors->first('student_id') }}</span>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="assignmentTitle">Topshiriq Nomi:</label>
                             <input name="title" type="text" id="assignmentTitle" class="form-control" placeholder="Topshiriq nomini kiriting" required>
+                            @if($errors->has('title'))
+                                <span class="text-danger">{{ $errors->first('title') }}</span>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="assignmentDescription">Topshiriq Ta'rifi:</label>
                             <textarea name="description" id="assignmentDescription" class="form-control" rows="4" placeholder="Topshiriq ta'rifini kiriting" required></textarea>
+                            @if($errors->has('description'))
+                                <span class="text-danger">{{ $errors->first('description') }}</span>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="assignmentFile">Fayl yuklash:</label>
                             <input name="file" type="file" id="assignmentFile" class="form-control-file" required>
+                            @if($errors->has('file'))
+                                <span class="text-danger">{{ $errors->first('file') }}</span>
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> Yaratish</button>
                     </form>
