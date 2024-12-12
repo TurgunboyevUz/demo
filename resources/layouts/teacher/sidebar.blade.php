@@ -8,7 +8,7 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="dashboard_teacher.html" class="nav-link">
+                <a href="{{ route('employee.teacher.dashboard') }}" class="nav-link">
                     <i class="nav-icon fas fa-home"></i>
                     <p>Bosh sahifa</p>
                 </a>
@@ -24,7 +24,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="teacher-upload-articles.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.article') }}" class="nav-link">
                             <i class="nav-icon fas fa-upload"></i>
                             <p>Yuklangan Maqolalar
                                 <span class="right badge badge-info">2</span>
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="teacher-student_scholarship.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.scholarship') }}" class="nav-link">
                             <i class="nav-icon fas fa-money-check"></i>
                             <p>Stipendiyat
                                 <span class="right badge badge-info">2</span>
@@ -40,7 +40,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="teacher-invention_dgu.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.invention') }}" class="nav-link">
                             <i class="nav-icon fas fa-lightbulb"></i>
                             <p>Ixtro/DGU/Foydali model
                                 <span class="right badge badge-info">2</span>
@@ -48,7 +48,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="teacher-startup_selection.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.startup') }}" class="nav-link">
                             <i class="nav-icon fas fa-rocket"></i>
                             <p>Startup/Tanlov
                                 <span class="right badge badge-info">2</span>
@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="teacher-grand_economy.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.grand-economy') }}" class="nav-link">
                             <i class="nav-icon fas fa-handshake"></i>
                             <p>Grant/Xo'jalik shartonmalar
                                 <span class="right badge badge-info">2</span>
@@ -64,7 +64,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="teacher-student-olympiads.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.olympics') }}" class="nav-link">
                             <i class="nav-icon fas fa-medal"></i>
                             <p>Olimpiyadalar
                                 <span class="right badge badge-info">2</span>
@@ -72,7 +72,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="teacher-language_certificates.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.lang-certificate') }}" class="nav-link">
                             <i class="nav-icon fas fa-language"></i>
                             <p>Til Sertifikatlari
                                 <span class="right badge badge-info">2</span>
@@ -80,7 +80,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="teacher-student_achievements.html" class="nav-link active">
+                        <a href="{{ route('employee.teacher.achievement') }}" class="nav-link active">
                             <i class="nav-icon fas fa-award"></i>
                             <p>O’quv yili davomida erishgan <br>boshqa yutuqlari
                                 <span class="right badge badge-info">2</span>
