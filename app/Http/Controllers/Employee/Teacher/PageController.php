@@ -163,4 +163,20 @@ class PageController extends Controller
 
         return view('employee.teacher.chat', compact('user'));
     }
+
+    public function student_list(Request $request)
+    {
+        $user = $request->user();
+        $students = $user->employee->students()->get();
+
+        return view('employee.teacher.student-list', compact('user', 'students'));
+    }
+
+    public function create_task(Request $request)
+    {
+        $user = $request->user();
+        $students = $user->employee->students()->get();
+
+        return view('employee.teacher.create-task', compact('user', 'students'));
+    }
 }

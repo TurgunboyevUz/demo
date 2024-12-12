@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Http\Requests\Employee\Teacher\StoreTaskRequest;
 use App\Http\Requests\Student\StoreAchievementRequest;
 use App\Http\Requests\Student\StoreArticleRequest;
 use App\Http\Requests\Student\StoreDistinguishedScholarshipRequest;
@@ -20,6 +21,7 @@ use App\Models\File\LangCertificate;
 use App\Models\File\Olympic;
 use App\Models\File\Scholarship;
 use App\Models\File\Startup;
+use App\Models\File\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -220,6 +222,23 @@ class File
         $achievement->upload_file($request, 'achievements');
 
         return $achievement;
+    }
+
+    public function task(StoreTaskRequest $request)
+    {
+        $data = $request->validated();
+
+        $task = new Task();
+        
+        $task->employee_id = $this->user->employee->id;
+        $task->student_id = $data['student_id'];
+        $task->title = $data['title'];
+        $task->description = $data['description'];
+        $task->save();
+
+        $task->upload_file($request, 'tasks');
+
+        return $task;
     }
 
     public function destroy_article($id)

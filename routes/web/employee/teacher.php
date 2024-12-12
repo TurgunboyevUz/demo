@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employee\Teacher\FileController;
 use App\Http\Controllers\Employee\Teacher\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,5 @@ Route::get('chat', [PageController::class, 'chat']);
 
 Route::get('student-list', [PageController::class, 'student_list']);
 Route::get('create-task', [PageController::class, 'create_task']);
+
+Route::post('create-task', [FileController::class, 'create_task']);
