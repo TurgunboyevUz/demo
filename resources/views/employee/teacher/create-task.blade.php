@@ -33,11 +33,9 @@
                             <label for="studentSelect">Talabani tanlang:</label>
                             <select name="student_id" id="studentSelect" class="form-control" required>
                                 <option value="" disabled selected>Talabani tanlang</option>
-                                <option value="1">Abdullayev Muhammad (2-kurs, Algebra va matematik analiz)</option>
-                                <option value="2">Qodirova Xadicha (3-kurs, Fizika va astronomiya)</option>
-                                <option value="3">Anvarov Oyatillo (4-kurs, Kompyuter fanlari)</option>
-                                <option value="4">Saidov Muhammad (1-kurs, Botanika va o'simlik fiziologiyasi)</option>
-                                <option value="5">Nazarov Diyorbek (3-kurs, Anorganik kimyo)</option>
+                                @foreach($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->user->fio() }} ({{ $student->level }}-kurs {{ $student->specialty->name }})</option>
+                                @endforeach
                             </select>
                             @if($errors->has('student_id'))
                                 <span class="text-danger">{{ $errors->first('student_id') }}</span>
