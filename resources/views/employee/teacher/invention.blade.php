@@ -40,7 +40,7 @@
                                         <tr>
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
-                                            <th>Rasmi</th>
+                                            <th style="width: 7%;">Rasmi</th>
                                             <th>Talaba FIO</th>
                                             <th>Intellektual Mulk Nomi</th>
                                             <th>Turi</th>
@@ -54,42 +54,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
-                                            <td>1</td>
-                                            <td><img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>Ismoilov Anvar</td>
-                                            <td>Yangi dasturiy ta'minot</td>
-                                            <td>Ixtiro</td>
-                                            <td>12345</td>
-                                            <td>3</td>
-                                            <td>Samadov, Anvarov Oyatillo, Diyorbek Turg'unboyev</td>
-                                            <td>O'zbekiston nashriyoti, 2023</td>
-                                            <td>2023-2024</td>
-                                            <td>mulk.pdf</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
-                                            </td>
-                                        </tr>
+                                        @foreach ($students as $student)
+                                            @foreach ($student->inventions as $item)
+                                                <tr>
+                                                    <td><input type="checkbox" class="checkItem"></td>
+                                                    <td>1</td>
+                                                    <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                                    <td>{{ $student->user->fio() }}</td>
+                                                    <td>{{ $item->title }}</td>
+                                                    <td>{{ $item->criteria->name }}</td>
+                                                    <td>{{ $item->property_number }}</td>
+                                                    <td>{{ $item->authors_count }}</td>
+                                                    <td>{{ $item->authors }}</td>
+                                                    <td>{{ $item->publish_params }}</td>
+                                                    <td>{{ $item->education_year }}</td>
+                                                    <td>{{ $item->file->name }}</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" id="checkAll"></th>
-                                            <th>#</th>
-                                            <th>Rasmi</th>
-                                            <th>Talaba FIO</th>
-                                            <th>Intellektual Mulk Nomi</th>
-                                            <th>Turi</th>
-                                            <th>Raqami</th>
-                                            <th>Mualliflar soni</th>
-                                            <th>Mualliflar</th>
-                                            <th>Nashr Parametrlari</th>
-                                            <th>O'quv yili</th>
-                                            <th>Fayl nomi</th>
-                                            <th>Harakatlar</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>

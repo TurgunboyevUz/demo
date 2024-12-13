@@ -13,6 +13,8 @@ use App\Models\File\LangCertificate;
 use App\Models\File\Olympic;
 use App\Models\File\Scholarship;
 use App\Models\File\Startup;
+use App\Traits\Fileable;
+use App\Traits\Scorable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasRoles, Notifiable;
+    use HasFactory, HasRoles, Notifiable, Fileable, Scorable;
 
     protected $guarded = [];
 

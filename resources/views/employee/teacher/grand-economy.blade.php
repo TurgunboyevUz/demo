@@ -40,7 +40,7 @@
                                         <tr>
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
-                                            <th>Rasmi</th>
+                                            <th style="width: 7%;">Rasmi</th>
                                             <th>Talaba FIO</th>
                                             <th>Shartnoma Turi</th>
                                             <th>Grant/Loyiha Nomi</th>
@@ -51,36 +51,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
-                                            <td>1</td>
-                                            <td><img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>Ismoilov Anvar</td>
-                                            <td>Grand shartnoma</td>
-                                            <td>Loyiha nomi 1</td>
-                                            <td>123456</td>
-                                            <td>$10,000</td>
-                                            <td>file1.pdf</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
-                                            </td>
-                                        </tr>
+                                        @foreach ($students as $student)
+                                            @foreach($student->grand_economies as $item)
+                                                <tr>
+                                                    <td><input type="checkbox" class="checkItem"></td>
+                                                    <td>1</td>
+                                                    <td><img src="{{ asset('storage/' . $student->user->picture_path)}}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                                    <td>{{ $student->user->fio() }}</td>
+                                                    <td>{{ $item->criteria->name }}</td>
+                                                    <td>{{ $item->title }}</td>
+                                                    <td>{{ $item->order_number }}</td>
+                                                    <td>{{ $item->amount }}</td>
+                                                    <td>{{ $item->file->name }}</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" id="checkAll"></th>
-                                            <th>#</th>
-                                            <th>Rasmi</th>
-                                            <th>Talaba FIO</th>
-                                            <th>Shartnoma Turi</th>
-                                            <th>Grant/Loyiha Nomi</th>
-                                            <th>Buyruq Raqami</th>
-                                            <th>Mablag' Miqdori</th>
-                                            <th>Fayl Nomi</th>
-                                            <th>Harakatlar</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>

@@ -40,7 +40,7 @@
                                         <tr>
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
-                                            <th>Rasmi</th>
+                                            <th style="width: 7%;">Rasmi</th>
                                             <th>Talaba FIO</th>
                                             <th>Yutuq Turi</th>
                                             <th>Darajasi</th>
@@ -52,38 +52,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
-                                            <td>1</td>
-                                            <td><img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>Ismoilov Anvar</td>
-                                            <td>Sport</td>
-                                            <td>Respublika</td>
-                                            <td>Jamoaviy</td>
-                                            <td>Toshkent</td>
-                                            <td>Sertifikat</td>
-                                            <td>certificate.pdf</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
-                                            </td>
-                                        </tr>
+                                        @foreach($students as $student)
+                                            @foreach($student->achievements as $item)
+                                                <tr>
+                                                <td><input type="checkbox" class="checkItem"></td>
+                                                <td>1</td>
+                                                <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                                <td>{{ $student->user->fio() }}</td>
+                                                <td>{{ $item->type() }}</td>
+                                                <td>{{ $item->criteria->name }}</td>
+                                                <td>{{ $item->participants }}</td>
+                                                <td>{{ $item->location() }}</td>
+                                                <td>{{ $item->document_type() }}</td>
+                                                <td>{{ $item->file->name }}</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
+                                                    <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" id="checkAll"></th>
-                                            <th>#</th>
-                                            <th>Rasmi</th>
-                                            <th>Talaba FIO</th>
-                                            <th>Yutuq Turi</th>
-                                            <th>Darajasi</th>
-                                            <th>Ishtirokchilar</th>
-                                            <th>O'tkazilgan Joyi</th>
-                                            <th>Hujjat Turi</th>
-                                            <th>Fayl</th>
-                                            <th>Harakatlar</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
