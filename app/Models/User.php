@@ -13,6 +13,7 @@ use App\Models\File\LangCertificate;
 use App\Models\File\Olympic;
 use App\Models\File\Scholarship;
 use App\Models\File\Startup;
+use App\Models\File\Task;
 use App\Traits\Fileable;
 use App\Traits\Scorable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -89,5 +90,10 @@ class User extends Authenticatable
     public function achievements()
     {
         return $this->hasMany(Achievement::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'student_id', 'id');
     }
 }

@@ -29,46 +29,16 @@
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        <div class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><i class="fas fa-file-alt"></i> 1. Ilmiy maqola tayyorlash</h5>
-                                <a href="#" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
+                        @foreach($data as $item)
+                            <div class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><i class="fas fa-file-alt"></i>{{ $item->title }}</h5>
+                                    <a href="{{ asset('storage/' . $item->file) }}" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
+                                </div>
+                                <p class="mb-1">{{ $item->description }}</p>
+                                <small class="text-muted">Topshiriq yuklangan sana: {{ $item->created_at->format('H:i d-m-Y') }}</small>
                             </div>
-                            <p class="mb-1">Ilmiy maqola tayyorlash bo'yicha topshiriq</p>
-                            <small class="text-muted">Topshiriq yuklangan sana: 2023-05-10</small>
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><i class="fas fa-file-powerpoint"></i> 2. Prezentatsiya tayyorlash</h5>
-                                <a href="#" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
-                            </div>
-                            <p class="mb-1">Prezentatsiya tayyorlash bo'yicha topshiriq</p>
-                            <small class="text-muted">Topshiriq yuklangan sana: 2023-04-22</small>
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><i class="fas fa-code"></i> 3. Dasturiy loyiha tayyorlash</h5>
-                                <a href="#" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
-                            </div>
-                            <p class="mb-1">Dasturiy loyiha tayyorlash bo'yicha topshiriq</p>
-                            <small class="text-muted">Topshiriq yuklangan sana: 2023-03-15</small>
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><i class="fas fa-book"></i> 4. Kitob muhokamasi</h5>
-                                <a href="#" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
-                            </div>
-                            <p class="mb-1">Kitob muhokamasi bo'yicha topshiriq</p>
-                            <small class="text-muted">Topshiriq yuklangan sana: 2023-02-10</small>
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><i class="fas fa-file-word"></i> 5. Referat yozish</h5>
-                                <a href="#" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
-                            </div>
-                            <p class="mb-1">Referat yozish bo'yicha topshiriq</p>
-                            <small class="text-muted">Topshiriq yuklangan sana: 2023-01-25</small>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
