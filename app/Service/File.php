@@ -73,7 +73,7 @@ class File
         $scholarship = new Scholarship();
         $scholarship->user_id = $this->user->id;
         $scholarship->criteria_id = $data['criteria_id'];
-        $scholarship->name = $data['name'];
+        $scholarship->title = $data['title'];
         $scholarship->given_date = $data['given_date'];
         $scholarship->certificate_number = $data['certificate_number'];
         $scholarship->save();

@@ -15,7 +15,7 @@ class StoreScholarshipRequest extends FormRequest
     {
         return [
             'criteria_id' => 'required|exists:criterias,id',
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'given_date' => 'required|date',
             'certificate_number' => 'required|string|max:255',
             'file' => 'required|mimes:pdf'

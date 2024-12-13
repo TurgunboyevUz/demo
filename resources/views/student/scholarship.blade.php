@@ -60,9 +60,9 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="awardName"><i class="fas fa-file-alt"></i> Yutuq nomi</label>
-                                    <input type="text" class="form-control" id="awardName" name="name" placeholder="Yutuq nomini kiriting" required>
-                                    @if($errors->has('name'))
-                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    <input type="text" class="form-control" id="awardName" name="title" placeholder="Yutuq nomini kiriting" required>
+                                    @if($errors->has('title'))
+                                        <span class="text-danger">{{ $errors->first('title') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                     <td>{{ $item->criteria->name }}</td>
                                     <td>{{ $item->given_date }}</td>
                                     <td>{{ $item->certificate_number }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->title }}</td>
                                     <td>{{ $item->file->name }}</td>
                                     <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                     

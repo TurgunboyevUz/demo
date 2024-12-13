@@ -49,7 +49,7 @@ class PageController extends Controller
                 ->get();
         });
 
-        return view('employee.teacher.scholarship', compact('user'));
+        return view('employee.teacher.scholarship', compact('user', 'students'));
     }
 
     public function invention(Request $request)

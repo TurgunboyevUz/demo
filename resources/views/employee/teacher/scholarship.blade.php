@@ -40,7 +40,7 @@
                                         <tr>
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
-                                            <th>Rasmi</th>
+                                            <th style="width: 7%;">Rasmi</th>
                                             <th>Talaba Ism, Familiyasi</th>
                                             <th>Yutuq Turi</th>
                                             <th>Berilgan Sana</th>
@@ -51,36 +51,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($students as $student)
+                                        @foreach($student->scholarships as $item)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>1</td>
-                                            <td><img src="img/image.jpg" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>Abdullayev Muhammad</td>
-                                            <td>Ilmiy Tadqiqot Yutuqlari</td>
-                                            <td>2024-11-13</td>
-                                            <td>123456</td>
-                                            <td>Yutuq nomi</td>
-                                            <td>sertifikat.pdf</td>
+                                            <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>{{ $item->user->fio() }}</td>
+                                            <td>{{ $item->criteria->name }}</td>
+                                            <td>{{ $item->given_date }}</td>
+                                            <td>{{ $item->certificate_number }}</td>
+                                            <td>{{ $item->title }}</td>
+                                            <td>{{ $item->file->name }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
                                                 <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
                                             </td>
                                         </tr>
+                                        @endforeach
+                                        @endforeach
+
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th><input type="checkbox" id="checkAll"></th>
-                                            <th>#</th>
-                                            <th>Rasmi</th>
-                                            <th>Talaba Ism, Familiyasi</th>
-                                            <th>Yutuq Turi</th>
-                                            <th>Berilgan Sana</th>
-                                            <th>Guvohnoma Raqami</th>
-                                            <th>Nomi</th>
-                                            <th>Fayl Nomi</th>
-                                            <th>Harakatlar</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -89,5 +80,24 @@
             </div>
         </div>
     </section>
+</div>
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Bekor Qilish Izohi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" rows="4" placeholder="Bekor qilish sababini kiriting..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+                <button type="button" class="btn btn-primary">Saqlash</button>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

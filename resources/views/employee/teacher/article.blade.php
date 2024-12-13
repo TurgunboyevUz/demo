@@ -58,23 +58,23 @@
                                     </thead>
                                     <tbody>
                                         @foreach($students as $student)
-                                        @foreach($student->articles as $article)
+                                        @foreach($student->articles as $item)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>1</td>
                                             <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>{{ $student->user->fio() }}</td>
-                                            <td>{{ $article->title }}</td>
-                                            <td>{{ $article->keywords }}</td>
-                                            <td>{{ $article->lang() }}</td>
-                                            <td>{{ $article->authors }}</td>
-                                            <td>{{ $article->doi }}</td>
-                                            <td>{{ $article->journal_name }}</td>
-                                            <td>{{ $article->international_databases }}</td>
-                                            <td>{{ $article->published_year }}</td>
-                                            <td>{{ $article->publish_params }}</td>
-                                            <td>{{ $article->education_year }}</td>
-                                            <td>{{ $article->file->name }}</td>
+                                            <td>{{ $item->user->fio() }}</td>
+                                            <td>{{ $item->title }}</td>
+                                            <td>{{ $item->keywords }}</td>
+                                            <td>{{ $item->lang() }}</td>
+                                            <td>{{ $item->authors }}</td>
+                                            <td>{{ $item->doi }}</td>
+                                            <td>{{ $item->journal_name }}</td>
+                                            <td>{{ $item->international_databases }}</td>
+                                            <td>{{ $item->published_year }}</td>
+                                            <td>{{ $item->publish_params }}</td>
+                                            <td>{{ $item->education_year }}</td>
+                                            <td>{{ $item->file->name }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
                                                 <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
