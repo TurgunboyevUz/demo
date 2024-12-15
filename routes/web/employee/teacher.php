@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Employee\Teacher\FileController;
 use App\Http\Controllers\Employee\Teacher\PageController;
+use App\Http\Controllers\Employee\Teacher\RejectController;
 use App\Http\Controllers\Employee\Teacher\ReviewController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,14 @@ Route::post('grand-economy/review', [ReviewController::class, 'grand_economy']);
 Route::post('olympics/review', [ReviewController::class, 'olympics']);
 Route::post('lang-certificate/review', [ReviewController::class, 'lang_certificate']);
 Route::post('achievement/review', [ReviewController::class, 'achievement']);
+
+Route::post('article/reject', [RejectController::class, 'article']);
+Route::post('scholarship/reject', [RejectController::class, 'scholarship']);
+Route::post('invention/reject', [RejectController::class, 'invention']);
+Route::post('startup/reject', [RejectController::class, 'startup']);
+Route::post('grand-economy/reject', [RejectController::class, 'grand_economy']);
+Route::post('olympics/reject', [RejectController::class, 'olympics']);
+Route::post('lang-certificate/reject', [RejectController::class, 'lang_certificate']);
+Route::post('achievement/reject', [RejectController::class, 'achievement']);
 
 Route::post('create-task', [FileController::class, 'create_task']);

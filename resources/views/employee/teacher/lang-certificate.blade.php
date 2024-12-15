@@ -68,7 +68,7 @@
                                             @if($item->file->status == 'pending')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->id }}"><i class="fas fa-ban"></i></button>
                                             </td>
                                             @else
                                                 <td>
@@ -131,14 +131,6 @@
             })
         }),
         
-        $(".deleteMessage").click(function() {
-            confirm("Xabarni chindan ham o'chirmoqchimisiz?") && alert("Xabar o'chirildi")
-        }),
-        
-        $(".cancelAction").click(function() {
-            $("#cancelModal").modal("show")
-        }),
-        
         $("#zipDownload").click(function() {
             var e = $(".checkItem:checked").length;
             if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
@@ -168,6 +160,43 @@
                     }
                 });
             }
+        });
+    });
+
+    $(function () {
+        let cancelItemId = null;
+
+        $(".cancelAction").click(function () {
+            cancelItemId = $(this).data("id"); // Get the item_id from the button's data-id attribute
+            $("#cancelModal").modal("show"); // Show the modal
+        });
+
+        $("#cancelModal .btn-primary").click(function () {
+            const reason = $("#cancelModal textarea").val(); // Get the reason from the modal
+
+            if (!reason) {
+                alert("Bekor qilish sababini kiriting!"); // Show an alert if no reason is provided
+                return;
+            }
+        
+            $.ajax({
+                url: "{{ route('employee.teacher.lang-certificate.reject') }}", // Replace with your actual endpoint
+                type: "POST",
+                data: {
+                    id: cancelItemId,
+                    reason: reason,
+                    _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
+                },
+                
+                success: function (response) {
+                    alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
+                    $("#cancelModal").modal("hide"); // Hide the modal
+                },
+
+                error: function (xhr) {
+                    alert("Bekor qilishda xatolik yuz berdi."); // Show error message
+                }
+            });
         });
     });
 </script>

@@ -95,14 +95,6 @@
             confirm("Xabarni chindan ham o'chirmoqchimisiz?") && alert("Xabar o'chirildi")
         }),
         
-        $(".confirmAction").click(function() {
-            confirm("Tasdiqlamoqchimisiz?") && alert("Tasdiqlandi")
-        }),
-        
-        $(".cancelAction").click(function() {
-            $("#cancelModal").modal("show")
-        }),
-        
         $("#zipDownload").click(function() {
             var e = $(".checkItem:checked").length;
             if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
