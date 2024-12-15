@@ -52,11 +52,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php $id = 1; @endphp
                                         @foreach ($students as $student)
                                             @foreach($student->startups as $item)
                                                 <tr>
                                                     <td><input type="checkbox" class="checkItem"></td>
-                                                    <td>1</td>
+                                                    <td>{{ $id++ }}</td>
                                                     <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                                     <td>{{ $student->user->fio() }}</td>
                                                     <td>{{ $item->type() }}</td>
@@ -65,10 +66,14 @@
                                                     <td>{{ $item->location() }}</td>
                                                     <td>{{ $item->title }}</td>
                                                     <td>{{ $item->file->name }}</td>
-                                                    <td>
-                                                        <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
-                                                        <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
-                                                    </td>
+                                                    @if($item->file->status == 'pending')
+                                                        <td>
+                                                            <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
+                                                            <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
+                                                        </td>
+                                                    @else
+                                                        <td>Bu fayl uchun harakat imkonsiz</td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -125,14 +130,6 @@
             })
         }),
         
-        $(".deleteMessage").click(function() {
-            confirm("Xabarni chindan ham o'chirmoqchimisiz?") && alert("Xabar o'chirildi")
-        }),
-        
-        $(".confirmAction").click(function() {
-            confirm("Tasdiqlamoqchimisiz?") && alert("Tasdiqlandi")
-        }),
-        
         $(".cancelAction").click(function() {
             $("#cancelModal").modal("show")
         }),
@@ -142,6 +139,31 @@
             if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
             else alert("Siz biror talaba tanlamagansiz")
         })
+    });
+
+    $(document).ready(function () {
+        $(".confirmAction").click(function (e) {
+            e.preventDefault();
+
+            var itemId = $(this).data('id');
+
+            if (confirm("Tasdiqlamoqchimisiz?")) {            
+                $.ajax({
+                    url: '{{ route("employee.teacher.startup.review") }}', // Replace with your actual route
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: itemId
+                    },
+                    success: function (response) {
+                        alert(response.message);
+                    },
+                    error: function (xhr) {
+                        alert('Xatolik yuz berdi: ' + xhr.responseText);
+                    }
+                });
+            }
+        });
     });
 </script>
 @endsection

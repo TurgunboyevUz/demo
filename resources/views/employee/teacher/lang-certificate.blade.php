@@ -65,10 +65,16 @@
                                             <td>{{ $item->criteria->name }}</td>
                                             <td>{{ $item->given_date }}</td>
                                             <td>{{ $item->file->name }}</td>
+                                            @if($item->file->status == 'pending')
                                             <td>
-                                                <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
                                                 <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
                                             </td>
+                                            @else
+                                                <td>
+                                                    Bu fayl uchun harakat imkonsiz
+                                                </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                         @endforeach
@@ -129,10 +135,6 @@
             confirm("Xabarni chindan ham o'chirmoqchimisiz?") && alert("Xabar o'chirildi")
         }),
         
-        $(".confirmAction").click(function() {
-            confirm("Tasdiqlamoqchimisiz?") && alert("Tasdiqlandi")
-        }),
-        
         $(".cancelAction").click(function() {
             $("#cancelModal").modal("show")
         }),
@@ -143,29 +145,28 @@
             else alert("Siz biror talaba tanlamagansiz")
         })
     });
-</script>
 
-<script>
-    document.getElementById('saveCancelReason').addEventListener('click', function() {
-        var reason = document.getElementById('cancelReason').value;
-        if (reason.trim() === '') {
-            alert('Iltimos, bekor qilish sababini kiriting.');
-            return;
-        }
-        $.ajax({
-            type: 'POST',
-            url: '/your-endpoint-url',
-            data: {
-                reason: reason
-            },
-            
-            success: function(response) {
-                alert('Bekor qilish sababi muvaffaqiyatli saqlandi.');
-                $('#cancelModal').modal('hide');
-            },
+    $(document).ready(function () {
+        $(".confirmAction").click(function (e) {
+            e.preventDefault();
 
-            error: function() {
-                alert('Bekor qilish sababini saqlashda xatolik yuz berdi.');
+            var itemId = $(this).data('id');
+
+            if (confirm("Tasdiqlamoqchimisiz?")) {            
+                $.ajax({
+                    url: '{{ route("employee.teacher.lang-certificate.review") }}', // Replace with your actual route
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: itemId
+                    },
+                    success: function (response) {
+                        alert(response.message);
+                    },
+                    error: function (xhr) {
+                        alert('Xatolik yuz berdi: ' + xhr.responseText);
+                    }
+                });
             }
         });
     });
