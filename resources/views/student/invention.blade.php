@@ -92,6 +92,7 @@
                         <th>Nashr Parametrlari</th>
                         <th>O'quv yili</th>
                         <th>Fayl nomi</th>
+                        <th>Holati</th>
                         <th>Harakatlar</th>
                     </tr>
                 </thead>

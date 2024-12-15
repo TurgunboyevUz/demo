@@ -139,6 +139,7 @@
                         <th>O'tkazilgan joyi</th>
                         <th>Hujjat turi</th>
                         <th>Fayl</th>
+                        <th>Holati</th>
                         <th>Harakatlar</th>
                     </tr>
                 </thead>
