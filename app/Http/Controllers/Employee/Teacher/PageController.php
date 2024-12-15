@@ -30,13 +30,6 @@ class PageController extends Controller
         return view('employee.teacher.article', compact('user', 'students'));
     }
 
-    public function assignments(Request $request)
-    {
-        $user = $request->user();
-
-        return view('employee.teacher.assignments', compact('user'));
-    }
-
     public function scholarship(Request $request)
     {
         $user = $request->user();

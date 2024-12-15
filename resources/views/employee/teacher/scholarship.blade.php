@@ -101,3 +101,44 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    $(function() {
+        var e = $("#scholarshipsTable").DataTable({
+                responsive: true,
+                autoWidth: false,
+                language: {
+                    url: "{{ asset('dist/js/uzbek.json') }}"
+                }
+            }),
+        
+        t = $("#checkAll");
+        
+        t.click(function() {
+            e.find("tr").each(function() {
+                var e = $(this).find("input.checkItem");
+                e.prop("checked", t.prop("checked"))
+            })
+        }),
+        
+        $(".deleteMessage").click(function() {
+            confirm("Xabarni chindan ham o'chirmoqchimisiz?") && alert("Xabar o'chirildi")
+        }),
+        
+        $(".confirmAction").click(function() {
+            confirm("Tasdiqlamoqchimisiz?") && alert("Tasdiqlandi")
+        }),
+        
+        $(".cancelAction").click(function() {
+            $("#cancelModal").modal("show")
+        }),
+        
+        $("#zipDownload").click(function() {
+            var e = $(".checkItem:checked").length;
+            if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
+            else alert("Siz biror talaba tanlamagansiz")
+        })
+    });
+</script>
+@endsection

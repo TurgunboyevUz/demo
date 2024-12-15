@@ -52,23 +52,23 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($students as $student)
-                                            @foreach ($student->lang_certificates as $item)
-                                                <tr>
-                                                    <td><input type="checkbox" class="checkItem"></td>
-                                                    <td>1</td>
-                                                    <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
-                                                    <td>{{ $student->user->fio() }}</td>
-                                                    <td>{{ $item->lang() }}</td>
-                                                    <td>{{ $item->type() }}</td>
-                                                    <td>{{ $item->criteria->name }}</td>
-                                                    <td>{{ $item->given_date }}</td>
-                                                    <td>{{ $item->file->name }}</td>
-                                                    <td>
-                                                        <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
-                                                        <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                        @foreach ($student->lang_certificates as $item)
+                                        <tr>
+                                            <td><input type="checkbox" class="checkItem"></td>
+                                            <td>1</td>
+                                            <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>{{ $student->user->fio() }}</td>
+                                            <td>{{ $item->lang() }}</td>
+                                            <td>{{ $item->type() }}</td>
+                                            <td>{{ $item->criteria->name }}</td>
+                                            <td>{{ $item->given_date }}</td>
+                                            <td>{{ $item->file->name }}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success confirmAction"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction"><i class="fas fa-ban"></i></button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -101,4 +101,71 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(function() {
+        var e = $("#languageCertificatesTable").DataTable({
+                responsive: true,
+                autoWidth: false,
+                language: {
+                    url: "{{ asset('dist/js/uzbek.json') }}"
+                }
+            }),
+        
+        t = $("#checkAll");
+        
+        t.click(function() {
+            e.find("tr").each(function() {
+                var e = $(this).find("input.checkItem");
+                e.prop("checked", t.prop("checked"))
+            })
+        }),
+        
+        $(".deleteMessage").click(function() {
+            confirm("Xabarni chindan ham o'chirmoqchimisiz?") && alert("Xabar o'chirildi")
+        }),
+        
+        $(".confirmAction").click(function() {
+            confirm("Tasdiqlamoqchimisiz?") && alert("Tasdiqlandi")
+        }),
+        
+        $(".cancelAction").click(function() {
+            $("#cancelModal").modal("show")
+        }),
+        
+        $("#zipDownload").click(function() {
+            var e = $(".checkItem:checked").length;
+            if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
+            else alert("Siz biror talaba tanlamagansiz")
+        })
+    });
+</script>
+
+<script>
+    document.getElementById('saveCancelReason').addEventListener('click', function() {
+        var reason = document.getElementById('cancelReason').value;
+        if (reason.trim() === '') {
+            alert('Iltimos, bekor qilish sababini kiriting.');
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/your-endpoint-url',
+            data: {
+                reason: reason
+            },
+            
+            success: function(response) {
+                alert('Bekor qilish sababi muvaffaqiyatli saqlandi.');
+                $('#cancelModal').modal('hide');
+            },
+
+            error: function() {
+                alert('Bekor qilish sababini saqlashda xatolik yuz berdi.');
+            }
+        });
+    });
+</script>
 @endsection
