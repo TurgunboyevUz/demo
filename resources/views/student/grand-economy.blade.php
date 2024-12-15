@@ -22,11 +22,11 @@
                             <select id="contractType" class="form-control" name="criteria_id" required>
                                 <option value="" disabled selected>Tanlang</option>
                                 @foreach ($criterias as $criteria)
-                                    <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                                <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('criteria_id'))
-                                <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                            <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
                             @endif
                         </div>
 
@@ -37,7 +37,7 @@
                             </label>
                             <input type="text" id="projectName" class="form-control" name="title" placeholder="Grant yoki loyiha nomini kiriting" required>
                             @if($errors->has('title'))
-                                <span class="text-danger">{{ $errors->first('title') }}</span>
+                            <span class="text-danger">{{ $errors->first('title') }}</span>
                             @endif
                         </div>
 
@@ -48,7 +48,7 @@
                             </label>
                             <input type="text" id="orderNumber" class="form-control" name="order_number" placeholder="Buyruq raqamini kiriting" required>
                             @if($errors->has('order_number'))
-                                <span class="text-danger">{{ $errors->first('order_number') }}</span>
+                            <span class="text-danger">{{ $errors->first('order_number') }}</span>
                             @endif
                         </div>
 
@@ -59,7 +59,7 @@
                             </label>
                             <input type="number" id="amount" class="form-control" name="amount" placeholder="Mablag' miqdorini kiriting" required>
                             @if($errors->has('amount'))
-                                <span class="text-danger">{{ $errors->first('amount') }}</span>
+                            <span class="text-danger">{{ $errors->first('amount') }}</span>
                             @endif
                         </div>
 
@@ -70,7 +70,7 @@
                             </label>
                             <input type="file" id="orderFile" class="form-control" name="file" required>
                             @if($errors->has('file'))
-                                <span class="text-danger">{{ $errors->first('file') }}</span>
+                            <span class="text-danger">{{ $errors->first('file') }}</span>
                             @endif
                         </div>
                     </div>
@@ -102,32 +102,32 @@
                                 </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $item)
                             <tr>
-                                @foreach ($data as $item)
-                                    <td>{{ $item->criteria->name }}</td>
-                                    <td>{{ $item->title }}</td>
-                                    <td>{{ $item->order_number }}</td>
-                                    <td>{{ $item->amount }} </td>
-                                    <td>{{ $item->file->name }}</td>
-                                    <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
-                                    
-                                    @if($item->file->status == 'pending')
-                                        <td>
-                                            <form action="{{ route('student.grand-economy.destroy') }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="hidden" name="id" value="{{ $item->id }}">
-                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                                            </form>
-                                        </td>
-                                    @else
-                                        <td>
-                                            Bu fayl uchun harakat imkonsiz
-                                        </td>
-                                    @endif
+                                <td>{{ $item->criteria->name }}</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->order_number }}</td>
+                                <td>{{ $item->amount }} </td>
+                                <td>{{ $item->file->name }}</td>
+                                <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+
+                                @if($item->file->status == 'pending')
+                                <td>
+                                    <form action="{{ route('student.grand-economy.destroy') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                    </form>
+                                </td>
+                                @else
+                                    <td>
+                                        Bu fayl uchun harakat imkonsiz
                                     </td>
-                                @endforeach
+                                @endif
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

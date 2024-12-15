@@ -26,7 +26,7 @@
                             <option value="cultural">Ma'naviy-ma'rifiy ishlar</option>
                         </select>
                         @if($errors->has('type'))
-                            <span class="text-danger">{{ $errors->first('type') }}</span>
+                        <span class="text-danger">{{ $errors->first('type') }}</span>
                         @endif
                     </div>
 
@@ -42,7 +42,7 @@
                             @endforeach
                         </select>
                         @if($errors->has('criteria_id'))
-                            <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                        <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
                         @endif
                     </div>
 
@@ -57,7 +57,7 @@
                             <option value="individual">Yakkalik</option>
                         </select>
                         @if($errors->has('participant'))
-                            <span class="text-danger">{{ $errors->first('participant') }}</span>
+                        <span class="text-danger">{{ $errors->first('participant') }}</span>
                         @endif
                     </div>
 
@@ -68,7 +68,7 @@
                         </label>
                         <input type="text" id="teamMemberName" class="form-control" name="team_members" placeholder="Ishtirokchilar ismi, sharifi">
                         @if($errors->has('team_members'))
-                            <span class="text-danger">{{ $errors->first('team_members') }}</span>
+                        <span class="text-danger">{{ $errors->first('team_members') }}</span>
                         @endif
                     </div>
 
@@ -83,7 +83,7 @@
                             <option value="andijan">Andijon</option>
                         </select>
                         @if($errors->has('location'))
-                            <span class="text-danger">{{ $errors->first('location') }}</span>
+                        <span class="text-danger">{{ $errors->first('location') }}</span>
                         @endif
                     </div>
 
@@ -98,7 +98,7 @@
                             <option value="diploma">Diplom</option>
                         </select>
                         @if($errors->has('document_type'))
-                            <span class="text-danger">{{ $errors->first('document_type') }}</span>
+                        <span class="text-danger">{{ $errors->first('document_type') }}</span>
                         @endif
                     </div>
 
@@ -109,7 +109,7 @@
                         </label>
                         <input type="file" name="file" id="uploadFile" class="form-control" required>
                         @if($errors->has('file'))
-                            <span class="text-danger">{{ $errors->first('file') }}</span>
+                        <span class="text-danger">{{ $errors->first('file') }}</span>
                         @endif
                     </div>
                 </div>
@@ -143,32 +143,33 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    @foreach($data as $item)
                     <tr>
-                        @foreach($data as $item)
-                            <td>{{ $item->type }}</td>
-                            <td>{{ $item->criteria->name }}</td>
-                            <td>{{ $item->team_members() }}</td>
-                            <td>{{ $item->location() }}</td>
-                            <td>{{ $item->document_type() }}</td>
-                            <td>{{ $item->file->name }}</td>
-                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
-                                    
-                            @if($item->file->status == 'pending')
-                                <td>
-                                    <form action="{{ route('student.achievement.destroy') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" value="{{ $item->id }}">
-                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                                    </form>
-                                </td>
-                            @else
-                                <td>
-                                    Bu fayl uchun harakat imkonsiz
-                                </td>
-                            @endif
-                        @endforeach
+                        <td>{{ $item->type }}</td>
+                        <td>{{ $item->criteria->name }}</td>
+                        <td>{{ $item->team_members() }}</td>
+                        <td>{{ $item->location() }}</td>
+                        <td>{{ $item->document_type() }}</td>
+                        <td>{{ $item->file->name }}</td>
+                        <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+
+                        @if($item->file->status == 'pending')
+                        <td>
+                            <form action="{{ route('student.achievement.destroy') }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                            </form>
+                        </td>
+                        @else
+                        <td>
+                            Bu fayl uchun harakat imkonsiz
+                        </td>
+                        @endif
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -27,7 +27,7 @@
                                 <option value="other">Boshqa</option>
                             </select>
                             @if($errors->has('lang'))
-                                <span class="text-danger">{{ $errors->first('lang') }}</span>
+                            <span class="text-danger">{{ $errors->first('lang') }}</span>
                             @endif
                         </div>
 
@@ -46,7 +46,7 @@
                                 <option value="itep">iTEP Academic — Plus</option>
                             </select>
                             @if($errors->has('type'))
-                                <span class="text-danger">{{ $errors->first('type') }}</span>
+                            <span class="text-danger">{{ $errors->first('type') }}</span>
                             @endif
                         </div>
 
@@ -58,11 +58,11 @@
                             <select id="certificateLevelType" name="criteria_id" class="form-control" required>
                                 <option value="" disabled selected>Tanlang</option>
                                 @foreach ($criterias as $criteria)
-                                    <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                                <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('criteria_id'))
-                                <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                            <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
                             @endif
                         </div>
 
@@ -73,7 +73,7 @@
                             </label>
                             <input type="date" id="certificateDate" name="given_date" class="form-control" required>
                             @if($errors->has('given_date'))
-                                <span class="text-danger">{{ $errors->first('given_date') }}</span>
+                            <span class="text-danger">{{ $errors->first('given_date') }}</span>
                             @endif
                         </div>
 
@@ -84,7 +84,7 @@
                             </label>
                             <input type="file" id="certificateFile" name="file" class="form-control" accept=".pdf" required>
                             @if($errors->has('file'))
-                                <span class="text-danger">{{ $errors->first('file') }}</span>
+                            <span class="text-danger">{{ $errors->first('file') }}</span>
                             @endif
                         </div>
                     </div>
@@ -114,31 +114,31 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $item)
                             <tr>
-                                @foreach ($data as $item)
-                                    <td>{{ $item->lang() }}</td>
-                                    <td>{{ $item->type() }}</td>
-                                    <td>{{ $item->criteria->name }}</td>
-                                    <td>{{ $item->given_date }}</td>
-                                    <td>{{ $item->file->name }}</td>
-                                    <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
-                                    
-                                    @if($item->file->status == 'pending')
-                                        <td>
-                                            <form action="{{ route('student.lang-certificate.destroy') }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="hidden" name="id" value="{{ $item->id }}">
-                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                                            </form>
-                                        </td>
-                                    @else
-                                        <td>
-                                            Bu fayl uchun harakat imkonsiz
-                                        </td>
-                                    @endif
-                                @endforeach
+                                <td>{{ $item->lang() }}</td>
+                                <td>{{ $item->type() }}</td>
+                                <td>{{ $item->criteria->name }}</td>
+                                <td>{{ $item->given_date }}</td>
+                                <td>{{ $item->file->name }}</td>
+                                <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+
+                                @if($item->file->status == 'pending')
+                                <td>
+                                    <form action="{{ route('student.lang-certificate.destroy') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                    </form>
+                                </td>
+                                @else
+                                <td>
+                                    Bu fayl uchun harakat imkonsiz
+                                </td>
+                                @endif
                             </tr>
+                            @endforeach
                             <!-- Qo'shimcha sertifikatlar qo'shiladi -->
                         </tbody>
                     </table>

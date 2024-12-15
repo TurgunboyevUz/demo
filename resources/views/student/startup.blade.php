@@ -26,7 +26,7 @@
                             <option value="contest">Tanlovlar</option>
                         </select>
                         @if($errors->has('type'))
-                            <span class="text-danger">{{ $errors->first('type') }}</span>
+                        <span class="text-danger">{{ $errors->first('type') }}</span>
                         @endif
                     </div>
 
@@ -38,11 +38,11 @@
                         <select id="level" name="criteria_id" class="form-control" required>
                             <option value="" disabled selected>Tanlang</option>
                             @foreach ($criterias as $criteria)
-                                <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
+                            <option value="{{ $criteria->id }}">{{ $criteria->name }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('criteria_id'))
-                            <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
+                        <span class="text-danger">{{ $errors->first('criteria_id') }}</span>
                         @endif
                     </div>
 
@@ -57,7 +57,7 @@
                             <option value="individual">Yakkalik</option>
                         </select>
                         @if($errors->has('participant'))
-                            <span class="text-danger">{{ $errors->first('participant') }}</span>
+                        <span class="text-danger">{{ $errors->first('participant') }}</span>
                         @endif
                     </div>
 
@@ -68,7 +68,7 @@
                         </label>
                         <input type="text" id="teamMemberName" name="team_members" class="form-control" placeholder="Ishtirokchilar ismi, sharifi">
                         @if($errors->has('team_members'))
-                            <span class="text-danger">{{ $errors->first('team_members') }}</span>
+                        <span class="text-danger">{{ $errors->first('team_members') }}</span>
                         @endif
                     </div>
 
@@ -83,7 +83,7 @@
                             <option value="andijan">Andijon</option>
                         </select>
                         @if($errors->has('location'))
-                            <span class="text-danger">{{ $errors->first('location') }}</span>
+                        <span class="text-danger">{{ $errors->first('location') }}</span>
                         @endif
                     </div>
 
@@ -94,7 +94,7 @@
                         </label>
                         <textarea id="topic" class="form-control" name="title" placeholder="Mavzuni kiriting" required></textarea>
                         @if($errors->has('title'))
-                            <span class="text-danger">{{ $errors->first('title') }}</span>
+                        <span class="text-danger">{{ $errors->first('title') }}</span>
                         @endif
                     </div>
 
@@ -105,7 +105,7 @@
                         </label>
                         <input type="file" id="supportingDocument" name="file" class="form-control" required>
                         @if($errors->has('file'))
-                            <span class="text-danger">{{ $errors->first('file') }}</span>
+                        <span class="text-danger">{{ $errors->first('file') }}</span>
                         @endif
                     </div>
                 </div>
@@ -140,34 +140,33 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($data as $item)
                     <tr>
-                        @foreach($data as $item)
-                            <td>{{ $item->type() }}</td>
-                            <td>{{ $item->criteria->name }}</td>
-                            <td>{{ $item->team_members() }}</td>
-                            <td>{{ $item->location() }}</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->file->name }}</td>
-                            
-                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
-                                    
-                            @if($item->file->status == 'pending')
-                                <td>
-                                    <form action="{{ route('student.startup.destroy') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" value="{{ $item->id }}">
-                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                                    </form>
-                                </td>
-                            @else
-                                <td>
-                                    Bu fayl uchun harakat imkonsiz
-                                </td>
-                            @endif
-                        @endforeach
-                        
+                        <td>{{ $item->type() }}</td>
+                        <td>{{ $item->criteria->name }}</td>
+                        <td>{{ $item->team_members() }}</td>
+                        <td>{{ $item->location() }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->file->name }}</td>
+
+                        <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+
+                        @if($item->file->status == 'pending')
+                        <td>
+                            <form action="{{ route('student.startup.destroy') }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                            </form>
+                        </td>
+                        @else
+                        <td>
+                            Bu fayl uchun harakat imkonsiz
+                        </td>
+                        @endif
                     </tr>
+                    @endforeach
                     <!-- Qo'shimcha yutuqlar ma'lumotlari qo'shiladi -->
                 </tbody>
             </table>

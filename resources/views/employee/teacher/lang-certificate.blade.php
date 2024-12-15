@@ -51,11 +51,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php $id = 1; @endphp
+
                                         @foreach ($students as $student)
                                         @foreach ($student->lang_certificates as $item)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
-                                            <td>1</td>
+                                            <td>{{ $id++ }}</td>
                                             <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                             <td>{{ $student->user->fio() }}</td>
                                             <td>{{ $item->lang() }}</td>
