@@ -50,6 +50,7 @@
                                             <th>Nashr Parametrlari</th>
                                             <th>O'quv yili</th>
                                             <th>Fayl nomi</th>
+                                            <th>Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
@@ -70,6 +71,7 @@
                                             <td>{{ $item->invention->publish_params }}</td>
                                             <td>{{ $item->invention->education_year }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->invention->id }}"><i class="fas fa-check"></i></button>

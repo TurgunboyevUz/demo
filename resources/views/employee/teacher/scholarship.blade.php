@@ -47,6 +47,7 @@
                                             <th>Guvohnoma Raqami</th>
                                             <th>Nomi</th>
                                             <th>Fayl Nomi</th>
+                                            <th>Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
@@ -63,6 +64,7 @@
                                             <td>{{ $item->scholarship->certificate_number }}</td>
                                             <td>{{ $item->scholarship->title }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>|
                                             @if($item->status == 'pending')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->scholarship->id }}"><i class="fas fa-check"></i></button>

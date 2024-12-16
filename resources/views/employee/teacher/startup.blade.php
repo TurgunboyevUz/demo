@@ -48,6 +48,7 @@
                                             <th>O'tkazilgan joyi</th>
                                             <th>Mavzusi</th>
                                             <th>Fayl nomi</th>
+                                            <th>Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
@@ -65,6 +66,7 @@
                                             <td>{{ $item->startup->location() }}</td>
                                             <td>{{ $item->startup->title }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->startup->id }}"><i class="fas fa-check"></i></button>

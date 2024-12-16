@@ -47,6 +47,7 @@
                                             <th>Darajasi</th>
                                             <th>Berilgan Sana</th>
                                             <th>Fayl Nomi</th>
+                                            <th>Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
@@ -64,6 +65,7 @@
                                             <td>{{ $item->lang_certificate->criteria->name }}</td>
                                             <td>{{ $item->lang_certificate->given_date }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->lang_certificate->id }}"><i class="fas fa-check"></i></button>
@@ -152,6 +154,8 @@
                     },
                     success: function (response) {
                         alert(response.message);
+
+                        window.location.reload();
                     },
                     error: function (xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
@@ -189,6 +193,7 @@
                 success: function (response) {
                     alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
                     $("#cancelModal").modal("hide"); // Hide the modal
+                    window.location.reload();
                 },
 
                 error: function (xhr) {

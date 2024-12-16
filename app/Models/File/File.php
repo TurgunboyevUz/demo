@@ -23,6 +23,30 @@ class File extends Model
         return $this->morphTo();
     }
 
+    public function status()
+    {
+        $statuses = [
+            'pending' => [
+                'name' => 'Kutilmoqda',
+                'color' => 'warning'
+            ],
+            'reviewed' => [
+                'name' => 'Tasdiqlanmoqda',
+                'color' => 'info'
+            ],
+            'approved' => [
+                'name' => 'Tasdiqlandi',
+                'color' => 'success'
+            ],
+            'rejected' => [
+                'name' => 'Rad etildi',
+                'color' => 'danger'
+            ],
+        ];
+
+        return $statuses[$this->status];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'uploaded_by');

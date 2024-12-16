@@ -53,6 +53,7 @@
                                             <th>Nashr Parametrlari</th>
                                             <th>O'quv Yili</th>
                                             <th>Fayl Nomi</th>
+                                            <th>Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
@@ -76,6 +77,7 @@
                                             <td>{{ $item->article->publish_params }}</td>
                                             <td>{{ $item->article->education_year }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->article->id }}"><i class="fas fa-check"></i></button>
