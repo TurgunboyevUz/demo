@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Criteria\Category;
 use Illuminate\Database\Seeder;
 
-class Criteria extends Seeder
+class CriteriaSeeder extends Seeder
 {
     /**
      * Run the database seeds.

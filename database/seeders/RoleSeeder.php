@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role as RoleModel;
+use Spatie\Permission\Models\Role;
 
-class Role extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,7 @@ class Role extends Seeder
         $roles = ['student', 'teacher', 'dean', 'inspector', 'admin', 'super_admin'];
 
         foreach ($roles as $role) {
-            RoleModel::create([
+            Role::create([
                 'name' => $role
             ]);
         }
