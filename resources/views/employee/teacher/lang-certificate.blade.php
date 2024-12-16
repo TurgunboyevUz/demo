@@ -53,22 +53,21 @@
                                     <tbody>
                                         @php $id = 1; @endphp
 
-                                        @foreach ($students as $student)
-                                        @foreach ($student->lang_certificates as $item)
+                                        @foreach($files as $item)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>{{ $student->user->fio() }}</td>
-                                            <td>{{ $item->lang() }}</td>
-                                            <td>{{ $item->type() }}</td>
-                                            <td>{{ $item->criteria->name }}</td>
-                                            <td>{{ $item->given_date }}</td>
-                                            <td>{{ $item->file->name }}</td>
-                                            @if($item->file->status == 'pending')
+                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>{{ $item->user->fio() }}</td>
+                                            <td>{{ $item->lang_certificate->lang() }}</td>
+                                            <td>{{ $item->lang_certificate->type() }}</td>
+                                            <td>{{ $item->lang_certificate->criteria->name }}</td>
+                                            <td>{{ $item->lang_certificate->given_date }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            @if($item->status == 'pending')
                                             <td>
-                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->id }}"><i class="fas fa-ban"></i></button>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->lang_certificate->id }}"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->lang_certificate->id }}"><i class="fas fa-ban"></i></button>
                                             </td>
                                             @else
                                                 <td>
@@ -76,7 +75,6 @@
                                                 </td>
                                             @endif
                                         </tr>
-                                        @endforeach
                                         @endforeach
                                     </tbody>
                                 </table>

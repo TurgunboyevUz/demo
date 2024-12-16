@@ -52,28 +52,26 @@
                                     </thead>
                                     <tbody>
                                         @php $id = 1; @endphp
-                                        @foreach ($students as $student)
-                                            @foreach($student->grand_economies as $item)
-                                                <tr>
-                                                    <td><input type="checkbox" class="checkItem"></td>
-                                                    <td>{{ $id++ }}</td>
-                                                    <td><img src="{{ asset('storage/' . $student->user->picture_path)}}" alt="User" class="img-circle" style="height: 30px;"></td>
-                                                    <td>{{ $student->user->fio() }}</td>
-                                                    <td>{{ $item->criteria->name }}</td>
-                                                    <td>{{ $item->title }}</td>
-                                                    <td>{{ $item->order_number }}</td>
-                                                    <td>{{ $item->amount }}</td>
-                                                    <td>{{ $item->file->name }}</td>
-                                                    @if($item->file->status == 'pending')
-                                                        <td>
-                                                            <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
-                                                            <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->id }}"><i class="fas fa-ban"></i></button>
-                                                        </td>
-                                                    @else
-                                                        <td>Bu fayl uchun harakat imkonsiz</td>
-                                                    @endif
-                                                </tr>
-                                            @endforeach
+                                        @foreach($files as $item)
+                                        <tr>
+                                            <td><input type="checkbox" class="checkItem"></td>
+                                            <td>{{ $id++ }}</td>
+                                            <td><img src="{{ asset('storage/' . $item->user->picture_path)}}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>{{ $item->user->fio() }}</td>
+                                            <td>{{ $item->grand_economy->criteria->name }}</td>
+                                            <td>{{ $item->grand_economy->title }}</td>
+                                            <td>{{ $item->grand_economy->order_number }}</td>
+                                            <td>{{ $item->grand_economy->amount }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            @if($item->status == 'pending')
+                                            <td>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->grand_economy->id }}"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->grand_economy->id }}"><i class="fas fa-ban"></i></button>
+                                            </td>
+                                            @else
+                                            <td>Bu fayl uchun harakat imkonsiz</td>
+                                            @endif
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -112,47 +110,47 @@
 <script>
     $(function() {
         var e = $("#contractsTable").DataTable({
-                responsive: true,
-                autoWidth: false,
-                language: {
+                responsive: true
+                , autoWidth: false
+                , language: {
                     url: "{{ asset('dist/js/uzbek.json') }}"
                 }
             }),
-        
-        t = $("#checkAll");
-        
+
+            t = $("#checkAll");
+
         t.click(function() {
-            e.find("tr").each(function() {
-                var e = $(this).find("input.checkItem");
-                e.prop("checked", t.prop("checked"))
+                e.find("tr").each(function() {
+                    var e = $(this).find("input.checkItem");
+                    e.prop("checked", t.prop("checked"))
+                })
+            }),
+
+            $("#zipDownload").click(function() {
+                var e = $(".checkItem:checked").length;
+                if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
+                else alert("Siz biror talaba tanlamagansiz")
             })
-        }),
-        
-        $("#zipDownload").click(function() {
-            var e = $(".checkItem:checked").length;
-            if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
-            else alert("Siz biror talaba tanlamagansiz")
-        })
     });
 
-    $(document).ready(function () {
-        $(".confirmAction").click(function (e) {
+    $(document).ready(function() {
+        $(".confirmAction").click(function(e) {
             e.preventDefault();
 
             var itemId = $(this).data('id');
 
-            if (confirm("Tasdiqlamoqchimisiz?")) {            
+            if (confirm("Tasdiqlamoqchimisiz?")) {
                 $.ajax({
                     url: '{{ route("employee.teacher.grand-economy.review") }}', // Replace with your actual route
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: itemId
-                    },
-                    success: function (response) {
+                    method: 'POST'
+                    , data: {
+                        _token: '{{ csrf_token() }}'
+                        , id: itemId
+                    }
+                    , success: function(response) {
                         alert(response.message);
-                    },
-                    error: function (xhr) {
+                    }
+                    , error: function(xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
                     }
                 });
@@ -160,41 +158,42 @@
         });
     });
 
-    $(function () {
+    $(function() {
         let cancelItemId = null;
 
-        $(".cancelAction").click(function () {
+        $(".cancelAction").click(function() {
             cancelItemId = $(this).data("id"); // Get the item_id from the button's data-id attribute
             $("#cancelModal").modal("show"); // Show the modal
         });
 
-        $("#cancelModal .btn-primary").click(function () {
+        $("#cancelModal .btn-primary").click(function() {
             const reason = $("#cancelModal textarea").val(); // Get the reason from the modal
 
             if (!reason) {
                 alert("Bekor qilish sababini kiriting!"); // Show an alert if no reason is provided
                 return;
             }
-        
+
             $.ajax({
                 url: "{{ route('employee.teacher.grand-economy.reject') }}", // Replace with your actual endpoint
-                type: "POST",
-                data: {
-                    id: cancelItemId,
-                    reason: reason,
-                    _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
+                type: "POST"
+                , data: {
+                    id: cancelItemId
+                    , reason: reason
+                    , _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
                 },
-                
-                success: function (response) {
+
+                success: function(response) {
                     alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
                     $("#cancelModal").modal("hide"); // Hide the modal
                 },
 
-                error: function (xhr) {
+                error: function(xhr) {
                     alert("Bekor qilishda xatolik yuz berdi."); // Show error message
                 }
             });
         });
     });
+
 </script>
 @endsection

@@ -3,6 +3,15 @@
 namespace App\Http\Controllers\Employee\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\File\Achievement;
+use App\Models\File\Article;
+use App\Models\File\File;
+use App\Models\File\GrandEconomy;
+use App\Models\File\Invention;
+use App\Models\File\LangCertificate;
+use App\Models\File\Olympic;
+use App\Models\File\Scholarship;
+use App\Models\File\Startup;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -18,136 +27,81 @@ class PageController extends Controller
     public function article(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', Article::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->articles = $student->articles()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.article', compact('user', 'students'));
+        return view('employee.teacher.article', compact('user', 'files'));
     }
 
     public function scholarship(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', Scholarship::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->scholarships = $student->scholarships()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.scholarship', compact('user', 'students'));
+        return view('employee.teacher.scholarship', compact('user', 'files'));
     }
 
     public function invention(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', Invention::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->inventions = $student->inventions()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.invention', compact('user', 'students'));
+        return view('employee.teacher.invention', compact('user', 'files'));
     }
 
     public function startup(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', Startup::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->startups = $student->startups()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.startup', compact('user', 'students'));
+        return view('employee.teacher.startup', compact('user', 'files'));
     }
 
     public function grand_economy(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', GrandEconomy::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->grand_economies = $student->grand_economies()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.grand-economy', compact('user', 'students'));
+        return view('employee.teacher.grand-economy', compact('user', 'files'));
     }
 
     public function olympics(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', Olympic::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->olympics = $student->olympics()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.olympics', compact('user', 'students'));
+        return view('employee.teacher.olympics', compact('user', 'files'));
     }
 
     public function lang_certificate(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', LangCertificate::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->lang_certificates = $student->lang_certificates()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.lang-certificate', compact('user', 'students'));
-    }
-
-    public function distinguished_scholarship(Request $request)
-    {
-        $user = $request->user();
-
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->distinguished_scholarships = $student->distinguished_scholarships()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.distinguished-scholarship', compact('user', 'students'));
+        return view('employee.teacher.lang-certificate', compact('user', 'files'));
     }
 
     public function achievement(Request $request)
     {
         $user = $request->user();
+        $files = File::where('fileable_type', Achievement::class)
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
+            ->get();
 
-        $students = $user->employee->students()->get()->each(function (&$student) {
-            $student->achievements = $student->achievements()
-                ->with('files', function ($query) {
-                    $query->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')");
-                })
-                ->get();
-        });
-
-        return view('employee.teacher.achievement', compact('user', 'students'));
+        return view('employee.teacher.achievement', compact('user', 'files'));
     }
 
     public function chat(Request $request)
