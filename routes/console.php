@@ -14,3 +14,11 @@ Artisan::command('tree', function () {
         $this->comment($line);
     }
 });
+
+Artisan::command('pint', function () {
+    exec('./vendor/bin/pint', $output);
+
+    foreach ($output as $line) {
+        $this->comment($line);
+    }
+});
