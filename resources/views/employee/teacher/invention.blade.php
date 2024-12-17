@@ -158,6 +158,8 @@
                     }
                     , success: function(response) {
                         alert(response.message);
+
+                        window.location.reload();
                     }
                     , error: function(xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
@@ -195,6 +197,7 @@
                 success: function(response) {
                     alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
                     $("#cancelModal").modal("hide"); // Hide the modal
+                    window.location.reload();
                 },
 
                 error: function(xhr) {

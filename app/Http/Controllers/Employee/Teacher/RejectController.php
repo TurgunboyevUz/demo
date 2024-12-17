@@ -19,19 +19,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:articles,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $article = Article::find($data['id']);
-        $article->file->update([
+        $article->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi'
+            'message' => 'Rad etildi',
         ]);
     }
 
@@ -39,19 +39,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:scholarships,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $scholarship = Scholarship::find($data['id']);
-        $scholarship->file->update([
+        $scholarship->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi'
+            'message' => 'Rad etildi',
         ]);
     }
 
@@ -59,19 +59,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:inventions,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $invention = Invention::find($data['id']);
-        $invention->file->update([
+        $invention->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi'
+            'message' => 'Rad etildi',
         ]);
     }
 
@@ -79,19 +79,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:startups,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $startup = Startup::find($data['id']);
-        $startup->file->update([
+        $startup->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi'
+            'message' => 'Rad etildi',
         ]);
     }
 
@@ -99,19 +99,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:grand_economies,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $grand = GrandEconomy::find($data['id']);
-        $grand->file->update([
+        $grand->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi'
+            'message' => 'Rad etildi',
         ]);
     }
 
@@ -119,19 +119,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:olympics,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $olympic = Olympic::find($data['id']);
-        $olympic->file->update([
+        $olympic->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi'
+            'message' => 'Rad etildi',
         ]);
     }
 
@@ -139,19 +139,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:lang_certificates,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $lang = LangCertificate::find($data['id']);
-        $lang->file->update([
+        $lang->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi!'
+            'message' => 'Rad etildi!',
         ]);
     }
 
@@ -159,19 +159,19 @@ class RejectController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|exists:achievements,id',
-            'reason' => 'required|string'
+            'reason' => 'required|string',
         ]);
 
         $achievement = Achievement::find($data['id']);
-        $achievement->file->update([
+        $achievement->file()->update([
             'status' => 'rejected',
             'reject_reason' => $data['reason'],
             'rejected_by' => $request->user()->id,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
 
         return response()->json([
-            'message' => 'Rad etildi!'
+            'message' => 'Rad etildi!',
         ]);
     }
 }

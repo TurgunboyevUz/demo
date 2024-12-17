@@ -1,7 +1,4 @@
-@extends('layouts::teacher.app')
-
-@section('content')
-<div class="content-wrapper">
+@extends('layouts::teacher.app') @section('content') <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -11,14 +8,15 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Bosh sahifa</a>
+                        </li>
                         <li class="breadcrumb-item active">Startup/Tanlov</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -29,8 +27,7 @@
                             <h3 class="card-title">Barcha Startup/Tanlov Yutuqlari</h3>
                             <div class="ml-auto d-flex">
                                 <button id="zipDownload" class="btn btn-success">
-                                    <i class="fas fa-file-archive"></i> ZIP Yuklash
-                                </button>
+                                    <i class="fas fa-file-archive"></i> ZIP Yuklash </button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -38,7 +35,9 @@
                                 <table id="startupTable" class="table table-bordered table-responsive table-striped">
                                     <thead>
                                         <tr>
-                                            <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
+                                            <th style="width: 5%;">
+                                                <input type="checkbox" id="checkAll">
+                                            </th>
                                             <th style="width: 5%;">#</th>
                                             <th style="width: 7%;">Rasmi</th>
                                             <th>Talaba FIO</th>
@@ -52,13 +51,14 @@
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @php $id = 1; @endphp
-                                        @foreach($files as $item)
-                                        <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
+                                    <tbody> @php $id = 1; @endphp @foreach($files as $item) <tr>
+                                            <td>
+                                                <input type="checkbox" class="checkItem">
+                                            </td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>
+                                                <img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;">
+                                            </td>
                                             <td>{{ $item->user->fio() }}</td>
                                             <td>{{ $item->startup->type() }}</td>
                                             <td>{{ $item->startup->criteria->name }}</td>
@@ -66,18 +66,17 @@
                                             <td>{{ $item->startup->location() }}</td>
                                             <td>{{ $item->startup->title }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
-                                            @if($item->status == 'pending')
                                             <td>
-                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->startup->id }}"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->startup->id }}"><i class="fas fa-ban"></i></button>
-                                            </td>
-                                            @else
-                                            <td>Bu fayl uchun harakat imkonsiz</td>
-                                            @endif
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
+                                                <span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span>
+                                            </td> @if($item->status == 'pending') <td>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->startup->id }}">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->startup->id }}">
+                                                    <i class="fas fa-ban"></i>
+                                                </button>
+                                            </td> @else <td>Bu fayl uchun harakat imkonsiz</td> @endif
+                                        </tr> @endforeach </tbody>
                                 </table>
                             </div>
                         </div>
@@ -87,7 +86,6 @@
         </div>
     </section>
 </div>
-
 <!-- Modal for cancel reason -->
 <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -107,97 +105,80 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
-
-@section('scripts')
-<script>
+</div> @endsection @section('scripts') <script>
     $(function() {
         var e = $("#startupTable").DataTable({
-                responsive: true
-                , autoWidth: false
-                , language: {
+                responsive: true,
+                autoWidth: false,
+                language: {
                     url: "{{ asset('dist/js/uzbek.json') }}"
                 }
             }),
-
             t = $("#checkAll");
-
         t.click(function() {
                 e.find("tr").each(function() {
                     var e = $(this).find("input.checkItem");
                     e.prop("checked", t.prop("checked"))
                 })
             }),
-
             $("#zipDownload").click(function() {
                 var e = $(".checkItem:checked").length;
                 if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
                 else alert("Siz biror talaba tanlamagansiz")
             })
     });
-
     $(document).ready(function() {
         $(".confirmAction").click(function(e) {
             e.preventDefault();
-
             var itemId = $(this).data('id');
-
             if (confirm("Tasdiqlamoqchimisiz?")) {
                 $.ajax({
                     url: '{{ route("employee.teacher.startup.review") }}', // Replace with your actual route
-                    method: 'POST'
-                    , data: {
-                        _token: '{{ csrf_token() }}'
-                        , id: itemId
-                    }
-                    , success: function(response) {
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: itemId
+                    },
+                    success: function(response) {
                         alert(response.message);
-                    }
-                    , error: function(xhr) {
+                        window.location.reload();
+                    },
+                    error: function(xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
                     }
                 });
             }
         });
     });
-
     $(function() {
         let cancelItemId = null;
-
         $(".cancelAction").click(function() {
             cancelItemId = $(this).data("id"); // Get the item_id from the button's data-id attribute
             $("#cancelModal").modal("show"); // Show the modal
         });
-
         $("#cancelModal .btn-primary").click(function() {
             const reason = $("#cancelModal textarea").val(); // Get the reason from the modal
-
             if (!reason) {
                 alert("Bekor qilish sababini kiriting!"); // Show an alert if no reason is provided
                 return;
             }
-
             $.ajax({
                 url: "{{ route('employee.teacher.startup.reject') }}", // Replace with your actual endpoint
-                type: "POST"
-                , data: {
-                    id: cancelItemId
-                    , reason: reason
-                    , _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
+                type: "POST",
+                data: {
+                    id: cancelItemId,
+                    reason: reason,
+                    _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
                 },
-
                 success: function(response) {
                     alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
                     $("#cancelModal").modal("hide"); // Hide the modal
+                    window.location.reload();
                 },
-
                 error: function(xhr) {
                     alert("Bekor qilishda xatolik yuz berdi."); // Show error message
                 }
             });
         });
     });
-
-</script>
-@endsection
+</script> @endsection
