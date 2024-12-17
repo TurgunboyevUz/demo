@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Til Sertifikatlari</h1>
+                    <h1 class="m-0">Stipendiya Yutuqlari</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item active">Til Sertifikatlari</li>
+                        <li class="breadcrumb-item active">Stipendiya Yutuqlari</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Barcha Til Sertifikatlari</h3>
+                            <h3 class="card-title">Barcha Stipendiya Yutuqlari</h3>
                             <div class="ml-auto d-flex">
                                 <button id="zipDownload" class="btn btn-success">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
@@ -34,49 +34,46 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive" style="max-width: 100%; overflow-x: auto;">
-                                <table id="languageCertificatesTable" class="table table-bordered table-responsive table-striped">
+                            <div class="table-responsive" style="max-width: 105%; overflow-x: auto;">
+                                <table id="scholarshipsTable" class="table table-bordered table-responsive table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
                                             <th style="width: 7%;">Rasmi</th>
-                                            <th>Talaba FIO</th>
-                                            <th>Chet Tili</th>
-                                            <th>Sertifikat Turi</th>
-                                            <th>Darajasi</th>
+                                            <th>Talaba Ism, Familiyasi</th>
+                                            <th>Yutuq Turi</th>
                                             <th>Berilgan Sana</th>
+                                            <th>Guvohnoma Raqami</th>
+                                            <th>Nomi</th>
                                             <th>Fayl Nomi</th>
+                                            <th>Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $id = 1; @endphp
-
-                                        @foreach ($students as $student)
-                                        @foreach ($student->lang_certificates as $item)
+                                        @foreach($files as $item)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
-                                            <td>{{ $student->user->fio() }}</td>
-                                            <td>{{ $item->lang() }}</td>
-                                            <td>{{ $item->type() }}</td>
-                                            <td>{{ $item->criteria->name }}</td>
-                                            <td>{{ $item->given_date }}</td>
-                                            <td>{{ $item->file->name }}</td>
-                                            @if($item->file->status == 'pending')
+                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>{{ $item->user->fio() }}</td>
+                                            <td>{{ $item->scholarship->criteria->name }}</td>
+                                            <td>{{ $item->scholarship->given_date }}</td>
+                                            <td>{{ $item->scholarship->certificate_number }}</td>
+                                            <td>{{ $item->scholarship->title }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>|
+                                            @if($item->status == 'pending')
                                             <td>
-                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->id }}"><i class="fas fa-ban"></i></button>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->scholarship->id }}"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->scholarship->id }}"><i class="fas fa-ban"></i></button>
                                             </td>
                                             @else
-                                                <td>
-                                                    Bu fayl uchun harakat imkonsiz
-                                                </td>
+                                            <td>Bu fayl uchun harakat imkonsiz</td>
                                             @endif
                                         </tr>
-                                        @endforeach
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -88,8 +85,6 @@
         </div>
     </section>
 </div>
-
-<!-- Modal for cancel reason -->
 <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -114,48 +109,48 @@
 @section('scripts')
 <script>
     $(function() {
-        var e = $("#languageCertificatesTable").DataTable({
-                responsive: true,
-                autoWidth: false,
-                language: {
+        var e = $("#scholarshipsTable").DataTable({
+                responsive: true
+                , autoWidth: false
+                , language: {
                     url: "{{ asset('dist/js/uzbek.json') }}"
                 }
             }),
-        
-        t = $("#checkAll");
-        
+
+            t = $("#checkAll");
+
         t.click(function() {
-            e.find("tr").each(function() {
-                var e = $(this).find("input.checkItem");
-                e.prop("checked", t.prop("checked"))
+                e.find("tr").each(function() {
+                    var e = $(this).find("input.checkItem");
+                    e.prop("checked", t.prop("checked"))
+                })
+            }),
+
+            $("#zipDownload").click(function() {
+                var e = $(".checkItem:checked").length;
+                if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
+                else alert("Siz biror talaba tanlamagansiz")
             })
-        }),
-        
-        $("#zipDownload").click(function() {
-            var e = $(".checkItem:checked").length;
-            if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
-            else alert("Siz biror talaba tanlamagansiz")
-        })
     });
 
-    $(document).ready(function () {
-        $(".confirmAction").click(function (e) {
+    $(document).ready(function() {
+        $(".confirmAction").click(function(e) {
             e.preventDefault();
 
             var itemId = $(this).data('id');
 
-            if (confirm("Tasdiqlamoqchimisiz?")) {            
+            if (confirm("Tasdiqlamoqchimisiz?")) {
                 $.ajax({
-                    url: '{{ route("employee.teacher.lang-certificate.review") }}', // Replace with your actual route
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: itemId
-                    },
-                    success: function (response) {
+                    url: '{{ route("employee.teacher.scholarship.review") }}', // Replace with your actual route
+                    method: 'POST'
+                    , data: {
+                        _token: '{{ csrf_token() }}'
+                        , id: itemId
+                    }
+                    , success: function(response) {
                         alert(response.message);
-                    },
-                    error: function (xhr) {
+                    }
+                    , error: function(xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
                     }
                 });
@@ -163,41 +158,42 @@
         });
     });
 
-    $(function () {
+    $(function() {
         let cancelItemId = null;
 
-        $(".cancelAction").click(function () {
+        $(".cancelAction").click(function() {
             cancelItemId = $(this).data("id"); // Get the item_id from the button's data-id attribute
             $("#cancelModal").modal("show"); // Show the modal
         });
 
-        $("#cancelModal .btn-primary").click(function () {
+        $("#cancelModal .btn-primary").click(function() {
             const reason = $("#cancelModal textarea").val(); // Get the reason from the modal
 
             if (!reason) {
                 alert("Bekor qilish sababini kiriting!"); // Show an alert if no reason is provided
                 return;
             }
-        
+
             $.ajax({
-                url: "{{ route('employee.teacher.lang-certificate.reject') }}", // Replace with your actual endpoint
-                type: "POST",
-                data: {
-                    id: cancelItemId,
-                    reason: reason,
-                    _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
+                url: "{{ route('employee.teacher.scholarship.reject') }}", // Replace with your actual endpoint
+                type: "POST"
+                , data: {
+                    id: cancelItemId
+                    , reason: reason
+                    , _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
                 },
-                
-                success: function (response) {
+
+                success: function(response) {
                     alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
                     $("#cancelModal").modal("hide"); // Hide the modal
                 },
 
-                error: function (xhr) {
+                error: function(xhr) {
                     alert("Bekor qilishda xatolik yuz berdi."); // Show error message
                 }
             });
         });
     });
+
 </script>
 @endsection

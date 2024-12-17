@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Startup/Tanlov</h1>
+                    <h1 class="m-0">Til Sertifikatlari</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item active">Startup/Tanlov</li>
+                        <li class="breadcrumb-item active">Til Sertifikatlari</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Barcha Startup/Tanlov Yutuqlari</h3>
+                            <h3 class="card-title">Barcha Til Sertifikatlari</h3>
                             <div class="ml-auto d-flex">
                                 <button id="zipDownload" class="btn btn-success">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
@@ -35,47 +35,48 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="max-width: 100%; overflow-x: auto;">
-                                <table id="startupTable" class="table table-bordered table-responsive table-striped">
+                                <table id="languageCertificatesTable" class="table table-bordered table-responsive table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
                                             <th style="width: 7%;">Rasmi</th>
                                             <th>Talaba FIO</th>
-                                            <th>Yutuq Turi</th>
+                                            <th>Chet Tili</th>
+                                            <th>Sertifikat Turi</th>
                                             <th>Darajasi</th>
-                                            <th>Ishtirokchilar</th>
-                                            <th>O'tkazilgan joyi</th>
-                                            <th>Mavzusi</th>
-                                            <th>Fayl nomi</th>
+                                            <th>Berilgan Sana</th>
+                                            <th>Fayl Nomi</th>
+                                            <th>Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $id = 1; @endphp
-                                        @foreach ($students as $student)
-                                            @foreach($student->startups as $item)
-                                                <tr>
-                                                    <td><input type="checkbox" class="checkItem"></td>
-                                                    <td>{{ $id++ }}</td>
-                                                    <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
-                                                    <td>{{ $student->user->fio() }}</td>
-                                                    <td>{{ $item->type() }}</td>
-                                                    <td>{{ $item->criteria->name }}</td>
-                                                    <td>{{ $item->participants }}</td>
-                                                    <td>{{ $item->location() }}</td>
-                                                    <td>{{ $item->title }}</td>
-                                                    <td>{{ $item->file->name }}</td>
-                                                    @if($item->file->status == 'pending')
-                                                        <td>
-                                                            <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
-                                                            <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->id }}"><i class="fas fa-ban"></i></button>
-                                                        </td>
-                                                    @else
-                                                        <td>Bu fayl uchun harakat imkonsiz</td>
-                                                    @endif
-                                                </tr>
-                                            @endforeach
+
+                                        @foreach($files as $item)
+                                        <tr>
+                                            <td><input type="checkbox" class="checkItem"></td>
+                                            <td>{{ $id++ }}</td>
+                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td>{{ $item->user->fio() }}</td>
+                                            <td>{{ $item->lang_certificate->lang() }}</td>
+                                            <td>{{ $item->lang_certificate->type() }}</td>
+                                            <td>{{ $item->lang_certificate->criteria->name }}</td>
+                                            <td>{{ $item->lang_certificate->given_date }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+                                            @if($item->status == 'pending')
+                                            <td>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->lang_certificate->id }}"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->lang_certificate->id }}"><i class="fas fa-ban"></i></button>
+                                            </td>
+                                            @else
+                                                <td>
+                                                    Bu fayl uchun harakat imkonsiz
+                                                </td>
+                                            @endif
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -113,7 +114,7 @@
 @section('scripts')
 <script>
     $(function() {
-        var e = $("#startupTable").DataTable({
+        var e = $("#languageCertificatesTable").DataTable({
                 responsive: true,
                 autoWidth: false,
                 language: {
@@ -145,7 +146,7 @@
 
             if (confirm("Tasdiqlamoqchimisiz?")) {            
                 $.ajax({
-                    url: '{{ route("employee.teacher.startup.review") }}', // Replace with your actual route
+                    url: '{{ route("employee.teacher.lang-certificate.review") }}', // Replace with your actual route
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -153,6 +154,8 @@
                     },
                     success: function (response) {
                         alert(response.message);
+
+                        window.location.reload();
                     },
                     error: function (xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
@@ -179,7 +182,7 @@
             }
         
             $.ajax({
-                url: "{{ route('employee.teacher.startup.reject') }}", // Replace with your actual endpoint
+                url: "{{ route('employee.teacher.lang-certificate.reject') }}", // Replace with your actual endpoint
                 type: "POST",
                 data: {
                     id: cancelItemId,
@@ -190,6 +193,7 @@
                 success: function (response) {
                     alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
                     $("#cancelModal").modal("hide"); // Hide the modal
+                    window.location.reload();
                 },
 
                 error: function (xhr) {

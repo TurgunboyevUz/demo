@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Stipendiya Yutuqlari</h1>
+                    <h1 class="m-0">Yuklangan Maqolalar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item active">Stipendiya Yutuqlari</li>
+                        <li class="breadcrumb-item active">Yuklangan Maqolalar</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Barcha Stipendiya Yutuqlari</h3>
+                            <h3 class="card-title">Barcha Biriktirilgan Talabalar Maqolalari</h3>
                             <div class="ml-auto d-flex">
                                 <button id="zipDownload" class="btn btn-success">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
@@ -35,47 +35,59 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="max-width: 105%; overflow-x: auto;">
-                                <table id="scholarshipsTable" class="table table-bordered table-responsive table-striped">
+                                <table id="articlesTable" class="table table-bordered table-responsive table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
-                                            <th style="width: 7%;">Rasmi</th>
+                                            <th>Rasmi</th>
                                             <th>Talaba Ism, Familiyasi</th>
-                                            <th>Yutuq Turi</th>
-                                            <th>Berilgan Sana</th>
-                                            <th>Guvohnoma Raqami</th>
-                                            <th>Nomi</th>
+                                            <th>Ilmiy Ish Nomi</th>
+                                            <th>Kalit So'zlar</th>
+                                            <th>Til</th>
+                                            <th>Mualliflar</th>
+                                            <th>DOI</th>
+                                            <th>Manba (Jurnal) Nomi</th>
+                                            <th>Xalqaro Ilmiy Bazalar</th>
+                                            <th>Nashr Yili</th>
+                                            <th>Nashr Parametrlari</th>
+                                            <th>O'quv Yili</th>
                                             <th>Fayl Nomi</th>
+                                            <th style="width: 7%;">Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $id = 1; @endphp
-                                        @foreach($students as $student)
-                                        @foreach($student->scholarships as $item)
+
+                                        @foreach($files as $item)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                             <td>{{ $item->user->fio() }}</td>
-                                            <td>{{ $item->criteria->name }}</td>
-                                            <td>{{ $item->given_date }}</td>
-                                            <td>{{ $item->certificate_number }}</td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ $item->file->name }}</td>
-                                            @if($item->file->status == 'pending')
-                                                <td>
-                                                    <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->id }}"><i class="fas fa-check"></i></button>
-                                                    <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->id }}"><i class="fas fa-ban"></i></button>
-                                                </td>
+                                            <td>{{ $item->article->title }}</td>
+                                            <td>{{ $item->article->keywords }}</td>
+                                            <td>{{ $item->article->lang() }}</td>
+                                            <td>{{ $item->article->authors }}</td>
+                                            <td>{{ $item->article->doi }}</td>
+                                            <td>{{ $item->article->journal_name }}</td>
+                                            <td>{{ $item->article->international_databases }}</td>
+                                            <td>{{ $item->article->published_year }}</td>
+                                            <td>{{ $item->article->publish_params }}</td>
+                                            <td>{{ $item->article->education_year }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
+                                            @if($item->status == 'pending')
+                                            <td>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->article->id }}"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->article->id }}"><i class="fas fa-ban"></i></button>
+                                            </td>
                                             @else
-                                                <td>Bu fayl uchun harakat imkonsiz</td>
+                                            <td>Bu fayl uchun harakat imkonsiz</td>
                                             @endif
                                         </tr>
                                         @endforeach
-                                        @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -86,6 +98,7 @@
         </div>
     </section>
 </div>
+
 <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -110,48 +123,50 @@
 @section('scripts')
 <script>
     $(function() {
-        var e = $("#scholarshipsTable").DataTable({
-                responsive: true,
-                autoWidth: false,
-                language: {
+        var e = $("#articlesTable").DataTable({
+                responsive: true
+                , autoWidth: false
+                , language: {
                     url: "{{ asset('dist/js/uzbek.json') }}"
                 }
             }),
-        
-        t = $("#checkAll");
-        
+
+            t = $("#checkAll");
+
         t.click(function() {
-            e.find("tr").each(function() {
-                var e = $(this).find("input.checkItem");
-                e.prop("checked", t.prop("checked"))
+                e.find("tr").each(function() {
+                    var e = $(this).find("input.checkItem");
+                    e.prop("checked", t.prop("checked"))
+                })
+            }),
+
+            $("#zipDownload").click(function() {
+                var e = $(".checkItem:checked").length;
+                if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
+                else alert("Siz biror talaba tanlamagansiz")
             })
-        }),
-        
-        $("#zipDownload").click(function() {
-            var e = $(".checkItem:checked").length;
-            if (e > 0) alert("Fayl yuklanish boshlandi"), console.log("ZIP yuklash boshlandi");
-            else alert("Siz biror talaba tanlamagansiz")
-        })
     });
 
-    $(document).ready(function () {
-        $(".confirmAction").click(function (e) {
+    $(document).ready(function() {
+        $(".confirmAction").click(function(e) {
             e.preventDefault();
 
             var itemId = $(this).data('id');
 
-            if (confirm("Tasdiqlamoqchimisiz?")) {            
+            if (confirm("Tasdiqlamoqchimisiz?")) {
                 $.ajax({
-                    url: '{{ route("employee.teacher.scholarship.review") }}', // Replace with your actual route
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: itemId
-                    },
-                    success: function (response) {
+                    url: '{{ route("employee.teacher.article.review") }}', // Replace with your actual route
+                    method: 'POST'
+                    , data: {
+                        _token: '{{ csrf_token() }}'
+                        , id: itemId
+                    }
+                    , success: function(response) {
                         alert(response.message);
-                    },
-                    error: function (xhr) {
+
+                        window.location.reload();
+                    }
+                    , error: function(xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
                     }
                 });
@@ -159,41 +174,43 @@
         });
     });
 
-    $(function () {
+    $(function() {
         let cancelItemId = null;
 
-        $(".cancelAction").click(function () {
+        $(".cancelAction").click(function() {
             cancelItemId = $(this).data("id"); // Get the item_id from the button's data-id attribute
             $("#cancelModal").modal("show"); // Show the modal
         });
 
-        $("#cancelModal .btn-primary").click(function () {
+        $("#cancelModal .btn-primary").click(function() {
             const reason = $("#cancelModal textarea").val(); // Get the reason from the modal
 
             if (!reason) {
                 alert("Bekor qilish sababini kiriting!"); // Show an alert if no reason is provided
                 return;
             }
-        
+
             $.ajax({
-                url: "{{ route('employee.teacher.scholarship.reject') }}", // Replace with your actual endpoint
-                type: "POST",
-                data: {
-                    id: cancelItemId,
-                    reason: reason,
-                    _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
-                },
-                
-                success: function (response) {
-                    alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
-                    $("#cancelModal").modal("hide"); // Hide the modal
+                url: "{{ route('employee.teacher.article.reject') }}", // Replace with your actual endpoint
+                type: "POST"
+                , data: {
+                    id: cancelItemId
+                    , reason: reason
+                    , _token: '{{ csrf_token() }}' // Add CSRF token for Laravel
                 },
 
-                error: function (xhr) {
+                success: function(response) {
+                    alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
+                    $("#cancelModal").modal("hide"); // Hide the modal
+                    window.location.reload();
+                },
+
+                error: function(xhr) {
                     alert("Bekor qilishda xatolik yuz berdi."); // Show error message
                 }
             });
         });
     });
+
 </script>
 @endsection

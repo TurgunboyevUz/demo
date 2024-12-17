@@ -53,7 +53,7 @@
                                             <th>Nashr Parametrlari</th>
                                             <th>O'quv Yili</th>
                                             <th>Fayl Nomi</th>
-                                            <th>Holati</th>
+                                            <th style="width: 7%;">Holati</th>
                                             <th>Harakatlar</th>
                                         </tr>
                                     </thead>
@@ -163,6 +163,8 @@
                     }
                     , success: function(response) {
                         alert(response.message);
+
+                        window.location.reload();
                     }
                     , error: function(xhr) {
                         alert('Xatolik yuz berdi: ' + xhr.responseText);
@@ -200,6 +202,7 @@
                 success: function(response) {
                     alert("Bekor qilish muvaffaqiyatli amalga oshirildi!"); // Show success message
                     $("#cancelModal").modal("hide"); // Hide the modal
+                    window.location.reload();
                 },
 
                 error: function(xhr) {

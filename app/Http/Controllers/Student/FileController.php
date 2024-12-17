@@ -80,9 +80,9 @@ class FileController extends Controller
         return redirect()->route($request->route()->getName());
     }
 
-    public function destroy_article($id)
+    public function destroy_article(Request $request)
     {
-        File::destroy_article($id);
+        File::destroy_article($request->input('id'));
 
         return redirect()->back();
     }
