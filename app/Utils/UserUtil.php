@@ -25,7 +25,7 @@ class UserUtil
         $name = $response['firstname'];
         $surname = $response['surname'];
         $patronymic = $response['patronymic'];
-        $short_name = $response['data']['short_name'] ?? $surname . '.' . $name[0] . '.' . $patronymic[0];
+        $short_name = $response['data']['short_name'] ?? $surname.'.'.$name[0].'.'.$patronymic[0];
         $phone = $response['phone'];
         $email = $response['email'];
         $passport_number = $response['passport_number'];
@@ -39,15 +39,15 @@ class UserUtil
             Storage::disk('public')->delete($user->picture_path);
         }
 
-        $picture_path = 'profile/image_' . now()->format('d-m-Y') . '_' . uniqid(true) . '.jpg';
+        $picture_path = 'profile/image_'.now()->format('d-m-Y').'_'.uniqid(true).'.jpg';
         $picture = file_get_contents($response['picture']);
 
         self::makeDir(storage_path('app/public/profile'));
-        file_put_contents(storage_path('app/public/' . $picture_path), $picture);
+        file_put_contents(storage_path('app/public/'.$picture_path), $picture);
 
         $user->update(compact('name', 'surname', 'patronymic', 'short_name', 'phone', 'email', 'picture_path', 'passport_number', 'passport_pin'));
 
-        $nation = $response['data']['educationLang']['name'] ?? "O‘zbek";
+        $nation = $response['data']['educationLang']['name'] ?? 'O‘zbek';
         $nation = Nation::firstOrCreate(['name' => $nation]);
 
         if ($response['type'] == 'student') {
@@ -55,7 +55,7 @@ class UserUtil
             $specialty = Specialty::firstOrCreate(['name' => $response['data']['specialty']['name']]);
             $group = Group::firstOrCreate(['name' => $response['data']['group']['name']]);
             $level = str_replace('-kurs', '', $response['data']['level']['name']);
-            $address = $response['data']['province']['name'] . ' ' . $response['data']['district']['name'] . ' ' . $response['data']['address'];
+            $address = $response['data']['province']['name'].' '.$response['data']['district']['name'].' '.$response['data']['address'];
 
             $student = Student::updateOrCreate(['user_id' => $user->id], [
                 'faculty_id' => $faculty->id,
@@ -76,15 +76,15 @@ class UserUtil
                 'nation_id' => $nation->id,
             ]);
 
-            $roles = array_map(function ($role, $department){
+            $roles = array_map(function ($role, $department) {
                 return [
                     'role' => $role,
-                    'department' => $department
+                    'department' => $department,
                 ];
             }, $response['roles'], $response['departments']);
 
             foreach ($roles as $role) {
-                if(Role::where('name', $role['role']['code'])->exists()) {
+                if (Role::where('name', $role['role']['code'])->exists()) {
                     $role_id = Role::where('name', $role['role']['code'])->first()->id;
 
                     $department_id = Department::firstOrCreate([
@@ -104,7 +104,7 @@ class UserUtil
 
             $user->syncRoles($roles);
 
-            $redirect = 'employee.' . $arr[0] . '.dashboard';
+            $redirect = 'employee.'.$arr[0].'.dashboard';
         }
 
         return [
@@ -115,7 +115,7 @@ class UserUtil
 
     public static function makeDir($dir)
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             mkdir($dir);
         }
     }

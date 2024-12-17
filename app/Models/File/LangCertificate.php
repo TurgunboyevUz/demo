@@ -19,7 +19,7 @@ class LangCertificate extends Model
 
     public function lang()
     {
-        $arr = ['ru' => "Rus tili", 'en' => "Ingliz tili", 'de' => "Nemis tili"];
+        $arr = ['ru' => 'Rus tili', 'en' => 'Ingliz tili', 'de' => 'Nemis tili'];
 
         return $arr[$this->lang];
     }

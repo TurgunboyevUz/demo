@@ -16,14 +16,14 @@ return new class extends Migration
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('criteria_id')->constrained('criterias')->cascadeOnDelete();
-            
+
             $table->string('title');
             $table->text('keywords');
             $table->enum('lang', ['uz', 'ru', 'en']);
 
             $table->integer('authors_count');
             $table->text('authors');
-            
+
             $table->string('doi');
             $table->string('journal_name');
             $table->text('publish_params');

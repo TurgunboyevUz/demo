@@ -15,7 +15,7 @@ class File extends Model
         'size',
         'uploaded_by',
         'type',
-        'status' //pending, reviewed, approved, declined etc..
+        'status', //pending, reviewed, approved, declined etc..
     ];
 
     public function fileable()
@@ -28,19 +28,19 @@ class File extends Model
         $statuses = [
             'pending' => [
                 'name' => 'Kutilmoqda',
-                'color' => 'warning'
+                'color' => 'warning',
             ],
             'reviewed' => [
                 'name' => 'Tasdiqlanmoqda',
-                'color' => 'info'
+                'color' => 'info',
             ],
             'approved' => [
                 'name' => 'Tasdiqlandi',
-                'color' => 'success'
+                'color' => 'success',
             ],
             'rejected' => [
                 'name' => 'Rad etildi',
-                'color' => 'danger'
+                'color' => 'danger',
             ],
         ];
 

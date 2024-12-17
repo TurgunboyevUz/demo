@@ -26,7 +26,7 @@ class StoreArticleRequest extends FormRequest
             'international_databases' => 'required|string',
             'published_year' => 'required|integer|min:1900|max:2100',
             'education_year' => 'required|integer|min:1900|max:2100',
-            'file' => 'required|mimes:pdf'
+            'file' => 'required|mimes:pdf',
         ];
     }
 }

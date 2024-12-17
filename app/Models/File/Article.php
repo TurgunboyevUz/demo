@@ -15,8 +15,8 @@ class Article extends Model
     {
         $arr = [
             'uz' => "O'zbek tili",
-            'ru' => "Rus tili",
-            'en' => "Ingliz tili",
+            'ru' => 'Rus tili',
+            'en' => 'Ingliz tili',
         ];
 
         return $arr[$this->lang];

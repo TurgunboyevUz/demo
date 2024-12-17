@@ -23,7 +23,7 @@ class StoreDistinguishedScholarshipRequest extends FormRequest
             'department_recommendation' => 'required|file|mimes:pdf',
             'supervisor_conclusion' => 'required|file|mimes:pdf',
             'list_of_works' => 'required|file|mimes:pdf',
-            'certificates' => 'required|file|mimes:pdf'
+            'certificates' => 'required|file|mimes:pdf',
         ];
     }
 }

@@ -7,7 +7,7 @@ return [
         'redirectUri' => env('OAUTH_EMPLOYEE_REDIRECT_URI'),
         'urlAuthorize' => env('OAUTH_EMPLOYEE_URL').'oauth/authorize',
         'urlAccessToken' => env('OAUTH_EMPLOYEE_URL').'oauth/access-token',
-        'urlResourceOwnerDetails' => env('OAUTH_EMPLOYEE_URL').'oauth/api/user' //?fields=id,uuid,employee_id_number,type,roles,name,login,email,picture,firstname,surname,patronymic,birth_date,university_id,phone
+        'urlResourceOwnerDetails' => env('OAUTH_EMPLOYEE_URL').'oauth/api/user', //?fields=id,uuid,employee_id_number,type,roles,name,login,email,picture,firstname,surname,patronymic,birth_date,university_id,phone
     ],
 
     'student' => [
@@ -19,5 +19,5 @@ return [
         'urlResourceOwnerDetails' => env('OAUTH_STUDENT_URL').'oauth/api/user',
     ],
 
-    'token' => 'UHi4-DZ7gIZb3tCfitdWrt4rzqQmNrlU'
+    'token' => 'UHi4-DZ7gIZb3tCfitdWrt4rzqQmNrlU',
 ];

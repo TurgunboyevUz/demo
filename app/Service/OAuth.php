@@ -7,12 +7,11 @@ use League\OAuth2\Client\Provider\GenericProvider;
 
 class OAuth
 {
-    public function __construct()
-    {}
+    public function __construct() {}
 
     public function provider($type)
     {
-        $config = config('oauth.' . $type);
+        $config = config('oauth.'.$type);
         $provider = new GenericProvider($config);
 
         return $provider;
@@ -25,7 +24,7 @@ class OAuth
 
     public function auth(Request $request, $type)
     {
-        if (!$request->has('code')) {
+        if (! $request->has('code')) {
             return false;
         }
 

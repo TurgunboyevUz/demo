@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('lang', ['ru', 'en', 'de']);
             $table->enum('type', ['national', 'cambridge', 'toefl-itp', 'toefl-ibt', 'ielts', 'itep']);
             $table->date('given_date');
-            
+
             $table->timestamps();
         });
     }

@@ -2,13 +2,14 @@
 
 namespace App\Utils;
 
-use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
 class Hemis
 {
     public $token;
+
     public $base_uri = 'https://student.andmiedu.uz/rest/v1/';
+
     public $response;
 
     public function __construct($token = null)
@@ -31,7 +32,9 @@ class Hemis
         $client = new Client;
         $client->base_uri($this->base_uri)->data($data);
 
-        if ($this->token) {$client->token($this->token);}
+        if ($this->token) {
+            $client->token($this->token);
+        }
 
         $response = $client->post($method);
 

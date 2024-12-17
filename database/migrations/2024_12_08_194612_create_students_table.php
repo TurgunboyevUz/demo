@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->nullable();
             $table->integer('level');
             $table->string('address');
-            
+
             $table->timestamps();
         });
     }

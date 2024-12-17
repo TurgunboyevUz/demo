@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->date('given_date');
             $table->string('certificate_number');
-            
+
             $table->timestamps();
         });
     }

@@ -19,30 +19,30 @@ class Achievement extends Model
 
     public function team_members()
     {
-        if($this->participant == 'team') {
+        if ($this->participant == 'team') {
             return $this->team_members;
-        }else{
+        } else {
             return $this->user->fio();
         }
     }
 
     public function type()
     {
-        $arr = ['sport' => "Sport", 'cultural' => "Ma'naviy-ma'rifiy ishlar"];
+        $arr = ['sport' => 'Sport', 'cultural' => "Ma'naviy-ma'rifiy ishlar"];
 
         return $arr[$this->type];
     }
 
     public function location()
     {
-        $arr = ['tashkent' => "Toshkent", 'andijan' => "Andijon"];
+        $arr = ['tashkent' => 'Toshkent', 'andijan' => 'Andijon'];
 
         return $arr[$this->location];
     }
 
     public function document_type()
     {
-        $arr = ['certificate' => "Sertifikat", 'diploma' => "Diplom"];
+        $arr = ['certificate' => 'Sertifikat', 'diploma' => 'Diplom'];
 
         return $arr[$this->document_type];
     }

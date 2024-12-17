@@ -22,16 +22,15 @@ use App\Models\File\Olympic;
 use App\Models\File\Scholarship;
 use App\Models\File\Startup;
 use App\Models\File\Task;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class File
 {
     protected $request;
+
     protected $user;
 
-    public function __construct()
-    {}
+    public function __construct() {}
 
     public function user(Request $request)
     {
@@ -45,7 +44,7 @@ class File
     {
         $data = $request->validated();
 
-        $article = new Article();
+        $article = new Article;
         $article->user_id = $this->user->id;
         $article->criteria_id = $data['criteria_id'];
         $article->title = $data['title'];
@@ -70,14 +69,14 @@ class File
     {
         $data = $request->validated();
 
-        $scholarship = new Scholarship();
+        $scholarship = new Scholarship;
         $scholarship->user_id = $this->user->id;
         $scholarship->criteria_id = $data['criteria_id'];
         $scholarship->title = $data['title'];
         $scholarship->given_date = $data['given_date'];
         $scholarship->certificate_number = $data['certificate_number'];
         $scholarship->save();
-        
+
         $scholarship->upload_file($request, 'scholarships');
 
         return $scholarship;
@@ -87,7 +86,7 @@ class File
     {
         $data = $request->validated();
 
-        $invention = new Invention();
+        $invention = new Invention;
 
         $invention->user_id = $this->user->id;
         $invention->criteria_id = $data['criteria_id'];
@@ -108,7 +107,7 @@ class File
     {
         $data = $request->validated();
 
-        $startup = new Startup();
+        $startup = new Startup;
 
         $startup->user_id = $this->user->id;
         $startup->criteria_id = $data['criteria_id'];
@@ -128,7 +127,7 @@ class File
     {
         $data = $request->validated();
 
-        $grand_economy = new GrandEconomy();
+        $grand_economy = new GrandEconomy;
 
         $grand_economy->user_id = $this->user->id;
         $grand_economy->criteria_id = $data['criteria_id'];
@@ -146,7 +145,7 @@ class File
     {
         $data = $request->validated();
 
-        $olympic = new Olympic();
+        $olympic = new Olympic;
 
         $olympic->user_id = $this->user->id;
         $olympic->criteria_id = $data['criteria_id'];
@@ -163,7 +162,7 @@ class File
     {
         $data = $request->validated();
 
-        $certificate = new LangCertificate();
+        $certificate = new LangCertificate;
         $certificate->user_id = $this->user->id;
         $certificate->criteria_id = $data['criteria_id'];
         $certificate->lang = $data['lang'];
@@ -180,7 +179,7 @@ class File
     {
         $data = $request->validated();
 
-        $scholarship = new DistinguishedScholarship();
+        $scholarship = new DistinguishedScholarship;
         $scholarship->user_id = $this->user->id;
         $scholarship->save();
 
@@ -208,7 +207,7 @@ class File
     {
         $data = $request->validated();
 
-        $achievement = new Achievement();
+        $achievement = new Achievement;
 
         $achievement->user_id = $this->user->id;
         $achievement->criteria_id = $data['criteria_id'];
@@ -228,8 +227,8 @@ class File
     {
         $data = $request->validated();
 
-        $task = new Task();
-        
+        $task = new Task;
+
         $task->employee_id = $this->user->employee->id;
         $task->student_id = $data['student_id'];
         $task->title = $data['title'];
@@ -253,6 +252,7 @@ class File
     {
         $scholarship = Scholarship::findOrFail($id);
         $scholarship->file()->delete();
+
         return $scholarship->delete();
     }
 
@@ -260,6 +260,7 @@ class File
     {
         $invention = Invention::findOrFail($id);
         $invention->file()->delete();
+
         return $invention->delete();
     }
 
@@ -267,6 +268,7 @@ class File
     {
         $startup = Startup::findOrFail($id);
         $startup->file()->delete();
+
         return $startup->delete();
     }
 
@@ -274,6 +276,7 @@ class File
     {
         $grand_economy = GrandEconomy::findOrFail($id);
         $grand_economy->file()->delete();
+
         return $grand_economy->delete();
     }
 
@@ -281,6 +284,7 @@ class File
     {
         $olympic = Olympic::findOrFail($id);
         $olympic->file()->delete();
+
         return $olympic->delete();
     }
 
@@ -288,6 +292,7 @@ class File
     {
         $certificate = LangCertificate::findOrFail($id);
         $certificate->file()->delete();
+
         return $certificate->delete();
     }
 
@@ -295,6 +300,7 @@ class File
     {
         $scholarship = DistinguishedScholarship::findOrFail($id);
         $scholarship->file()->delete();
+
         return $scholarship->delete();
     }
 
@@ -302,6 +308,7 @@ class File
     {
         $achievement = Achievement::findOrFail($id);
         $achievement->file()->delete();
+
         return $achievement->delete();
     }
 }

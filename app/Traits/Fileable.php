@@ -35,19 +35,19 @@ trait Fileable
         $statuses = [
             'pending' => [
                 'name' => 'Kutilmoqda',
-                'color' => 'warning'
+                'color' => 'warning',
             ],
             'reviewed' => [
                 'name' => 'Tasdiqlanmoqda',
-                'color' => 'info'
+                'color' => 'info',
             ],
             'approved' => [
                 'name' => 'Tasdiqlandi',
-                'color' => 'success'
+                'color' => 'success',
             ],
             'rejected' => [
                 'name' => 'Rad etildi',
-                'color' => 'danger'
+                'color' => 'danger',
             ],
         ];
 

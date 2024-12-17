@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('authors');
             $table->text('publish_params');
             $table->integer('education_year');
-            
+
             $table->timestamps();
         });
     }

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('team_members')->nullable();
             $table->enum('location', ['tashkent', 'andijan']);
             $table->enum('document_type', ['certificate', 'diploma']);
-            
+
             $table->timestamps();
         });
     }

@@ -23,18 +23,18 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasRoles, Notifiable, Fileable, Scorable;
+    use Fileable, HasFactory, HasRoles, Notifiable, Scorable;
 
     protected $guarded = [];
 
     public function full_name()
     {
-        return $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
+        return $this->name.' '.$this->surname.' '.$this->patronymic;
     }
 
     public function fio()
     {
-        return $this->surname . ' ' . $this->name . ' ' . $this->patronymic;
+        return $this->surname.' '.$this->name.' '.$this->patronymic;
     }
 
     public function employee()

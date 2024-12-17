@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('order_number');
             $table->double('amount');
-            
+
             $table->timestamps();
         });
     }

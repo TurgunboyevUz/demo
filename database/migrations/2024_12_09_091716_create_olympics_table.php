@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('olympics', function (Blueprint $table) {
             $table->id();
-            
+
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('criteria_id')->constrained('criterias')->cascadeOnDelete();
-            
+
             $table->date('date');
             $table->string('direction');
-            
+
             $table->timestamps();
         });
     }

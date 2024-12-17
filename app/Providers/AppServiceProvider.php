@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Service\OAuth;
 use App\Service\File;
+use App\Service\OAuth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

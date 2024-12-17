@@ -19,7 +19,7 @@ class AuthController extends Controller
 
         foreach ($roles as $role) {
             if ($request->user()?->hasRole($role)) {
-                return redirect()->route('employee.' . $role . '.dashboard');
+                return redirect()->route('employee.'.$role.'.dashboard');
             }
         }
 
@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         foreach ($roles as $role) {
             if ($request->user()?->hasRole($role)) {
-                return redirect()->route('employee.' . $role . '.dashboard');
+                return redirect()->route('employee.'.$role.'.dashboard');
             }
         }
 
@@ -69,8 +69,8 @@ class AuthController extends Controller
     {
         $auth = oauth()->auth($request, $type);
 
-        if (!$auth) {
-            return redirect()->route($type . '.login');
+        if (! $auth) {
+            return redirect()->route($type.'.login');
         }
 
         $util = UserUtil::create($auth['user']);
