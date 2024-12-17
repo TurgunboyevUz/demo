@@ -19,9 +19,9 @@ class PageController extends Controller
     public function dashboard(Request $request)
     {
         $user = $request->user();
-        $department = $user->employee->department('teacher');
+        $department = $user->employee->department('inspector');
 
-        return view('employee.teacher.dashboard', compact('user', 'department'));
+        return view('employee.inspector.dashboard', compact('user', 'department'));
     }
 
     public function article(Request $request)
@@ -31,7 +31,7 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.article', compact('user', 'files'));
+        return view('employee.inspector.article', compact('user', 'files'));
     }
 
     public function scholarship(Request $request)
@@ -41,7 +41,7 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.scholarship', compact('user', 'files'));
+        return view('employee.inspector.scholarship', compact('user', 'files'));
     }
 
     public function invention(Request $request)
@@ -51,7 +51,7 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.invention', compact('user', 'files'));
+        return view('employee.inspector.invention', compact('user', 'files'));
     }
 
     public function startup(Request $request)
@@ -61,7 +61,7 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.startup', compact('user', 'files'));
+        return view('employee.inspector.startup', compact('user', 'files'));
     }
 
     public function grand_economy(Request $request)
@@ -71,7 +71,7 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.grand-economy', compact('user', 'files'));
+        return view('employee.inspector.grand-economy', compact('user', 'files'));
     }
 
     public function olympics(Request $request)
@@ -81,7 +81,7 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.olympics', compact('user', 'files'));
+        return view('employee.inspector.olympics', compact('user', 'files'));
     }
 
     public function lang_certificate(Request $request)
@@ -91,7 +91,7 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.lang-certificate', compact('user', 'files'));
+        return view('employee.inspector.lang-certificate', compact('user', 'files'));
     }
 
     public function achievement(Request $request)
@@ -101,14 +101,14 @@ class PageController extends Controller
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
-        return view('employee.teacher.achievement', compact('user', 'files'));
+        return view('employee.inspector.achievement', compact('user', 'files'));
     }
 
     public function chat(Request $request)
     {
         $user = $request->user();
 
-        return view('employee.teacher.chat', compact('user'));
+        return view('employee.inspector.chat', compact('user'));
     }
 
     public function student_list(Request $request)
@@ -116,7 +116,7 @@ class PageController extends Controller
         $user = $request->user();
         $students = $user->employee->students()->get();
 
-        return view('employee.teacher.student-list', compact('user', 'students'));
+        return view('employee.inspector.student-list', compact('user', 'students'));
     }
 
     public function create_task(Request $request)
@@ -124,6 +124,6 @@ class PageController extends Controller
         $user = $request->user();
         $students = $user->employee->students()->get();
 
-        return view('employee.teacher.create-task', compact('user', 'students'));
+        return view('employee.inspector.create-task', compact('user', 'students'));
     }
 }

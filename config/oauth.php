@@ -17,5 +17,7 @@ return [
         'urlAuthorize' => env('OAUTH_STUDENT_URL').'oauth/authorize',
         'urlAccessToken' => env('OAUTH_STUDENT_URL').'oauth/access-token',
         'urlResourceOwnerDetails' => env('OAUTH_STUDENT_URL').'oauth/api/user',
-    ]
+    ],
+
+    'token' => 'UHi4-DZ7gIZb3tCfitdWrt4rzqQmNrlU'
 ];
