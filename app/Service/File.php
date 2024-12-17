@@ -244,54 +244,64 @@ class File
     public function destroy_article($id)
     {
         $article = Article::findOrFail($id);
+        $article->file()->delete();
+
         return $article->delete();
     }
 
     public function destroy_scholarship($id)
     {
         $scholarship = Scholarship::findOrFail($id);
+        $scholarship->file()->delete();
         return $scholarship->delete();
     }
 
     public function destroy_invention($id)
     {
         $invention = Invention::findOrFail($id);
+        $invention->file()->delete();
         return $invention->delete();
     }
 
     public function destroy_startup($id)
     {
         $startup = Startup::findOrFail($id);
+        $startup->file()->delete();
         return $startup->delete();
     }
 
     public function destroy_grand_economy($id)
     {
         $grand_economy = GrandEconomy::findOrFail($id);
+        $grand_economy->file()->delete();
         return $grand_economy->delete();
     }
 
     public function destroy_olympics($id)
     {
         $olympic = Olympic::findOrFail($id);
+        $olympic->file()->delete();
         return $olympic->delete();
     }
 
     public function destroy_lang_certificate($id)
     {
         $certificate = LangCertificate::findOrFail($id);
+        $certificate->file()->delete();
         return $certificate->delete();
     }
 
     public function destroy_distinguished_scholarship($id)
     {
         $scholarship = DistinguishedScholarship::findOrFail($id);
+        $scholarship->file()->delete();
         return $scholarship->delete();
     }
 
     public function destroy_achievement($id)
     {
         $achievement = Achievement::findOrFail($id);
+        $achievement->file()->delete();
         return $achievement->delete();
     }
 }
