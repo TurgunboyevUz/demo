@@ -1,4 +1,4 @@
-@extends('layouts::teacher.app')
+@extends('layouts::employee.inspeksiya.app')
 
 @section('content')
 <div class="content-wrapper">
@@ -65,7 +65,7 @@
                                             <td>{{ $item->grand_economy->amount }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
-                                            @if($item->status == 'pending')
+                                            @if($item->status == 'reviewed')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->grand_economy->id }}"><i class="fas fa-check"></i></button>
                                                 <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->grand_economy->id }}"><i class="fas fa-ban"></i></button>
@@ -143,7 +143,7 @@
 
             if (confirm("Tasdiqlamoqchimisiz?")) {
                 $.ajax({
-                    url: '{{ route("employee.teacher.grand-economy.review") }}', // Replace with your actual route
+                    url: '{{ route("employee.inspeksiya.grand-economy.approve") }}', // Replace with your actual route
                     method: 'POST'
                     , data: {
                         _token: '{{ csrf_token() }}'

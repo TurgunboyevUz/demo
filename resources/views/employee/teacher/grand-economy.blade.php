@@ -1,4 +1,4 @@
-@extends('layouts::teacher.app')
+@extends('layouts::employee.teacher.app')
 
 @section('content')
 <div class="content-wrapper">

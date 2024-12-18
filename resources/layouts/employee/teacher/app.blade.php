@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="uz">
 
-@include('layouts::teacher.head')
+@include('layouts::employee.head')
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -10,14 +10,14 @@
             <div class="loader"></div>
         </div>
 
-        @include('layouts::teacher.navbar')
-        @include('layouts::teacher.sidebar')
+        @include('layouts::employee.teacher.navbar')
+        @include('layouts::employee.teacher.sidebar')
 
         @yield('content')
 
-        @include('layouts::teacher.footer')
+        @include('layouts::employee.footer')
 
-        @include('layouts::teacher.scripts')
+        @include('layouts::employee.scripts')
 
     </div>
 

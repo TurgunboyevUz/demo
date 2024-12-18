@@ -88,13 +88,13 @@ class UserUtil
                     $role_id = Role::where('name', $role['role']['code'])->first()->id;
 
                     $department_id = Department::firstOrCreate([
-                        'name' => $role['department']['department']['name'],
+                        'name' => $role['department']['department']['name'] ?? '',
                     ]);
 
                     $employee->departments()->attach($department_id, [
                         'role_id' => $role_id,
-                        'type' => $role['department']['employeeType']['name'],
-                        'position' => $role['department']['staffPosition']['name'],
+                        'type' => $role['department']['employeeType']['name'] ?? '',
+                        'position' => $role['department']['staffPosition']['name'] ?? '',
                     ]);
                 }
             }

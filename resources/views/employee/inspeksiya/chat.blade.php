@@ -1,4 +1,4 @@
-@extends('layouts::teacher.app')
+@extends('layouts::employee.inspeksiya.app')
 
 @section('content')
 <div class="content-wrapper" style="padding: 0;">
