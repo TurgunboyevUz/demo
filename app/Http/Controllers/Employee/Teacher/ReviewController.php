@@ -22,7 +22,7 @@ class ReviewController extends Controller
         ]);
 
         $article = Article::find($data['id']);
-        $article->file->update([
+        $article->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),
@@ -40,7 +40,7 @@ class ReviewController extends Controller
         ]);
 
         $scholarship = Scholarship::find($data['id']);
-        $scholarship->file->update([
+        $scholarship->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),
@@ -58,7 +58,7 @@ class ReviewController extends Controller
         ]);
 
         $invention = Invention::find($data['id']);
-        $invention->file->update([
+        $invention->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),
@@ -76,7 +76,7 @@ class ReviewController extends Controller
         ]);
 
         $startup = Startup::find($data['id']);
-        $startup->file->update([
+        $startup->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),
@@ -94,7 +94,7 @@ class ReviewController extends Controller
         ]);
 
         $grand = GrandEconomy::find($data['id']);
-        $grand->file->update([
+        $grand->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),
@@ -112,7 +112,7 @@ class ReviewController extends Controller
         ]);
 
         $olympic = Olympic::find($data['id']);
-        $olympic->file->update([
+        $olympic->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),
@@ -130,7 +130,7 @@ class ReviewController extends Controller
         ]);
 
         $lang = LangCertificate::find($data['id']);
-        $lang->file->update([
+        $lang->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),
@@ -148,7 +148,7 @@ class ReviewController extends Controller
         ]);
 
         $achievement = Achievement::find($data['id']);
-        $achievement->file->update([
+        $achievement->file()->update([
             'status' => 'reviewed',
             'teacher_id' => $request->user()->id,
             'reviewed_at' => now(),

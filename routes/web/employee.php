@@ -11,7 +11,7 @@ Route::prefix('employee')->middleware(['auth', 'role:teacher|dean|inspector'])->
         require_once __DIR__.'/employee/dean.php';
     });
 
-    Route::prefix('inspector')->middleware(['auth', 'role:inspector'])->group(function () {
-        require_once __DIR__.'/employee/inspector.php';
+    Route::prefix('inspeksiya')->middleware(['auth', 'role:inspeksiya'])->group(function () {
+        require_once __DIR__.'/employee/inspeksiya.php';
     });
 });

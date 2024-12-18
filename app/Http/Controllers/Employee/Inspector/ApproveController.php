@@ -22,10 +22,10 @@ class ApproveController extends Controller
         ]);
 
         $article = Article::find($data['id']);
-        $article->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $article->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -40,10 +40,10 @@ class ApproveController extends Controller
         ]);
 
         $scholarship = Scholarship::find($data['id']);
-        $scholarship->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $scholarship->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -58,10 +58,10 @@ class ApproveController extends Controller
         ]);
 
         $invention = Invention::find($data['id']);
-        $invention->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $invention->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -76,10 +76,10 @@ class ApproveController extends Controller
         ]);
 
         $startup = Startup::find($data['id']);
-        $startup->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $startup->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -94,10 +94,10 @@ class ApproveController extends Controller
         ]);
 
         $grand = GrandEconomy::find($data['id']);
-        $grand->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $grand->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -112,10 +112,10 @@ class ApproveController extends Controller
         ]);
 
         $olympic = Olympic::find($data['id']);
-        $olympic->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $olympic->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -130,10 +130,10 @@ class ApproveController extends Controller
         ]);
 
         $lang = LangCertificate::find($data['id']);
-        $lang->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $lang->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -148,10 +148,10 @@ class ApproveController extends Controller
         ]);
 
         $achievement = Achievement::find($data['id']);
-        $achievement->file->update([
-            'status' => 'reviewed',
-            'teacher_id' => $request->user()->id,
-            'reviewed_at' => now(),
+        $achievement->file()->update([
+            'status' => 'approved',
+            'inspector_id' => $request->user()->id,
+            'approved_at' => now(),
         ]);
 
         return response()->json([
