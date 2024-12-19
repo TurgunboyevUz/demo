@@ -174,19 +174,3 @@
     </div>
 </div>
 @endsection
-
-@section('scripts')
-<script>
-    function toggleTeamInputs() {
-        const participants = document.getElementById('participants');
-        const teamMembers = document.getElementById('teamMembers');
-
-        if (participants.value === 'team') {
-            teamMembers.style.display = 'block';
-        } else {
-            teamMembers.style.display = 'none';
-        }
-    }
-
-</script>
-@endsection
