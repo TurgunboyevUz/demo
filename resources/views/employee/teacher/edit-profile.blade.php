@@ -22,6 +22,15 @@
                         <input type="text" id="lastName" class="form-control" value="ANVAROV" readonly>
                     </div>
 
+                    <!-- Fakultet tanlash -->
+                    <div class="col-md-6 mb-3">
+                        <label for="faculty" class="form-label">Fakultet</label>
+                        
+                        <select id="faculty" class="form-control" readonly>
+                            <option value="" disabled>Fakultetlar</option>
+                        </select>
+                    </div>
+
                     <!-- Login -->
                     <div class="col-md-6 mb-3">
                         <label for="login" class="form-label">Login</label>
@@ -37,13 +46,13 @@
                     <!-- Email -->
                     <div class="col-md-6 mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-control" value="anoyatillo16@gmail.com">
+                        <input type="email" id="email" class="form-control" value="anoyatillo16@gmail.com" readonly>
                     </div>
 
                     <!-- Talaba telefoni -->
                     <div class="col-md-6 mb-3">
                         <label for="phone" class="form-label">Xodim telefoni (+998 xx xxx-xx-xx)</label>
-                        <input type="tel" id="phone" class="form-control" value="+998 93 446-67-52">
+                        <input type="tel" id="phone" class="form-control" value="+998 93 446-67-52" readonly>
                     </div>
 
                     <!-- Rasm yuklash -->
@@ -51,26 +60,7 @@
                         <label for="profilePicture" class="form-label">Rasm</label>
                         <div class="profile-picture-upload">
                             <img src="img/image.jpg" alt="Profil rasmi" class="img-thumbnail" style="width: 100px; height: 100px;">
-                            <input type="file" id="profilePicture" class="form-control mt-2">
                         </div>
-                    </div>
-
-                    <!-- Parolni o'zgartirish -->
-                    <div class="col-md-12 mb-3">
-                        <input type="checkbox" id="changePasswordCheckbox" onchange="togglePasswordFields()">
-                        <label for="changePasswordCheckbox">Parolni o'zgartirish</label>
-                    </div>
-
-                    <!-- Yangi parol -->
-                    <div class="col-md-6 mb-3" id="newPasswordField" style="display: none;">
-                        <label for="newPassword" class="form-label">Yangi parol</label>
-                        <input type="password" id="newPassword" class="form-control" placeholder="Yangi parol">
-                    </div>
-
-                    <!-- Parol tasdiq -->
-                    <div class="col-md-6 mb-3" id="confirmPasswordField" style="display: none;">
-                        <label for="confirmPassword" class="form-label">Parol tasdiq</label>
-                        <input type="password" id="confirmPassword" class="form-control" placeholder="Parol tasdiq">
                     </div>
 
                     <!-- Saqlash tugmasi -->
