@@ -67,7 +67,7 @@
                                             <td>{{ $item->startup->participants }}</td>
                                             <td>{{ $item->startup->location() }}</td>
                                             <td>{{ $item->startup->title }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td><a href="{{ asset('storage/'.$item->path) }}" target="_blank">{{ $item->name }}</a></td>
                                             <td>
                                                 <span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span>
                                             </td>

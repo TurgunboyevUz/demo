@@ -68,7 +68,7 @@
                                             <td>{{ $item->achievement->participants }}</td>
                                             <td>{{ $item->achievement->location() }}</td>
                                             <td>{{ $item->achievement->document_type() }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td><a href="{{ asset('storage/'.$item->path) }}" target="_blank">{{ $item->name }}</a></td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>

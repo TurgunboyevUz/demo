@@ -61,7 +61,7 @@
                                             <td>{{ $item->olympic->criteria->name }}</td>
                                             <td>{{ $item->olympic->date }}</td>
                                             <td>{{ $item->olympic->direction }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td><a href="{{ asset('storage/'.$item->path) }}" target="_blank">{{ $item->name }}</a></td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>

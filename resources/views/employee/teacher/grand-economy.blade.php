@@ -63,7 +63,7 @@
                                             <td>{{ $item->grand_economy->title }}</td>
                                             <td>{{ $item->grand_economy->order_number }}</td>
                                             <td>{{ $item->grand_economy->amount }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td><a href="{{ asset('storage/'.$item->path) }}" target="_blank">{{ $item->name }}</a></td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>
