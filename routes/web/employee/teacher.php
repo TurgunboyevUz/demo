@@ -20,6 +20,7 @@ Route::get('achievement', [PageController::class, 'achievement']);
 Route::get('chat', [PageController::class, 'chat']);
 Route::get('student-list', [PageController::class, 'student_list']);
 Route::get('create-task', [PageController::class, 'create_task']);
+Route::get('edit-profile', [PageController::class, 'edit_profile']);
 
 Route::post('article/review', [ReviewController::class, 'article']);
 Route::post('scholarship/review', [ReviewController::class, 'scholarship']);

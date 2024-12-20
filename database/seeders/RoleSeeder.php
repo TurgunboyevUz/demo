@@ -12,12 +12,15 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['student', 'teacher', 'dean', 'inspeksiya', 'admin', 'super_admin'];
+        $roles = [
+            'student' => 'Talaba',
+            'teacher' => 'O\'qituvchi',
+            'dean' => 'Dekan',
+            'inspeksiya' => 'Ta\'lim sifat inspeksiyasi'
+        ];
 
-        foreach ($roles as $role) {
-            Role::create([
-                'name' => $role,
-            ]);
+        foreach ($roles as $name => $label) {
+            Role::create(['name' => $name, 'label' => $label]);
         }
     }
 }

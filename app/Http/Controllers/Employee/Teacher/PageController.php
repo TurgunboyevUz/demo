@@ -126,4 +126,11 @@ class PageController extends Controller
 
         return view('employee.teacher.create-task', compact('user', 'students'));
     }
+
+    public function edit_profile(Request $request)
+    {
+        $user = $request->user();
+
+        return view('employee.inspeksiya.edit-profile', compact('user'));
+    }
 }

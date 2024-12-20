@@ -18,6 +18,7 @@ Route::get('distinguished-scholarship', [PageController::class, 'distinguished_s
 Route::get('achievement', [PageController::class, 'achievement']);
 Route::get('chat', [PageController::class, 'chat']);
 Route::get('student-list', [PageController::class, 'student_list']);
+Route::get('edit-profile', [PageController::class, 'edit_profile']);
 
 Route::post('article/approve', [ApproveController::class, 'article']);
 Route::post('scholarship/approve', [ApproveController::class, 'scholarship']);
