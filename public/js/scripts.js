@@ -104,4 +104,18 @@ $(function() {
             });
         });
     });
+
+    $(document).ready(function() {
+        $(".btn-primary").on("click", function() {
+            const reason = $(this).data("reason");
+
+            $("#reject-reason").text(reason || "Rad etilish sababi mavjud emas");
+
+            $("#rejectModal").modal("show");
+        });
+
+        $(".btn-close, .btn-secondary").on("click", function() {
+            $("#rejectModal").modal("hide");
+        });
+    });
 });

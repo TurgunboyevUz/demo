@@ -71,15 +71,20 @@
                                             <td>
                                                 <span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span>
                                             </td>
-                                            
+
                                             @if($item->status == 'pending')
                                             <td>
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->startup->id }}" data-url="{{ route('employee.teacher.startup.review') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-check"></i></button>
                                                 <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->startup->id }}" data-url="{{ route('employee.teacher.startup.reject') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-ban"></i></button>
                                             </td>
-                                            
+                                            @elseif($item->file->status == 'rejected')
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
+                                                    <i class="fa fa-eye fa-sm"></i>
+                                                </button>
+                                            </td>
                                             @else
-                                                <td>Bu fayl uchun harakat imkonsiz</td>
+                                            <td>Bu fayl uchun harakat imkonsiz</td>
                                             @endif
                                         </tr>
                                         @endforeach
