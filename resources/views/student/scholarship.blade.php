@@ -111,7 +111,7 @@
                                     <td>{{ $item->given_date }}</td>
                                     <td>{{ $item->certificate_number }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->file->name }}</td>
+                                    <td><a href="{{ asset('storage/'.$item->file->path) }}" target="_blank">{{ $item->file->name }}</a></td>
                                     <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                     
                                     @if($item->file->status == 'pending')

@@ -121,7 +121,7 @@
                                 <td>{{ $item->type() }}</td>
                                 <td>{{ $item->criteria->name }}</td>
                                 <td>{{ $item->given_date }}</td>
-                                <td>{{ $item->file->name }}</td>
+                                <td><a href="{{ asset('storage/'.$item->file->path) }}" target="_blank">{{ $item->file->name }}</a></td>
                                 <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
 
                                 @if($item->file->status == 'pending')

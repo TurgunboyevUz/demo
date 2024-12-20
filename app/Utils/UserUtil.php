@@ -51,9 +51,10 @@ class UserUtil
         $nation = Nation::firstOrCreate(['name' => $nation]);
 
         if ($response['type'] == 'student') {
-            $faculty = Faculty::firstOrCreate(['name' => $response['data']['faculty']['name']]);
-            $specialty = Specialty::firstOrCreate(['name' => $response['data']['specialty']['name']]);
+            $faculty = Faculty::firstOrCreate(['code' => $response['data']['faculty']['code']], ['name' => $response['data']['faculty']['name']]);
+            $specialty = Specialty::firstOrCreate(['code' => $response['data']['specialty']['code']],['name' => $response['data']['specialty']['name']]);
             $group = Group::firstOrCreate(['name' => $response['data']['group']['name']]);
+
             $level = str_replace('-kurs', '', $response['data']['level']['name']);
             $address = $response['data']['province']['name'].' '.$response['data']['district']['name'].' '.$response['data']['address'];
 

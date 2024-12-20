@@ -152,7 +152,7 @@
                         <td>{{ $item->team_members() }}</td>
                         <td>{{ $item->location() }}</td>
                         <td>{{ $item->document_type() }}</td>
-                        <td>{{ $item->file->name }}</td>
+                        <td><a href="{{ asset('storage/'.$item->file->path) }}" target="_blank">{{ $item->file->name }}</a></td>
                         <td>
                             <span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span>
                         </td>
