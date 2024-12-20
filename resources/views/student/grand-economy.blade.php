@@ -120,6 +120,12 @@
                                         <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
                                     </form>
                                 </td>
+                                @elseif($item->file->status == 'rejected')
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
+                                            <i class="fa fa-eye fa-sm"></i>
+                                        </button>
+                                    </td>
                                 @else
                                     <td>
                                         Bu fayl uchun harakat imkonsiz
