@@ -71,9 +71,9 @@
                                                 <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->lang_certificate->id }}" data-url="{{ route('employee.inspeksiya.lang-certificate.approve') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-check"></i></button>
                                                 <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->lang_certificate->id }}" data-url="{{ route('employee.inspeksiya.lang-certificate.reject') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-ban"></i></button>
                                             </td>
-                                            @elseif($item->file->status == 'rejected')
+                                            @elseif($item->status == 'rejected')
                                             <td>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->reject_reason }}">
                                                     <i class="fa fa-eye fa-sm"></i>
                                                 </button>
                                             </td>
