@@ -2,71 +2,89 @@
 
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Topshiriq Yaratish</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item active">Topshiriq yaratish</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+       <div class="container-fluid">
+          <div class="row mb-2">
+             <div class="col-sm-6">
+                <h1 class="m-0">Talabalarni biriktirish</h1>
+             </div>
+          </div>
+       </div>
     </div>
+<!-- Main content -->
+<div class="content">
+ <div class="container-fluid">
+    <div class="row">
+       <!-- Fakultet va Kafedra tanlash -->
+       <div class="col-md-12 mb-4">
+             <div class="row">
+                <div class="col-md-6">
+                   <label for="facultySelect">Fakultetni tanlang</label>
+                   <select class="form-control" id="facultySelect">
+                         <option value="">Fakultetni tanlang</option>
+                         <option value="informatika">Informatika</option>
+                         <option value="iqtisodiyot">Iqtisodiyot</option>
+                         <!-- Qo'shimcha fakultetlar -->
+                   </select>
+                </div>
+                <div class="col-md-6">
+                   <label for="departmentSelect">Kafedrani tanlang</label>
+                   <select class="form-control" id="departmentSelect">
+                         <option value="">Kafedrani tanlang</option>
+                         <option value="dasturiy_ta'minot">Dasturiy ta'minot</option>
+                         <option value="moliya">Moliya</option>
+                         <!-- Qo'shimcha kafedralar -->
+                   </select>
+                </div>
+             </div>
+       </div>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Yangi Topshiriq Yaratish</h3>
-                </div>
-                <div class="card-body">
-                    <form id="assignmentForm" action="{{ route('employee.teacher.create-task') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="studentSelect">Talabani tanlang:</label>
-                            <select name="student_id" id="studentSelect" class="form-control" required>
-                                <option value="" disabled selected>Talabani tanlang</option>
-                                @foreach($students as $student)
-                                    <option value="{{ $student->id }}">{{ $student->user->fio() }} ({{ $student->level }}-kurs {{ $student->specialty->name }})</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('student_id'))
-                                <span class="text-danger">{{ $errors->first('student_id') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="assignmentTitle">Topshiriq Nomi:</label>
-                            <input name="title" type="text" id="assignmentTitle" class="form-control" placeholder="Topshiriq nomini kiriting" required>
-                            @if($errors->has('title'))
-                                <span class="text-danger">{{ $errors->first('title') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="assignmentDescription">Topshiriq Ta'rifi:</label>
-                            <textarea name="description" id="assignmentDescription" class="form-control" rows="4" placeholder="Topshiriq ta'rifini kiriting" required></textarea>
-                            @if($errors->has('description'))
-                                <span class="text-danger">{{ $errors->first('description') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="assignmentFile">Fayl yuklash:</label>
-                            <input name="file" type="file" id="assignmentFile" class="form-control-file" required>
-                            @if($errors->has('file'))
-                                <span class="text-danger">{{ $errors->first('file') }}</span>
-                            @endif
-                        </div>
-                        <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> Yaratish</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+       <!-- Biriktirilgan talabalar jadvali -->
+       <div class="col-md-12 mb-4">
+             <h4>Biriktirilgan talabalar jadvali</h4>
+             <table class="table table-responsive table-bordered" id="assignedTable">
+                <thead>
+                   <tr>
+                         <th>Professorlar ro'yxati</th>
+                         <th>Talabalar ro'yxati</th>
+                   </tr>
+                </thead>
+                <tbody id="assignedTableBody">
+                   <!-- Dinamik jadval -->
+                </tbody>
+             </table>
+             <center>
+                <button class="btn btn-success btn-sm mb-2" id="saveChanges">
+                   <i class="fas fa-check mr-2"></i>O'zgarishlarni saqlash
+                </button>
+             </center>
+       </div>
+
+       <!-- Professorlar va Talabalar jadvali -->
+       <table class="table table-bordered" id="ListofProfessorsandStudents">
+             <thead>
+                <tr>
+                   <th>Professorlar</th>
+                   <th>Talabalar</th>
+                </tr>
+             </thead>
+             <tbody>
+                <tr>
+                   <td>
+                         <ul class="list-group" id="professorList">
+                            <!-- Professorlar dinamik ro'yxati -->
+                         </ul>
+                   </td>
+                   <td>
+                         <ul class="list-group" id="studentList">
+                            <!-- Talabalar dinamik ro'yxati -->
+                         </ul>
+                   </td>
+                </tr>
+             </tbody>
+       </table>
+    </div>
+ </div>
+</div>
 </div>
 @endsection
