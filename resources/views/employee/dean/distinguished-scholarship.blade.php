@@ -29,14 +29,21 @@
                                             <th>Fakulteti</th>
                                             <th>Yo'nalishi</th>
                                             <th>Ariza topshirish holati</th>
-                                            <th>Umumiy ball</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $i = 1; @endphp
 
                                         @foreach($data as $item)
-                                        
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $item->user->fio() }}</td>
+                                            <td>{{ $item->user->student->level }}-kurs</td>
+                                            <td>{{ $item->user->student->employee->user->fio() }}</td>
+                                            <td>{{ $item->user->student->faculty->name }}</td>
+                                            <td>{{ $item->user->student->specialty->name }}</td>
+                                            <td>{{ $item->status }}</td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

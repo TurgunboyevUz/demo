@@ -31,7 +31,15 @@ class PageController extends Controller
     public function distinguished_scholarship(Request $request)
     {
         $user = $request->user();
-        $data = File::selectRaw('ANY_VALUE(id) as id, fileable_id, ANY_VALUE(name) as name, ANY_VALUE(path) as path, ANY_VALUE(type) as type, ANY_VALUE(status) as status, MAX(id) as max_id')
+        $data = File::selectRaw('
+        ANY_VALUE(id) as id,
+        fileable_id,
+        ANY_VALUE(name) as name,
+        ANY_VALUE(path) as path,
+        ANY_VALUE(type) as type,
+        ANY_VALUE(status) as status,
+        MAX(id) as max_id,
+        ANY_VALUE(uploaded_by) as uploaded_by')
             ->where('fileable_type', DistinguishedScholarship::class)
             ->groupBy('fileable_id')
             ->get();
