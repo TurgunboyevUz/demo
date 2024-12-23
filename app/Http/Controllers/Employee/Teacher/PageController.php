@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auth\Faculty;
 use App\Models\File\Achievement;
 use App\Models\File\Article;
 use App\Models\File\File;
@@ -130,7 +131,8 @@ class PageController extends Controller
     public function edit_profile(Request $request)
     {
         $user = $request->user();
+        $faculties = Faculty::all();
 
-        return view('employee.teacher.edit-profile', compact('user'));
+        return view('employee.teacher.edit-profile', compact('user', 'faculties'));
     }
 }
