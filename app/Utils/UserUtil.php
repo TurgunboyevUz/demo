@@ -52,7 +52,7 @@ class UserUtil
 
         if ($response['type'] == 'student') {
             $faculty = Faculty::firstOrCreate(['code' => $response['data']['faculty']['code']], ['name' => $response['data']['faculty']['name']]);
-            $specialty = Specialty::firstOrCreate(['code' => $response['data']['specialty']['code']],['name' => $response['data']['specialty']['name']]);
+            $specialty = Specialty::firstOrCreate(['code' => $response['data']['specialty']['code']], ['name' => $response['data']['specialty']['name']]);
             $group = Group::firstOrCreate(['name' => $response['data']['group']['name']]);
 
             $level = str_replace('-kurs', '', $response['data']['level']['name']);
