@@ -8,7 +8,7 @@ Artisan::command('tree', function () {
     ];
 
     $path = base_path();
-    $tree = exec("tree --prune -I '".implode('|', $exclude)."' $path", $output);
+    $tree = exec("tree --prune -I '" . implode('|', $exclude) . "' $path", $output);
 
     foreach ($output as $line) {
         $this->comment($line);

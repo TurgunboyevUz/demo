@@ -24,7 +24,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use Fileable, HasFactory, HasRoles, Notifiable, Scorable;
-
+    
     protected $guarded = [];
 
     public function full_name()
