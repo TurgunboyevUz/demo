@@ -75,6 +75,20 @@
             </a>
         </li>
 
+        <!-- Role Switcher -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+            <font size='3px'>
+            <i class="fas fa-exchange-alt"></i>
+            </font>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                @foreach ($user->roles as $role)
+                    <a href="{{ route("employee.{$role->name}.dashboard") }}" class="dropdown-item"> {{ $role->label }}</a>
+                @endforeach
+            </div>
+         </li>
+
         <!-- Profile Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">

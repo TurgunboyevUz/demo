@@ -90,6 +90,7 @@ class UserUtil
 
                     $department_id = Department::firstOrCreate([
                         'name' => $role['department']['department']['name'] ?? '',
+                        'code' => $role['department']['department']['code'] ?? '',
                     ]);
 
                     $employee->departments()->attach($department_id, [

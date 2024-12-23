@@ -41,3 +41,4 @@ Route::post('lang-certificate/reject', [RejectController::class, 'lang_certifica
 Route::post('achievement/reject', [RejectController::class, 'achievement']);
 
 Route::post('create-task', [FileController::class, 'create_task']);
+Route::post('edit-profile', [FileController::class, 'edit_profile']);

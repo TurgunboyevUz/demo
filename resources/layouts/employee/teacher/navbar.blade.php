@@ -75,6 +75,20 @@
             </a>
         </li>
 
+        <!-- Role Switcher -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+            <font size='3px'>
+            <i class="fas fa-exchange-alt"></i>
+            </font>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                @foreach ($user->roles as $role)
+                    <a href="{{ route("employee.{$role->name}.dashboard") }}" class="dropdown-item"> {{ $role->label }}</a>
+                @endforeach
+            </div>
+         </li>
+
         <!-- Profile Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -83,7 +97,7 @@
                 <span class="d-inline d-md-none">{{ $user->short_name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="teacher-profile-edit.html" class="dropdown-item">
+                <a href="{{ route('employee.teacher.edit-profile') }}" class="dropdown-item">
                     <i class="nav-icon fas fa-pencil"></i> Profilni tahrirlash
                 </a>
                 <a href="{{ route('logout') }}" class="dropdown-item">

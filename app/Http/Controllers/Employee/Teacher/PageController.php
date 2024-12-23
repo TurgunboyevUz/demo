@@ -131,6 +131,6 @@ class PageController extends Controller
     {
         $user = $request->user();
 
-        return view('employee.inspeksiya.edit-profile', compact('user'));
+        return view('employee.teacher.edit-profile', compact('user'));
     }
 }
