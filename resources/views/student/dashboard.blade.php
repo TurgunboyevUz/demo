@@ -26,28 +26,6 @@
                             <h5 class="widget-user-desc">Talaba</h5>
                         </div>
                         <div class="card-body">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-paper-plane"></i> Xalqaro Maqolalar <span class="float-right badge bg-primary">12</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-file-alt"></i> Mahalliy Maqolalar <span class="float-right badge bg-info">5</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-book"></i> Tezislar <span class="float-right badge bg-success">3</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-star"></i> Tez Xalqaro Maqolalar <span class="float-right badge bg-warning">1</span>
-                                    </a>
-                                </li>
-                            </ul>
                             <hr>
                             <!-- Shaxsiy Ma'lumotlar -->
                             <h4 class="mt-4">Shaxsiy Ma'lumotlar</h4>
@@ -69,7 +47,7 @@
                                         <td>
                                             <i class="fas fa-flag"></i> Millati
                                         </td>
-                                        <td>{{ $user->student->nation->name ?? "O'zbek" }}</td>
+                                        <td>{{ $user->nation->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>

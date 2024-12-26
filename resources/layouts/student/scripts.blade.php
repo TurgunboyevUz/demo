@@ -24,7 +24,7 @@
     });
 
     $(document).ready(function() {
-        $(".btn-primary").on("click", function() {
+        $("#reject-eye-button").on("click", function() {
             const reason = $(this).data("reason");
 
             $("#reject-reason").text(reason || "Rad etilish sababi mavjud emas");

@@ -15,6 +15,7 @@ class StoreArticleRequest extends FormRequest
     {
         return [
             'criteria_id' => 'required|exists:criterias,id',
+            'education_year' => 'required|exists:education_years,id',
             'title' => 'required|string|max:255',
             'keywords' => 'required|string',
             'lang' => 'required|in:uz,ru,en',
@@ -25,7 +26,6 @@ class StoreArticleRequest extends FormRequest
             'publish_params' => 'required|string',
             'international_databases' => 'required|string',
             'published_year' => 'required|integer|min:1900|max:2100',
-            'education_year' => 'required|integer|min:1900|max:2100',
             'file' => 'required|mimes:pdf',
         ];
     }

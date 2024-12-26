@@ -156,7 +156,12 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="oquv_yili"><i class="fas fa-graduation-cap"></i> O'quv yili</label>
-                                <input type="number" class="form-control" id="oquv_yili" name="education_year" min="2020" max="2100">
+                                <select class="form-control" id="oquv_yili" name="education_year">
+                                    <option value="" disabled selected>Tanlang</option>
+                                    @foreach ($education_year as $year)
+                                        <option value="{{ $year->id }}">{{ $year->name }}</option>                                        
+                                    @endforeach
+                                </select>
                                 @if($errors->has('education_year'))
                                     <span class="text-danger">{{ $errors->first('education_year') }}</span>
                                 @endif
@@ -219,7 +224,7 @@
                                 <td>{{ $item->international_databases }}</td>
                                 <td>{{ $item->published_year }}</td>
                                 <td>{{ $item->publish_params }}</td>
-                                <td>{{ $item->education_year }}</td>
+                                <td>{{ $item->education_year->name }}</td>
                                 <td><a href="{{ asset('storage/'.$item->file->path) }}" target="_blank">{{ $item->file->name }}</a></td>
                                 <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                     
@@ -234,7 +239,7 @@
                                     </td>
                                 @elseif($item->file->status == 'rejected')
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
+                                        <button id="reject-eye-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
                                             <i class="fa fa-eye fa-sm"></i>
                                         </button>
                                     </td>

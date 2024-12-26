@@ -59,7 +59,12 @@
                     <!-- O'quv yili -->
                     <div class="col-12 col-md-6 mb-3">
                         <label for="academicYear"><i class="fas fa-calendar"></i> O'quv yili</label>
-                        <input type="text" id="academicYear" name="education_year" class="form-control" placeholder="2023-2024" required>
+                        <select class="form-control" id="academicYear" name="education_year">
+                            <option value="" disabled selected>Tanlang</option>
+                            @foreach ($education_year as $year)
+                                <option value="{{ $year->id }}">{{ $year->name }}</option>                                        
+                            @endforeach
+                        </select>
                     </div>
                     <!-- Fayl Yuklash -->
                     <div class="col-12 col-md-6 mb-3">
@@ -106,7 +111,7 @@
                         <td>{{ $item->authors_count }}</td>
                         <td>{{ $item->authors }}</td>
                         <td>{{ $item->publish_params }}</td>
-                        <td>{{ $item->education_year }}</td>
+                        <td>{{ $item->education_year->name }}</td>
                         <td><a href="{{ asset('storage/'.$item->file->path) }}" target="_blank">{{ $item->file->name }}</a></td>
                         <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                     
@@ -121,7 +126,7 @@
                             </td>
                         @elseif($item->file->status == 'rejected')
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
+                                <button id="reject-eye-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
                                     <i class="fa fa-eye fa-sm"></i>
                                 </button>
                             </td>

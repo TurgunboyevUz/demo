@@ -16,7 +16,7 @@ $(function() {
             responsive: true,
             autoWidth: false,
             language: {
-                url: "{{ asset('dist/js/uzbek.json') }}"
+                url: uzLocaleFile
             }
         });
 
@@ -56,8 +56,6 @@ $(function() {
                     id: itemId
                 },
                 success: function(response) {
-                    alert(response.message);
-
                     window.location.reload();
                 },
                 error: function(xhr) {
@@ -93,7 +91,6 @@ $(function() {
                     _token: csrfToken
                 },
                 success: function(response) {
-                    alert(response.message);
                     $("#cancelModal").modal("hide");
 
                     window.location.reload();
@@ -106,7 +103,7 @@ $(function() {
     });
 
     $(document).ready(function() {
-        $(".btn-primary").on("click", function() {
+        $("#reject-eye-button").on("click", function() {
             const reason = $(this).data("reason");
 
             $("#reject-reason").text(reason || "Rad etilish sababi mavjud emas");

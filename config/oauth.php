@@ -19,5 +19,5 @@ return [
         'urlResourceOwnerDetails' => env('OAUTH_STUDENT_URL').'oauth/api/user',
     ],
 
-    'token' => 'UHi4-DZ7gIZb3tCfitdWrt4rzqQmNrlU',
+    'token' => env('BACKEND_API_TOKEN'),
 ];

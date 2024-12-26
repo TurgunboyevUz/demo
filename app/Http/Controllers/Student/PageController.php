@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Criteria\Category;
+use App\Models\Criteria\EducationYear;
 use Illuminate\Http\Request;
 
 class PageController
@@ -17,7 +18,7 @@ class PageController
     public function assignments(Request $request)
     {
         $user = $request->user();
-        $data = $user->tasks;
+        $data = $user->student->tasks;
 
         return view('student.assignments', compact('user', 'data'));
     }
@@ -26,9 +27,10 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'article')->first()->criterias;
+        $education_year = EducationYear::where('status', true)->get();
         $data = $user->articles;
 
-        return view('student.article', compact('user', 'criterias', 'data'));
+        return view('student.article', compact('user', 'criterias', 'education_year', 'data'));
     }
 
     public function scholarship(Request $request)
@@ -44,9 +46,10 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'invention')->first()->criterias;
+        $education_year = EducationYear::all();
         $data = $user->inventions;
 
-        return view('student.invention', compact('user', 'criterias', 'data'));
+        return view('student.invention', compact('user', 'criterias', 'education_year', 'data'));
     }
 
     public function startup(Request $request)

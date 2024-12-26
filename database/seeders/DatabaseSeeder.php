@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
             CriteriaSeeder::class,
             FacultySeeder::class,
             DepartmentSeeder::class,
-            SpecialtySeeder::class,
+            DirectionSeeder::class,
+            GenderSeeder::class,
+            EducationYearSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

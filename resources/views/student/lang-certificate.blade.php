@@ -135,7 +135,7 @@
                                 </td>
                                 @elseif($item->file->status == 'rejected')
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
+                                        <button id="reject-eye-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
                                             <i class="fa fa-eye fa-sm"></i>
                                         </button>
                                     </td>

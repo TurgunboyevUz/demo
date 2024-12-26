@@ -12,16 +12,15 @@ Route::get('/hemis', function () {
     $user = User::find(1);
     $hemis = new Hemis(config('oauth.token'));
 
-    dd($hemis->employee_list([
-        'type' => 'all',
-        'passport_pin' => $user->passport_pin,
-        'passport_number' => $user->passport_number,
-    ]));
+    dd($hemis->employee(
+        $user->hemis_id,
+        $user->passport_pin,
+        $user->passport_number,
+    ));
 });
 
-require_once __DIR__.'/web/student.php';
-require_once __DIR__.'/web/employee.php';
-require_once __DIR__.'/web/admin.php';
+require_once __DIR__.'/student/student.php';
+require_once __DIR__.'/employee/employee.php';
 
-require_once __DIR__.'/web/basic/auth.php';
-require_once __DIR__.'/web/basic/rename.php';
+require_once __DIR__.'/basic/auth.php';
+require_once __DIR__.'/basic/rename.php';

@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Http\Requests\Employee\Teacher\StoreTaskRequest;
 use App\Http\Requests\Student\StoreAchievementRequest;
 use App\Http\Requests\Student\StoreArticleRequest;
 use App\Http\Requests\Student\StoreDistinguishedScholarshipRequest;
@@ -12,6 +11,7 @@ use App\Http\Requests\Student\StoreLangCertificateRequest;
 use App\Http\Requests\Student\StoreOlympicRequest;
 use App\Http\Requests\Student\StoreScholarshipRequest;
 use App\Http\Requests\Student\StoreStartupRequest;
+use App\Http\Requests\Teacher\StoreTaskRequest;
 use App\Models\File\Achievement;
 use App\Models\File\Article;
 use App\Models\File\DistinguishedScholarship;
@@ -47,6 +47,7 @@ class File
         $article = new Article;
         $article->user_id = $this->user->id;
         $article->criteria_id = $data['criteria_id'];
+        $article->education_year_id = $data['education_year'];
         $article->title = $data['title'];
         $article->keywords = $data['keywords'];
         $article->lang = $data['lang'];
@@ -57,7 +58,6 @@ class File
         $article->publish_params = $data['publish_params'];
         $article->international_databases = $data['international_databases'];
         $article->published_year = $data['published_year'];
-        $article->education_year = $data['education_year'];
         $article->save();
 
         $article->upload_file($request, 'articles');
@@ -90,12 +90,12 @@ class File
 
         $invention->user_id = $this->user->id;
         $invention->criteria_id = $data['criteria_id'];
+        $invention->education_year_id = $data['education_year'];
         $invention->title = $data['title'];
         $invention->property_number = $data['property_number'];
         $invention->authors_count = $data['authors_count'];
         $invention->authors = $data['authors'];
         $invention->publish_params = $data['publish_params'];
-        $invention->education_year = $data['education_year'];
         $invention->save();
 
         $invention->upload_file($request, 'inventions');

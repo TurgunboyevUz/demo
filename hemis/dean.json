@@ -1,0 +1,153 @@
+{
+    "success": true,
+    "error": null,
+    "data": {
+        "items": [
+            {
+                "id": 96,
+                "meta_id": 756,
+                "full_name": "MUXTAROV MAXMUDJON MARIFOVICH",
+                "short_name": "MUXTAROV M. M.",
+                "first_name": "MAXMUDJON",
+                "second_name": "MUXTAROV",
+                "third_name": "MARIFOVICH",
+                "employee_id_number": "3030211001",
+                "gender": {
+                    "code": "11",
+                    "name": "Erkak"
+                },
+                "birth_date": 298598400,
+                "image": "https://hemis.andmiedu.uz/static/crop/3/1/320__90_315699398.jpg",
+                "year_of_enter": 2023,
+                "specialty": "Tarmoqlar iqtisodiyoti",
+                "academicDegree": {
+                    "code": "10",
+                    "name": "Darajasiz"
+                },
+                "academicRank": {
+                    "code": "10",
+                    "name": "Unvonsiz"
+                },
+                "tutorGroups": [],
+                "department": {
+                    "id": 44,
+                    "name": "Iqtisodiyot kafedrasi",
+                    "code": "303-109-13",
+                    "structureType": {
+                        "code": "12",
+                        "name": "Kafedra"
+                    },
+                    "localityType": {
+                        "code": "11",
+                        "name": "Mahalliy"
+                    },
+                    "parent": 43,
+                    "active": true
+                },
+                "employmentForm": {
+                    "code": "15",
+                    "name": "O‘rindoshlik (ichki-asosiy)"
+                },
+                "employmentStaff": {
+                    "code": "14",
+                    "name": "0,25 stavka"
+                },
+                "staffPosition": {
+                    "code": "14",
+                    "name": "Dotsent"
+                },
+                "employeeStatus": {
+                    "code": "11",
+                    "name": "Ishlamoqda"
+                },
+                "employeeType": {
+                    "code": "12",
+                    "name": "Professor-o‘qituvchi xodim"
+                },
+                "contract_number": "643",
+                "decree_number": "943-k",
+                "contract_date": 1725840000,
+                "decree_date": 1725840000,
+                "created_at": 1663072211,
+                "updated_at": 1726636756,
+                "hash": "cc5b82e03b4cb2e6cb1cc5ea34646b572cf0ee12e84fc0ea9abd36e4a43ce422"
+            },
+            {
+                "id": 96,
+                "meta_id": 517,
+                "full_name": "MUXTAROV MAXMUDJON MARIFOVICH",
+                "short_name": "MUXTAROV M. M.",
+                "first_name": "MAXMUDJON",
+                "second_name": "MUXTAROV",
+                "third_name": "MARIFOVICH",
+                "employee_id_number": "3030211001",
+                "gender": {
+                    "code": "11",
+                    "name": "Erkak"
+                },
+                "birth_date": 298598400,
+                "image": "https://hemis.andmiedu.uz/static/crop/3/1/320__90_315699398.jpg",
+                "year_of_enter": 2023,
+                "specialty": "Tarmoqlar iqtisodiyoti",
+                "academicDegree": {
+                    "code": "10",
+                    "name": "Darajasiz"
+                },
+                "academicRank": {
+                    "code": "10",
+                    "name": "Unvonsiz"
+                },
+                "tutorGroups": [],
+                "department": {
+                    "id": 5,
+                    "name": "Intellektual boshqaruv va kompyuter tizimlari fakulteti",
+                    "code": "303-105",
+                    "structureType": {
+                        "code": "11",
+                        "name": "Fakultet"
+                    },
+                    "localityType": {
+                        "code": "11",
+                        "name": "Mahalliy"
+                    },
+                    "parent": null,
+                    "active": true
+                },
+                "employmentForm": {
+                    "code": "11",
+                    "name": "Asosiy ish joy"
+                },
+                "employmentStaff": {
+                    "code": "11",
+                    "name": "1,00 stavka"
+                },
+                "staffPosition": {
+                    "code": "25",
+                    "name": "Dekan"
+                },
+                "employeeStatus": {
+                    "code": "11",
+                    "name": "Ishlamoqda"
+                },
+                "employeeType": {
+                    "code": "10",
+                    "name": "Boshqa"
+                },
+                "contract_number": "468-K",
+                "decree_number": "468-K",
+                "contract_date": 1689984000,
+                "decree_date": 1689984000,
+                "created_at": 1632313761,
+                "updated_at": 1692936515,
+                "hash": "cc5b82e03b4cb2e6cb1cc5ea34646b572cf0ee12e84fc0ea9abd36e4a43ce422"
+            }
+        ],
+        "pagination": {
+            "totalCount": 2,
+            "pageSize": 20,
+            "pageCount": 1,
+            "page": 1
+        }
+    },
+    "code": 200
+}

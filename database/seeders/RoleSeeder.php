@@ -17,6 +17,7 @@ class RoleSeeder extends Seeder
             'teacher' => 'O\'qituvchi',
             'dean' => 'Dekan',
             'inspeksiya' => 'Ta\'lim sifat inspeksiyasi',
+            'talent' => 'Iqtidor bo\'limi',
         ];
 
         foreach ($roles as $name => $label) {

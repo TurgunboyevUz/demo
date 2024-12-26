@@ -374,6 +374,11 @@ body.dark-mode textarea:focus {
   width: 100%;
 }
 
+.scrollable-card-body {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
 table::-webkit-scrollbar {
   width: 10px;
 }

@@ -105,31 +105,31 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="attached-students-rating.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.rating.attached-students') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Biriktirilgan talabalar reytingi</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="department-rating.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.rating.department') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Kafedra bo'yicha reytingi</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="faculty-rating.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.rating.faculty') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Fakultet reytingi</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="institute-rating.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.rating.institute') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Institut reytingi</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="students-general-institute-rating.html" class="nav-link">
+                        <a href="{{ route('employee.teacher.rating.general-institute') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Talabalarni institut <br>bo'yicha umumiy reytingi</p>
                         </a>

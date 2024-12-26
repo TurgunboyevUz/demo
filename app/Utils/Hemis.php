@@ -68,17 +68,48 @@ class Hemis
         return Arr::get($json, $key, $default);
     }
 
-    public function login($login, $password)
+    public function employee($hemis_id, $passport_pin, $passport_number)
     {
-        $response = $this->post('auth/login', compact('login', 'password'));
+        $response = $this->get('data/employee-list', [
+            'type' => 'all',
+            'search' => $hemis_id,
+            'passport_pin' => $passport_pin,
+            'passport_number' => $passport_number,
+        ]);
 
-        return $response->json('data.token', 'default');
+        $arr = [];
+        $items = $response->json('data.items', []);
+
+        foreach ($items as $item) {
+            if ($item['employee_id_number'] != $hemis_id) {
+                continue;
+            }
+
+            $arr[] = [
+                'gender' => $item['gender'],
+                'specialty' => $item['specialty'],
+                'department' => $item['department'],
+                'staff_position' => $item['staffPosition'],
+                'employee_type' => $item['employeeType'],
+            ];
+        }
+
+        return $arr;
     }
 
-    public function employee_list($query = [])
+    public function student($hemis_id, $passport_pin)
     {
-        $response = $this->get('data/employee-list', $query);
+        $response = $this->get('data/student-info', [
+            'student_id_number' => $hemis_id,
+            'pnfl' => $passport_pin,
+        ]);
 
-        return $response->json('data');
+        $arr = [
+            [
+                'gender' => $response->json('data.gender'),
+            ],
+        ];
+
+        return $arr;
     }
 }

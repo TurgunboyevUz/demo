@@ -1,7 +1,9 @@
 <?php
 
 return [
-
+    'aliases' => [
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Name

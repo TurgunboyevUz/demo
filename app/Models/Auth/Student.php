@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Models\File\Task;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,9 +27,9 @@ class Student extends Model
         return $this->belongsTo(Faculty::class);
     }
 
-    public function specialty()
+    public function direction()
     {
-        return $this->belongsTo(Specialty::class);
+        return $this->belongsTo(Direction::class);
     }
 
     public function group()
@@ -39,6 +40,11 @@ class Student extends Model
     public function nation()
     {
         return $this->belongsTo(Nation::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 
     public function articles()

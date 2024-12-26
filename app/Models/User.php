@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Models\Auth\Employee;
+use App\Models\Auth\Gender;
+use App\Models\Auth\Nation;
 use App\Models\Auth\Student;
 use App\Models\File\Achievement;
 use App\Models\File\Article;
 use App\Models\File\DistinguishedScholarship;
+use App\Models\File\File;
 use App\Models\File\GrandEconomy;
 use App\Models\File\Invention;
 use App\Models\File\LangCertificate;
@@ -24,7 +27,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use Fileable, HasFactory, HasRoles, Notifiable, Scorable;
-    
+
     protected $guarded = [];
 
     public function full_name()
@@ -37,6 +40,11 @@ class User extends Authenticatable
         return $this->surname.' '.$this->name.' '.$this->patronymic;
     }
 
+    public function short_fio()
+    {
+        return $this->surname.' '.$this->name;
+    }
+
     public function employee()
     {
         return $this->hasOne(Employee::class);
@@ -45,6 +53,16 @@ class User extends Authenticatable
     public function student()
     {
         return $this->hasOne(Student::class);
+    }
+
+    public function nation()
+    {
+        return $this->belongsTo(Nation::class);
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
     }
 
     public function articles()
@@ -95,5 +113,10 @@ class User extends Authenticatable
     public function tasks()
     {
         return $this->hasMany(Task::class, 'student_id', 'id');
+    }
+
+    public function getFiles()
+    {
+        return $this->hasMany(File::class, 'uploaded_by', 'id');
     }
 }

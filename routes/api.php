@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Dean\DeanController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::prefix('dean')->group(function () {
+    Route::get('/student-employee', [DeanController::class, 'student_employee']);
+    Route::post('/attach-student', [DeanController::class, 'attach_student']);
+});

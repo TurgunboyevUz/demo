@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Utils\UserUtil;
+use App\Service\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,14 +70,27 @@ class AuthController extends Controller
         $auth = oauth()->auth($request, $type);
 
         if (! $auth) {
+            toast('Hisobga kirishda xatolik!', 'error', 'top-end')->width('25rem')
+                ->background('#f5f6f7')
+                ->showCloseButton()
+                ->timerProgressBar();
+
             return redirect()->route($type.'.login');
         }
 
-        $util = UserUtil::create($auth['user']);
+        $util = new User;
+        $util = $util->user($auth['user']);
+
         $user = $util['user'];
         $redirect = $util['redirect'];
 
         Auth::login($user, true);
+
+        toast('Hisobga muvaffaqiyatli kirildi', 'success', 'top-end')
+            ->width('25rem')
+            ->background('#f5f6f7')
+            ->showCloseButton()
+            ->timerProgressBar();
 
         return redirect()->route($redirect);
     }

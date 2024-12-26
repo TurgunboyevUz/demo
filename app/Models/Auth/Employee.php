@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Enums\StructureType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Role;
@@ -13,20 +14,28 @@ class Employee extends Model
     public function departments()
     {
         return $this->belongsToMany(Department::class)
-            ->withPivot(['position', 'type', 'role_id'])
+            ->withPivot(['staff_position', 'employee_type', 'role_id', 'department_id'])
             ->withTimestamps();
     }
 
-    public function department($role_code)
+    public function department($role_code, $structure_code = StructureType::FACULTY)
     {
         $role = Role::where('name', $role_code)->first();
 
-        return $this->departments()->wherePivot('role_id', $role->id)->first();
+        return $this->departments()
+            ->wherePivot('role_id', $role->id)
+            ->where('structure_code', $structure_code)
+            ->first();
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function specialty()
+    {
+        return $this->belongsTo(Specialty::class);
     }
 
     public function nation()

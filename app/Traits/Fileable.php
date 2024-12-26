@@ -15,6 +15,16 @@ trait Fileable
         return $this->belongsTo(User::class, 'uploaded_by', 'id');
     }
 
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id', 'id');
+    }
+
+    public function inspector()
+    {
+        return $this->belongsTo(User::class, 'inspector_id', 'id');
+    }
+
     public function files()
     {
         return $this->morphMany(File::class, 'fileable');

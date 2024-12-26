@@ -15,7 +15,23 @@ class DepartmentSeeder extends Seeder
         $data = json_decode(file_get_contents(storage_path('hemis/department.json')), true);
 
         foreach ($data['data']['items'] as $item) {
-            Department::firstOrCreate(['code' => $item['code']], ['name' => $item['name']]);
+            Department::firstOrCreate(['code' => $item['code']], [
+                'name' => $item['name'],
+
+                'structure_type' => $item['structureType']['name'],
+                'structure_code' => $item['structureType']['code'],
+            ]);
+        }
+
+        $data = json_decode(file_get_contents(storage_path('hemis/faculty.json')), true);
+
+        foreach ($data['data']['items'] as $item) {
+            Department::firstOrCreate(['code' => $item['code']], [
+                'name' => $item['name'],
+
+                'structure_type' => $item['structureType']['name'],
+                'structure_code' => $item['structureType']['code'],
+            ]);
         }
     }
 }

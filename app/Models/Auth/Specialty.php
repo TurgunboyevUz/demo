@@ -8,8 +8,8 @@ class Specialty extends Model
 {
     protected $guarded = [];
 
-    public function students()
+    public function employee()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Employee::class);
     }
 }
