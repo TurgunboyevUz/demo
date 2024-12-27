@@ -8,7 +8,7 @@
 
     <div class="card mt-3">
         <div class="card-body">
-            <form id="profileForm" action="{{ route('employee.inspeksiya.edit-profile') }}" method="POST" enctype="multipart/form-data">
+            <form id="profileForm" action="{{ route('employee.talent.edit-profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-3">

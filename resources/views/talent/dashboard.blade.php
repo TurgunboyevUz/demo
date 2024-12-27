@@ -23,7 +23,7 @@
                                 <img class="img-circle elevation-2" src="{{ asset('storage/' . $user->picture_path) }}" alt="User Avatar">
                             </div>
                             <h3 class="widget-user-username">{{ $user->surname . ' ' . $user->name }}</h3>
-                            <h5 class="widget-user-desc">Ta'lim sifati inspeksiyasi</h5>
+                            <h5 class="widget-user-desc">Iqtidorli talabalar bilan ishlash bo'limi</h5>
                         </div>
                         <div class="card-body">
                             <!-- Progress Bar with Count -->

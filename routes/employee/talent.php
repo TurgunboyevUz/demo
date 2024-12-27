@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Talent\ApproveController;
-use App\Http\Controllers\Talent\InspectorController;
 use App\Http\Controllers\Talent\PageController;
 use App\Http\Controllers\Talent\RatingController;
 use App\Http\Controllers\Talent\RejectController;

@@ -2,19 +2,76 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Auth\Student;
 use App\Models\Criteria\Category;
 use App\Models\Criteria\EducationYear;
 use App\Models\File\DistinguishedScholarship;
 use App\Models\File\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PageController
 {
     public function dashboard(Request $request)
     {
-        return view('student.dashboard', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+
+        $group = $user->student->group->name;
+        $faculty = $user->student->faculty->name;
+
+        $group_id = $user->student->group_id;
+        $faculty_id = $user->student->faculty_id;
+
+        $groupmates = Student::with('user')->where('group_id', $group_id)->get();
+        $facultymates = Student::with('user')->where('faculty_id', $faculty_id)->get();
+
+        $groupmate_scores = $groupmates->map(function ($student) use ($group) {
+            $total_score = File::select(DB::raw('SUM(student_score) as total_score'))->first();
+
+            return [
+                'fio' => $student->user->short_fio(),
+                'group' => $group,
+                'total_score' => $total_score->total_score,
+                'picture_path' => asset('storage/' . $student->user->picture_path),
+            ];
+        });
+
+        $groupmate_top = $groupmate_scores->sortByDesc('total_score')->take(3)->toArray();
+
+        $facultymate_top = File::select('uploaded_by', DB::raw('SUM(student_score) as total_score'))
+            ->whereIn('uploaded_by', $facultymates->pluck('user_id'))
+            ->groupBy('uploaded_by')
+            ->orderBy('total_score', 'desc')
+            ->take(3)
+            ->get();
+
+        $facultymate_top = $facultymate_top->map(function ($file) use ($faculty) {
+            return [
+                'fio' => $file->user->short_fio(),
+                'level' => $file->user->student->level,
+                'direction' => $file->user->student->direction->name,
+                'total_score' => $file->total_score,
+                'picture_path' => asset('storage/' . $file->user->picture_path),
+            ];
+        });
+
+        $institute_top = File::select('uploaded_by', DB::raw('SUM(student_score) as total_score'))
+            ->groupBy('uploaded_by')
+            ->orderBy('total_score', 'desc')
+            ->take(3)
+            ->get();
+
+        $institute_top = $institute_top->map(function ($file) {
+            return [
+                'fio' => $file->user->short_fio(),
+                'faculty' => $file->user->student->faculty->name,
+                'direction' => $file->user->student->direction->name,
+                'total_score' => $file->total_score,
+                'picture_path' => asset('storage/' . $file->user->picture_path),
+            ];
+        });
+
+        return view('student.dashboard', compact('user', 'groupmate_scores', 'groupmate_top', 'facultymate_top', 'institute_top'));
     }
 
     public function assignments(Request $request)
@@ -98,7 +155,7 @@ class PageController
             ->whereIn('type', ['passport', 'rating_book', 'faculty_statement', 'department_recommendation'])
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
-        
+
         $data = $data->groupBy('fileable_id');
 
         return view('student.distinguished-scholarship', compact('user', 'data'));
