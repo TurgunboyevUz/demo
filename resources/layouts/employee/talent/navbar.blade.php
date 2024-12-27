@@ -97,7 +97,7 @@
                 <span class="d-inline d-md-none">{{ $user->short_name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="{{ route('employee.inspeksiya.edit-profile') }}" class="dropdown-item">
+                <a href="{{ route('employee.talent.edit-profile') }}" class="dropdown-item">
                     <i class="nav-icon fas fa-pencil"></i> Profilni tahrirlash
                 </a>
                 <a href="{{ route('logout') }}" class="dropdown-item">

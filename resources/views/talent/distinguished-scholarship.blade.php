@@ -1,7 +1,23 @@
-@extends('layouts::employee.dean.app')
+@extends('layouts::employee.talent.app')
 
 @section('content')
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Kelib tushgan arizalar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
+                        <li class="breadcrumb-item active">Kelib tushgan arizalar</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main content -->
     <section class="content">
@@ -10,15 +26,15 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Nomdor Stipendiyaga tushgan arizalar ro'yxati</h3>
+                            <h3 class="card-title">Barcha biriktirilgan talabalar Maqolalari</h3>
                             <div class="ml-auto d-flex">
-                                <button id="excelDownload" class="btn btn-success">
-                                    <i class="fas fa-file-excel"></i> Excel yuklash
+                                <button id="zipDownload" class="btn btn-success">
+                                    <i class="fas fa-file-archive"></i> ZIP Yuklash
                                 </button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive" style="max-width: 100%; overflow-x: auto;">
+                            <div class="table-responsive" style="max-width: 105%; overflow-x: auto;">
                                 <table class="table table-bordered table-hover table-responsive">
                                     <thead>
                                         <tr>
@@ -37,7 +53,7 @@
                                     <tbody>
                                         @php $id = 1; @endphp
 
-                                        @foreach($files as $item)
+                                        @foreach($files as $key => $item)
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
@@ -50,7 +66,12 @@
                                             <td><a href="{{ asset('storage/'.$item[3]->path) }}" target="_blank">{{ $item[3]->name }}</a></td>
 
                                             <td><span class="badge badge-{{ $item[0]->status()['color'] }}">{{ $item[0]->status()['name'] }}</span></td>
-                                            @if($item[0]->status == 'rejected')
+                                            @if($item[0]->status == 'pending')
+                                            <td>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $key }}" data-url="{{ route('employee.talent.distinguished-scholarship.approve') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $key }}" data-url="{{ route('employee.talent.distinguished-scholarship.reject') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-ban"></i></button>
+                                            </td>
+                                            @elseif($item[0]->status == 'rejected')
                                             <td>
                                                 <button id="reject-eye-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item[0]->reject_reason }}">
                                                     <i class="fa fa-eye fa-sm"></i>
@@ -72,4 +93,5 @@
         </div>
     </section>
 </div>
+
 @endsection

@@ -21,7 +21,7 @@
                             </label>
                             <input type="file" id="obektivka" class="form-control-file mt-2" name="reference" required>
                             @if($errors->has('reference'))
-                                <span class="text-danger">{{ $errors->first('reference') }}</span>
+                            <span class="text-danger">{{ $errors->first('reference') }}</span>
                             @endif
                         </div>
                         <!-- Pasport nusxasi -->
@@ -31,7 +31,7 @@
                             </label>
                             <input type="file" id="pasport" class="form-control-file mt-2" name="passport" required>
                             @if($errors->has('passport'))
-                                <span class="text-danger">{{ $errors->first('passport') }}</span>
+                            <span class="text-danger">{{ $errors->first('passport') }}</span>
                             @endif
                         </div>
                         <!-- Reyting daftarchasi ko'chirma yoki HEMIS transkripti -->
@@ -41,7 +41,7 @@
                             </label>
                             <input type="file" id="reyt" name="rating_book" class="form-control-file mt-2" required>
                             @if($errors->has('rating_book'))
-                                <span class="text-danger">{{ $errors->first('rating_book') }}</span>
+                            <span class="text-danger">{{ $errors->first('rating_book') }}</span>
                             @endif
                         </div>
                         <!-- Dekanning kafolat xati -->
@@ -51,7 +51,7 @@
                             </label>
                             <input type="file" id="kafolatXati" name="dean_guarantee" class="form-control-file mt-2" required>
                             @if($errors->has('dean_guarantee'))
-                                <span class="text-danger">{{ $errors->first('dean_guarantee') }}</span>
+                            <span class="text-danger">{{ $errors->first('dean_guarantee') }}</span>
                             @endif
                         </div>
                         <!-- Dekan tavsiyanomasi -->
@@ -61,7 +61,7 @@
                             </label>
                             <input type="file" id="dekanTavsiyanomasi" name="dean_recommendation" class="form-control-file mt-2" required>
                             @if($errors->has('dean_recommendation'))
-                                <span class="text-danger">{{ $errors->first('dean_recommendation') }}</span>
+                            <span class="text-danger">{{ $errors->first('dean_recommendation') }}</span>
                             @endif
                         </div>
                         <!-- Fakultet bayonnomasidan ko‘chirma -->
@@ -71,7 +71,7 @@
                             </label>
                             <input type="file" id="fakultetBayonnoma" name="faculty_statement" class="form-control-file mt-2" required>
                             @if($errors->has('faculty_statement'))
-                                <span class="text-danger">{{ $errors->first('faculty_statement') }}</span>
+                            <span class="text-danger">{{ $errors->first('faculty_statement') }}</span>
                             @endif
                         </div>
                         <!-- Kafedra mudiri tavsiyanomasi -->
@@ -81,7 +81,7 @@
                             </label>
                             <input type="file" id="kafedraTavsiyanomasi" name="department_recommendation" class="form-control-file mt-2" required>
                             @if($errors->has('department_recommendation'))
-                                <span class="text-danger">{{ $errors->first('department_recommendation') }}</span>
+                            <span class="text-danger">{{ $errors->first('department_recommendation') }}</span>
                             @endif
                         </div>
                         <!-- Ilmiy rahbarining xulosasi -->
@@ -91,7 +91,7 @@
                             </label>
                             <input type="file" id="ilmiyRahbarXulosa" name="supervisor_conclusion" class="form-control-file mt-2" required>
                             @if($errors->has('supervisor_conclusion'))
-                                <span class="text-danger">{{ $errors->first('supervisor_conclusion') }}</span>
+                            <span class="text-danger">{{ $errors->first('supervisor_conclusion') }}</span>
                             @endif
                         </div>
                         <!-- Ilmiy (ijodiy) ishlar ro‘yxati -->
@@ -101,7 +101,7 @@
                             </label>
                             <input type="file" id="ijodiyIshlar" name="list_of_works" class="form-control-file mt-2" required>
                             @if($errors->has('list_of_works'))
-                                <span class="text-danger">{{ $errors->first('list_of_works') }}</span>
+                            <span class="text-danger">{{ $errors->first('list_of_works') }}</span>
                             @endif
                         </div>
                         <!-- Diplom, sertifikat va faxriy yorliqlar -->
@@ -111,7 +111,7 @@
                             </label>
                             <input type="file" id="diplomlar" name="certificates" class="form-control-file mt-2" required>
                             @if($errors->has('certificates'))
-                                <span class="text-danger">{{ $errors->first('certificates') }}</span>
+                            <span class="text-danger">{{ $errors->first('certificates') }}</span>
                             @endif
                         </div>
                         <!-- Jo'natish tugmasi -->
@@ -143,37 +143,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($data as $item)
+                        @php $id = 1; @endphp
+
+                        @foreach($data as $key => $item)
                         <tr>
-                            <td>{{ $user->fio() }}</td>
-                            @foreach($item->files as $file)
-                                <td>{{ $file->name }}</td>
-                            @endforeach
-                            
-                            <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
-                                    
-                            @if($item->file->status == 'pending')
-                                <td>
-                                    <form action="{{ route('student.distinguished-scholarship.destroy') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" value="{{ $item->id }}">
-                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
-                                    </form>
-                                </td>
-                            @elseif($item->file->status == 'rejected')
-                                <td>
-                                    <button id="reject-eye-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item->file->reject_reason }}">
-                                        <i class="fa fa-eye fa-sm"></i>
-                                    </button>
-                                </td>
+                            <td>{{ $item[0]->user->fio() }}</td>
+                            <td><a href="{{ asset('storage/'.$item[0]->path) }}" target="_blank">{{ $item[0]->name }}</a></td>
+                            <td><a href="{{ asset('storage/'.$item[1]->path) }}" target="_blank">{{ $item[1]->name }}</a></td>
+                            <td><a href="{{ asset('storage/'.$item[2]->path) }}" target="_blank">{{ $item[2]->name }}</a></td>
+                            <td><a href="{{ asset('storage/'.$item[3]->path) }}" target="_blank">{{ $item[3]->name }}</a></td>
+
+                            <td><span class="badge badge-{{ $item[0]->status()['color'] }}">{{ $item[0]->status()['name'] }}</span></td>
+                            @if($item[0]->status == 'pending')
+                            <td>
+                                <form action="{{ route('student.distinguished-scholarship.destroy') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="id" value="{{ $key }}">
+                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> O'chirish</button>
+                                </form>
+                            </td>
+                            @elseif($item[0]->status == 'rejected')
+                            <td>
+                                <button id="reject-eye-button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-reason="{{ $item[0]->reject_reason }}">
+                                    <i class="fa fa-eye fa-sm"></i>
+                                </button>
+                            </td>
                             @else
-                                <td>
-                                    Bu fayl uchun harakat imkonsiz
-                                </td>
+                            <td>
+                                Bu fayl uchun harakat imkonsiz
+                            </td>
                             @endif
                         </tr>
-                    @endforeach
+                        @endforeach
                         <!-- Qo'shimcha talabalar ma'lumotlari qo'shiladi -->
                     </tbody>
                 </table>

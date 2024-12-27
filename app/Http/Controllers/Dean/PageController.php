@@ -59,20 +59,14 @@ class PageController extends Controller
     public function distinguished_scholarship(Request $request)
     {
         $user = $request->user();
-        $data = File::selectRaw('
-        ANY_VALUE(id) as id,
-        fileable_id,
-        ANY_VALUE(name) as name,
-        ANY_VALUE(path) as path,
-        ANY_VALUE(type) as type,
-        ANY_VALUE(status) as status,
-        MAX(id) as max_id,
-        ANY_VALUE(uploaded_by) as uploaded_by')
-            ->where('fileable_type', DistinguishedScholarship::class)
-            ->groupBy('fileable_id')
+        $files = File::where('fileable_type', DistinguishedScholarship::class)
+            ->whereIn('type', ['passport', 'rating_book', 'faculty_statement', 'department_recommendation'])
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
+        
+        $files = $files->groupBy('fileable_id');
 
-        return view('dean.distinguished-scholarship', compact('user', 'data'));
+        return view('dean.distinguished-scholarship', compact('user', 'files'));
     }
 
     public function edit_profile(Request $request)

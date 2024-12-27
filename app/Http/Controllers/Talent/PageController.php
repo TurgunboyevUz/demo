@@ -5,15 +5,8 @@ namespace App\Http\Controllers\Talent;
 use App\Enums\StructureType;
 use App\Http\Controllers\Controller;
 use App\Models\Auth\Student;
-use App\Models\File\Achievement;
-use App\Models\File\Article;
+use App\Models\File\DistinguishedScholarship;
 use App\Models\File\File;
-use App\Models\File\GrandEconomy;
-use App\Models\File\Invention;
-use App\Models\File\LangCertificate;
-use App\Models\File\Olympic;
-use App\Models\File\Scholarship;
-use App\Models\File\Startup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -62,7 +55,7 @@ class PageController extends Controller
                 'fio' => $user->short_fio(),
                 'faculty' => $faculty->name ?? 'Tanlanmagan',
                 'department' => $department->name,
-                
+
                 'total_score' => $employee->total_teacher_score,
                 'picture_path' => asset('storage/' . $user->picture_path),
             ];
@@ -70,94 +63,21 @@ class PageController extends Controller
 
         $data = compact('top3_stu', 'top3_ins');
 
-        return view('inspeksiya.dashboard', compact('user', 'department', 'data'));
+        return view('talent.dashboard', compact('user', 'department', 'data'));
     }
 
-    public function article(Request $request)
+    public function distinguished_scholarship(Request $request)
     {
         $user = $request->user();
-        $files = File::where('fileable_type', Article::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+
+        $files = File::where('fileable_type', DistinguishedScholarship::class)
+            ->whereIn('type', ['passport', 'rating_book', 'faculty_statement', 'department_recommendation'])
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
+        
+        $files = $files->groupBy('fileable_id');
 
-        return view('inspeksiya.article', compact('user', 'files'));
-    }
-
-    public function scholarship(Request $request)
-    {
-        $user = $request->user();
-        $files = File::where('fileable_type', Scholarship::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
-            ->get();
-
-        return view('inspeksiya.scholarship', compact('user', 'files'));
-    }
-
-    public function invention(Request $request)
-    {
-        $user = $request->user();
-        $files = File::where('fileable_type', Invention::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
-            ->get();
-
-        return view('inspeksiya.invention', compact('user', 'files'));
-    }
-
-    public function startup(Request $request)
-    {
-        $user = $request->user();
-        $files = File::where('fileable_type', Startup::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
-            ->get();
-
-        return view('inspeksiya.startup', compact('user', 'files'));
-    }
-
-    public function grand_economy(Request $request)
-    {
-        $user = $request->user();
-        $files = File::where('fileable_type', GrandEconomy::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
-            ->get();
-
-        return view('inspeksiya.grand-economy', compact('user', 'files'));
-    }
-
-    public function olympics(Request $request)
-    {
-        $user = $request->user();
-        $files = File::where('fileable_type', Olympic::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
-            ->get();
-
-        return view('inspeksiya.olympics', compact('user', 'files'));
-    }
-
-    public function lang_certificate(Request $request)
-    {
-        $user = $request->user();
-        $files = File::where('fileable_type', LangCertificate::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
-            ->get();
-
-        return view('inspeksiya.lang-certificate', compact('user', 'files'));
-    }
-
-    public function achievement(Request $request)
-    {
-        $user = $request->user();
-        $files = File::where('fileable_type', Achievement::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
-            ->get();
-
-        return view('inspeksiya.achievement', compact('user', 'files'));
-    }
-
-    public function chat(Request $request)
-    {
-        $user = $request->user();
-
-        return view('inspeksiya.chat', compact('user'));
+        return view('talent.distinguished-scholarship', compact('user', 'files'));
     }
 
     public function student_list(Request $request)
@@ -165,13 +85,13 @@ class PageController extends Controller
         $user = $request->user();
         $students = Student::all();
 
-        return view('inspeksiya.student-list', compact('user', 'students'));
+        return view('talent.student-list', compact('user', 'students'));
     }
 
     public function edit_profile(Request $request)
     {
         $user = $request->user();
 
-        return view('inspeksiya.edit-profile', compact('user'));
+        return view('talent.edit-profile', compact('user'));
     }
 }

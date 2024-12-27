@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Student;
 
 use App\Models\Criteria\Category;
 use App\Models\Criteria\EducationYear;
+use App\Models\File\DistinguishedScholarship;
+use App\Models\File\File;
 use Illuminate\Http\Request;
 
 class PageController
@@ -91,11 +93,13 @@ class PageController
     public function distinguished_scholarship(Request $request)
     {
         $user = $request->user();
-        $data = $user->distinguished_scholarships()
-            ->with(['files' => function ($query) {
-                $query->whereIn('type', ['passport', 'rating_book', 'faculty_statement', 'department_recommendation']);
-            }])
+        $data = File::where('fileable_type', DistinguishedScholarship::class)
+            ->where('uploaded_by', $user->id)
+            ->whereIn('type', ['passport', 'rating_book', 'faculty_statement', 'department_recommendation'])
+            ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
+        
+        $data = $data->groupBy('fileable_id');
 
         return view('student.distinguished-scholarship', compact('user', 'data'));
     }

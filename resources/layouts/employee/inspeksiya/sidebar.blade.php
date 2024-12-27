@@ -118,14 +118,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('employee.inspeksiya.chat') }}" class="nav-link">
-                    <i class="nav-icon fas fa-comments"></i>
-                    <p>Talabalar bilan chat
-                        <span class="right badge badge-danger">8</span>
-                    </p>
-                </a>
-            </li>
         </ul>
     </nav>
 </aside>
