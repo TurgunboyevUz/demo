@@ -61,14 +61,14 @@
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td><img src="{{ $item->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                             <td>{{ $item->user->fio() }}</td>
                                             <td>{{ $item->achievement->type() }}</td>
                                             <td>{{ $item->achievement->criteria->name }}</td>
                                             <td>{{ $item->achievement->team_members() }}</td>
                                             <td>{{ $item->achievement->location() }}</td>
                                             <td>{{ $item->achievement->document_type() }}</td>
-                                            <td><a href="{{ asset('storage/'.$item->path) }}" target="_blank">{{ $item->name }}</a></td>
+                                            <td>{!! $item->download_tag() !!}</td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>

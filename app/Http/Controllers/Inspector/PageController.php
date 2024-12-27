@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inspector;
 use App\Enums\StructureType;
 use App\Http\Controllers\Controller;
 use App\Models\Auth\Student;
+use App\Models\Criteria\Category;
 use App\Models\File\Achievement;
 use App\Models\File\Article;
 use App\Models\File\File;
@@ -47,7 +48,7 @@ class PageController extends Controller
                 'direction' => $student->user->student->direction->name,
 
                 'total_score' => $student->total_student_score,
-                'picture_path' => asset('storage/' . $student->user->picture_path),
+                'picture_path' => $student->user->picture_path(),
             ];
         }
 
@@ -64,7 +65,7 @@ class PageController extends Controller
                 'department' => $department->name,
                 
                 'total_score' => $employee->total_teacher_score,
-                'picture_path' => asset('storage/' . $user->picture_path),
+                'picture_path' => $user->picture_path(),
             ];
         }
 
@@ -153,19 +154,20 @@ class PageController extends Controller
         return view('inspeksiya.achievement', compact('user', 'files'));
     }
 
-    public function chat(Request $request)
-    {
-        $user = $request->user();
-
-        return view('inspeksiya.chat', compact('user'));
-    }
-
     public function student_list(Request $request)
     {
         $user = $request->user();
         $students = Student::all();
 
         return view('inspeksiya.student-list', compact('user', 'students'));
+    }
+
+    public function evaluation_criteria(Request $request)
+    {
+        $user = $request->user();
+        $categories = Category::all();
+
+        return view('inspeksiya.evaluation-criteria', compact('user', 'categories'));
     }
 
     public function edit_profile(Request $request)

@@ -3,6 +3,7 @@
 namespace App\Models\Auth;
 
 use App\Enums\StructureType;
+use App\Models\File\Task;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Role;
@@ -46,5 +47,10 @@ class Employee extends Model
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }

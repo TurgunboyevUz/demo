@@ -6,6 +6,7 @@ use App\Models\Auth\Employee;
 use App\Models\Auth\Gender;
 use App\Models\Auth\Nation;
 use App\Models\Auth\Student;
+use App\Models\Chat\Chat;
 use App\Models\File\Achievement;
 use App\Models\File\Article;
 use App\Models\File\DistinguishedScholarship;
@@ -43,6 +44,11 @@ class User extends Authenticatable
     public function short_fio()
     {
         return $this->surname.' '.$this->name;
+    }
+
+    public function picture_path()
+    {
+        return asset('storage/' . $this->picture_path);
     }
 
     public function employee()
@@ -113,6 +119,16 @@ class User extends Authenticatable
     public function tasks()
     {
         return $this->hasMany(Task::class, 'student_id', 'id');
+    }
+
+    public function chat()
+    {
+        return $this->hasOne(Chat::class, 'user_one_id', 'id');
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class, 'user_one_id', 'id');
     }
 
     public function getFiles()

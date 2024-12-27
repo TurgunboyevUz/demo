@@ -40,7 +40,7 @@ class PageController extends Controller
                 'direction' => $student->user->student->direction->name,
 
                 'total_score' => $student->total_student_score,
-                'picture_path' => asset('storage/' . $student->user->picture_path),
+                'picture_path' => $student->user->picture_path(),
             ];
         }
 
@@ -57,7 +57,7 @@ class PageController extends Controller
                 'department' => $department->name,
 
                 'total_score' => $employee->total_teacher_score,
-                'picture_path' => asset('storage/' . $user->picture_path),
+                'picture_path' => $user->picture_path(),
             ];
         }
 

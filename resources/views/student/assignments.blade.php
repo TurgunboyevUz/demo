@@ -34,7 +34,7 @@
                             <div class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1"><i class="fas fa-file-alt"></i> {{ $i++ }}. {{ $item->title }}</h5>
-                                    <a href="{{ asset('storage/' . $item->file->path) }}" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
+                                    <a href="{{ route('storage.download', ['uuid' => $item->file->uuid]) }}" class="btn btn-sm btn-success" download><i class="fas fa-download"></i> Yuklab Olish</a>
                                 </div>
                                 <p class="mb-1">{{ $item->description }}</p>
                                 <small class="text-muted">Topshiriq yuklangan sana: {{ $item->created_at->format('H:i d-m-Y') }}</small>

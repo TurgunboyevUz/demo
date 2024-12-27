@@ -92,7 +92,7 @@
         <!-- Profile Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <img src="{{ asset('storage/' . $user->picture_path) }}" alt="User" class="img-circle" style="height: 30px; padding-right: 8px;">
+                <img src="{{ $user->picture_path() }}" alt="User" class="img-circle" style="height: 30px; padding-right: 8px;">
                 <span class="d-none d-md-inline">{{ $user->full_name() }}</span>
                 <span class="d-inline d-md-none">{{ $user->short_name }}</span>
             </a>

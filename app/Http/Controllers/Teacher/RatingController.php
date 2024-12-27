@@ -24,7 +24,7 @@ class RatingController extends Controller
 
         foreach ($students as $student) {
             $arr[] = [
-                'picture_path' => $student->user->picture_path,
+                'picture_path' => $student->user->picture_path(),
 
                 'fio' => $student->user->short_fio(),
                 'level' => $student->user->student->level,

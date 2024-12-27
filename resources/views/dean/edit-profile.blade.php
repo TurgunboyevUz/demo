@@ -41,13 +41,6 @@
                         <input name="phone" type="tel" id="phone" class="form-control" value="{{ $user->phone }}">
                     </div>
 
-                    <!--<div class="col-md-6 mb-3">
-                        <label for="profilePicture" class="form-label">Rasm</label>
-                        <div class="profile-picture-upload">
-                            <img src="{{ asset('storage/' . $user->picture_path) }}" alt="Profil rasmi" class="img-thumbnail" style="width: 100px; height: 100px;">
-                        </div>
-                    </div>-->
-
                     <div class="col-12 mt-4">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Saqlash

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Inspector;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Inspector\StoreCriteriaRequest;
 use App\Http\Requests\Inspector\StoreProfileRequest;
+use App\Models\Criteria\Criteria;
 
 class InspectorController extends Controller
 {
@@ -20,6 +22,23 @@ class InspectorController extends Controller
         $this->toast('Profil muvaffaqiyatli yangilandi!');
 
         return redirect()->route($request->route()->getName());
+    }
+
+    public function evaluation_criteria(StoreCriteriaRequest $request)
+    {
+        $user = $request->user();
+        $data = $request->validated();
+
+        foreach ($data['score'] as $id => $value) {
+            $criteria = Criteria::find($id);
+            $criteria->update([
+                'score' => $value
+            ]);
+        }
+
+        $this->toast('Baholash mezoni muvaffaqiyatli o\'zgartirildi');
+
+        return redirect()->back();
     }
 
     public function toast($message)

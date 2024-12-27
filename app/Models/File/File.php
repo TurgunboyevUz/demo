@@ -112,4 +112,14 @@ class File extends Model
     {
         return $this->belongsTo(Task::class, 'fileable_id', 'id');
     }
+
+    public function download_link()
+    {
+        return route('storage.download', ['uuid' => $this->uuid]);
+    }
+
+    public function download_tag()
+    {
+        return '<a href="' . $this->download_link() . '" target="_blank">' . $this->name . '</a>';
+    }
 }

@@ -7,11 +7,12 @@ use App\Facade\File;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teacher\StoreProfileRequest;
 use App\Http\Requests\Teacher\StoreTaskRequest;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class FileController extends Controller
 {
-    public function create_task(StoreTaskRequest $request)
+    public function task(StoreTaskRequest $request)
     {
         $user = $request->user();
 
@@ -20,6 +21,15 @@ class FileController extends Controller
         $this->toast('Topshiriq muvaffaqiyatli yaratildi!');
 
         return redirect()->route($request->route()->getName());
+    }
+
+    public function destroy_task(Request $request)
+    {
+        File::destroy_task($request->input('id'));
+
+        $this->toast('Topshiriq muvaffaqiyatli o\'chirildi!', 'info');
+
+        return redirect()->back();
     }
 
     public function edit_profile(StoreProfileRequest $request)
@@ -44,9 +54,9 @@ class FileController extends Controller
         return redirect()->route($request->route()->getName());
     }
 
-    public function toast($message)
+    public function toast($message, $type = 'success')
     {
-        toast($message, 'success', 'top-end')->width('25rem')
+        toast($message, $type, 'top-end')->width('25rem')
             ->background('#f5f6f7')
             ->showCloseButton()
             ->timerProgressBar();

@@ -137,7 +137,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="{{ route('employee.teacher.create-task') }}" class="nav-link">
+                <a href="{{ route('employee.teacher.tasks') }}" class="nav-link">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Topshiriq yaratish</p>
                 </a>

@@ -64,7 +64,7 @@
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td><img src="{{ $item->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                             <td>{{ $item->user->fio() }}</td>
                                             <td>{{ $item->article->title }}</td>
                                             <td>{{ $item->article->keywords }}</td>

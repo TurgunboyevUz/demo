@@ -17,14 +17,14 @@
                     <div id="chatMessages" class="p-3" style="height: 400px; overflow-y: auto;">
                         <!-- Foydalanuvchi va professor xabarlari -->
                         <div class="message my-2 d-flex align-items-start">
-                            <img src="dist/img/user3-128x128.jpg" alt="Professor Profil" class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+                            <img src="{{ $chat->second_user->picture_path() }}" alt="Professor Profil" class="rounded-circle mr-2" style="width: 40px; height: 40px;">
                             <div>
                                 <strong>Professor:</strong>
                                 <p>Salom Hurmatli talaba! Bugungi mavzu sizga tushunarli bo'ldimi mavzuga oid qandaydir savollaringiz bormi?</p>
                             </div>
                         </div>
                         <div class="message my-2 d-flex align-items-start flex-row-reverse">
-                            <img src="img/image.jpg" alt="Foydalanuvchi Profil" class="rounded-circle ml-2" style="width: 40px; height: 40px;">
+                            <img src="{{ $chat->first_user->picture_path }}" alt="Foydalanuvchi Profil" class="rounded-circle ml-2" style="width: 40px; height: 40px;">
                             <div class="text-right">
                                 <strong>Siz:</strong>
                                 <p>Assalomu alaykum, Professor. Ha menda bugungi uyga vazifa borasida bir nechta savollarim bor edi. mumkinmi?!</p>

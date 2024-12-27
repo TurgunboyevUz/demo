@@ -61,7 +61,7 @@
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td><img src="{{ $item->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                             <td>{{ $item->user->fio() }}</td>
                                             <td>{{ $item->invention->title }}</td>
                                             <td>{{ $item->invention->criteria->name }}</td>
@@ -70,7 +70,7 @@
                                             <td>{{ $item->invention->authors }}</td>
                                             <td>{{ $item->invention->publish_params }}</td>
                                             <td>{{ $item->invention->education_year->name }}</td>
-                                            <td><a href="{{ asset('storage/'.$item->path) }}" target="_blank">{{ $item->name }}</a></td>
+                                            <td>{!! $item->download_tag() !!}</td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>

@@ -51,7 +51,7 @@
                                         @foreach($students as $student)
                                             <tr>
                                                 <td>1</td>
-                                                <td><center><img src="{{ asset('storage/' . $student->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></center></td>
+                                                <td><center><img src="{{ $student->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></center></td>
                                                 <td>{{ $student->user->fio() }}</td>
                                                 <td>{{ $student->faculty->name }}</td>
                                                 <td>{{ $student->direction->name }}</td>

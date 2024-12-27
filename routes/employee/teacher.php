@@ -20,7 +20,7 @@ Route::get('distinguished-scholarship', [PageController::class, 'distinguished_s
 Route::get('achievement', [PageController::class, 'achievement']);
 Route::get('chat', [PageController::class, 'chat']);
 Route::get('student-list', [PageController::class, 'student_list']);
-Route::get('create-task', [PageController::class, 'create_task']);
+Route::get('tasks', [PageController::class, 'task']);
 Route::get('edit-profile', [PageController::class, 'edit_profile']);
 
 Route::post('article/review', [ReviewController::class, 'article']);
@@ -41,7 +41,9 @@ Route::post('olympics/reject', [RejectController::class, 'olympics']);
 Route::post('lang-certificate/reject', [RejectController::class, 'lang_certificate']);
 Route::post('achievement/reject', [RejectController::class, 'achievement']);
 
-Route::post('create-task', [FileController::class, 'create_task']);
+Route::post('tasks', [FileController::class, 'task']);
+Route::delete('tasks/destroy', [FileController::class, 'destroy_task']);
+
 Route::post('edit-profile', [FileController::class, 'edit_profile']);
 
 Route::prefix('rating')->group(function () {

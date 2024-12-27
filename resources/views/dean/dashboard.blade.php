@@ -21,7 +21,7 @@
                     <div class="card card-widget widget-user">
                         <div class="widget-user-header bg-info">
                             <div class="widget-user-image">
-                                <img class="img-circle elevation-2" src="{{ asset('storage/' . $user->picture_path) }}" alt="User Avatar">
+                                <img class="img-circle elevation-2" src="{{ $user->picture_path() }}" alt="User Avatar">
                             </div>
                             <h3 class="widget-user-username">Dekan</h3>
                             <h5 class="widget-user-desc">{{ $department->name ?? ''}} dekani</h5>

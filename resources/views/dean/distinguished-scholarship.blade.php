@@ -41,13 +41,13 @@
                                         <tr>
                                             <td><input type="checkbox" class="checkItem"></td>
                                             <td>{{ $id++ }}</td>
-                                            <td><img src="{{ asset('storage/' . $item[0]->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;"></td>
+                                            <td><img src="{{ $item[0]->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
 
                                             <td>{{ $item[0]->user->fio() }}</td>
-                                            <td><a href="{{ asset('storage/'.$item[0]->path) }}" target="_blank">{{ $item[0]->name }}</a></td>
-                                            <td><a href="{{ asset('storage/'.$item[1]->path) }}" target="_blank">{{ $item[1]->name }}</a></td>
-                                            <td><a href="{{ asset('storage/'.$item[2]->path) }}" target="_blank">{{ $item[2]->name }}</a></td>
-                                            <td><a href="{{ asset('storage/'.$item[3]->path) }}" target="_blank">{{ $item[3]->name }}</a></td>
+                                            <td>{!! $item[0]->download_tag() !!}</td>
+                                            <td>{!! $item[1]->download_tag() !!}</td>
+                                            <td>{!! $item[2]->download_tag() !!}</td>
+                                            <td>{!! $item[3]->download_tag() !!}</td>
 
                                             <td><span class="badge badge-{{ $item[0]->status()['color'] }}">{{ $item[0]->status()['name'] }}</span></td>
                                             @if($item[0]->status == 'rejected')

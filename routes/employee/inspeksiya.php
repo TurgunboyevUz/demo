@@ -20,7 +20,9 @@ Route::get('distinguished-scholarship', [PageController::class, 'distinguished_s
 Route::get('achievement', [PageController::class, 'achievement']);
 Route::get('chat', [PageController::class, 'chat']);
 Route::get('student-list', [PageController::class, 'student_list']);
+Route::get('evaluation-criteria', [PageController::class, 'evaluation_criteria']);
 Route::get('edit-profile', [PageController::class, 'edit_profile']);
+
 
 Route::post('article/approve', [ApproveController::class, 'article']);
 Route::post('scholarship/approve', [ApproveController::class, 'scholarship']);
@@ -40,6 +42,7 @@ Route::post('olympics/reject', [RejectController::class, 'olympics']);
 Route::post('lang-certificate/reject', [RejectController::class, 'lang_certificate']);
 Route::post('achievement/reject', [RejectController::class, 'achievement']);
 
+Route::post('evaluation-criteria', [InspectorController::class, 'evaluation_criteria']);
 Route::post('edit-profile', [InspectorController::class, 'edit_profile']);
 
 Route::prefix('rating')->group(function () {

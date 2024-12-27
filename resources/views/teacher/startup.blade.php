@@ -59,7 +59,7 @@
                                             </td>
                                             <td>{{ $id++ }}</td>
                                             <td>
-                                                <img src="{{ asset('storage/' . $item->user->picture_path) }}" alt="User" class="img-circle" style="height: 30px;">
+                                                <img src="{{ $item->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;">
                                             </td>
                                             <td>{{ $item->user->fio() }}</td>
                                             <td>{{ $item->startup->type() }}</td>
@@ -67,7 +67,7 @@
                                             <td>{{ $item->startup->team_members() }}</td>
                                             <td>{{ $item->startup->location() }}</td>
                                             <td>{{ $item->startup->title }}</td>
-                                            <td><a href="{{ asset('storage/'.$item->path) }}" target="_blank">{{ $item->name }}</a></td>
+                                            <td>{!! $item->download_tag() !!}</td>
                                             <td>
                                                 <span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span>
                                             </td>

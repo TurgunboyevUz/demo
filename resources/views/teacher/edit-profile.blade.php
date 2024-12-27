@@ -70,7 +70,7 @@
                     <!--<div class="col-md-6 mb-3">
                         <label for="profilePicture" class="form-label">Rasm</label>
                         <div class="profile-picture-upload">
-                            <img src="{{ asset('storage/' . $user->picture_path) }}" alt="Profil rasmi" class="img-thumbnail" style="width: 100px; height: 100px;">
+                            <img src="{{ $user->picture_path() }}" alt="Profil rasmi" class="img-thumbnail" style="width: 100px; height: 100px;">
                         </div>
                     </div>-->
 

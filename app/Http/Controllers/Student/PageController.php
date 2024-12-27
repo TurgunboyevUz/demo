@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Auth\Student;
+use App\Models\Chat\Chat;
 use App\Models\Criteria\Category;
 use App\Models\Criteria\EducationYear;
 use App\Models\File\DistinguishedScholarship;
@@ -32,7 +33,7 @@ class PageController
                 'fio' => $student->user->short_fio(),
                 'group' => $group,
                 'total_score' => $total_score->total_score,
-                'picture_path' => asset('storage/' . $student->user->picture_path),
+                'picture_path' => $student->user->picture_path(),
             ];
         });
 
@@ -51,7 +52,7 @@ class PageController
                 'level' => $file->user->student->level,
                 'direction' => $file->user->student->direction->name,
                 'total_score' => $file->total_score,
-                'picture_path' => asset('storage/' . $file->user->picture_path),
+                'picture_path' => $file->user->picture_path(),
             ];
         });
 
@@ -67,7 +68,7 @@ class PageController
                 'faculty' => $file->user->student->faculty->name,
                 'direction' => $file->user->student->direction->name,
                 'total_score' => $file->total_score,
-                'picture_path' => asset('storage/' . $file->user->picture_path),
+                'picture_path' => $file->user->picture_path(),
             ];
         });
 
@@ -181,7 +182,24 @@ class PageController
     public function chat(Request $request)
     {
         $user = $request->user();
+        $first_user_id = $user->id;
+        $second_user_id = $user->student->employee->user->id;
 
-        return view('student.chat', compact('user'));
+        $chat = Chat::where(function ($query) use ($first_user_id, $second_user_id) {
+            $query->where('user_one_id', $first_user_id)
+                  ->where('user_two_id', $second_user_id);
+        })->orWhere(function ($query) use ($first_user_id, $second_user_id) {
+            $query->where('user_one_id', $first_user_id)
+                  ->where('user_two_id', $second_user_id);
+        })->first();
+
+        if (!$chat) {
+            $chat = Chat::create([
+                'user_one_id' => $first_user_id,
+                'user_two_id' => $second_user_id,
+            ]);
+        }
+
+        return view('student.chat', compact('user', 'chat'));
     }
 }

@@ -311,4 +311,12 @@ class File
 
         return $achievement->delete();
     }
+
+    public function destroy_task($id)
+    {
+        $task = Task::findOrFail($id);
+        $task->file()->delete();
+
+        return $task->delete();
+    }
 }

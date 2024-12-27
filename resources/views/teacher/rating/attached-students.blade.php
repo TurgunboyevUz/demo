@@ -87,7 +87,7 @@
                             <tr>
                                 <td class="text-center"><input type="checkbox" class="student-checkbox"></td>
                                 <td>{{ $i++ }}</td>
-                                <td><img src="{{ asset('storage/' . $student['picture_path']) }}" alt="Avatar" class="img-circle elevation-2" style="width: 50px; height: 50px;"></td>
+                                <td><img src="{{ $student['picture_path'] }}" alt="Avatar" class="img-circle elevation-2" style="width: 50px; height: 50px;"></td>
                                 <td>{{ $student['fio'] }}</td>
                                 <td>{{ $student['level'] }}-kurs</td>
                                 <td>{{ $student['specialty'] }}</td>
