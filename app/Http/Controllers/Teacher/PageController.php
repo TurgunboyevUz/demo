@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Enums\StructureType;
 use App\Http\Controllers\Controller;
 use App\Models\Auth\Department;
+use App\Models\Chat\Chat;
 use App\Models\File\Achievement;
 use App\Models\File\Article;
 use App\Models\File\File;
@@ -14,6 +15,7 @@ use App\Models\File\LangCertificate;
 use App\Models\File\Olympic;
 use App\Models\File\Scholarship;
 use App\Models\File\Startup;
+use App\Service\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,94 +25,13 @@ class PageController extends Controller
     {
         $user = $request->user();
 
-        $faculty = $user->employee->department('teacher', StructureType::FACULTY);
-        $department = $user->employee->department('teacher', StructureType::DEPARTMENT);
+        $top3_att = (new Rating($user))->getRating(Rating::ATTACHED, Rating::STUDENT)->take(3);
+        $top3_dep = (new Rating($user))->getRating(Rating::DEPARTMENT, Rating::TEACHER)->take(3);
+        $top3_fac = (new Rating($user))->getRating(Rating::FACULTY, Rating::TEACHER)->take(3);
+        $top3_ins = (new Rating($user))->getRating(Rating::ALL, Rating::TEACHER)->take(3);
 
-        $students = File::select('uploaded_by', DB::raw('SUM(student_score) as total_student_score'))
-            ->where('teacher_id', $user->id)
-            ->groupBy('uploaded_by')
-            ->orderBy('total_student_score', 'desc')
-            ->take(3)
-            ->get();
-
-        $employees = File::select('teacher_id', DB::raw('SUM(teacher_score) as total_teacher_score'))
-            ->where('teacher_id', '!=', null)
-            ->groupBy('teacher_id')
-            ->orderBy('total_teacher_score', 'desc')
-            ->get();
-
-        $top3_att = [];
-
-        foreach ($students as $student) {
-            $top3_att[] = [
-                'fio' => $student->user->short_fio(),
-                'level' => $student->user->student->level,
-                'direction' => $student->user->student->direction->name,
-
-                'total_score' => $student->total_student_score,
-                'picture_path' => $student->user->picture_path(),
-            ];
-        }
-
-        $top3_dep = [];
-        foreach ($employees as $employee) {
-            $user = $employee->teacher;
-
-            $dep = $user->employee->department('teacher', StructureType::DEPARTMENT);
-            if ($dep->id != $department->id) {
-                continue;
-            }
-
-            $top3_dep[] = [
-                'fio' => $user->short_fio(),
-                'specialty' => $user->employee->specialty->name,
-                'staff_position' => $dep->pivot->staff_position,
-
-                'total_score' => $employee->total_teacher_score,
-                'picture_path' => $user->picture_path(),
-            ];
-
-            if (count($top3_dep) == 3) {break;}
-        }
-
-        $top3_fac = [];
-        foreach ($employees as $employee) {
-            $data = $employee->teacher;
-
-            $department = $data->employee->department('teacher', StructureType::DEPARTMENT);
-            $current_faculty = $data->employee->department('teacher', StructureType::FACULTY);
-            if ($current_faculty?->id != $faculty?->id) {
-                continue;
-            }
-
-            $top3_fac[] = [
-                'fio' => $data->short_fio(),
-                'specialty' => $data->employee->specialty->name,
-                'staff_position' => $department->pivot->staff_position,
-                
-                'total_score' => $employee->total_teacher_score,
-                'picture_path' => $data->picture_path(),
-            ];
-
-            if (count($top3_fac) == 3) {break;}
-        }
-
-        $top3_ins = [];
-        foreach ($employees as $employee) {
-            $user = $employee->teacher;
-
-            $department = $user->employee->department('teacher', StructureType::DEPARTMENT);
-            $faculty = $user->employee->department('teacher', StructureType::FACULTY);
-
-            $top3_ins[] = [
-                'fio' => $user->short_fio(),
-                'faculty' => $faculty->name ?? 'Tanlanmagan',
-                'department' => $department->name,
-                
-                'total_score' => $employee->total_teacher_score,
-                'picture_path' => $user->picture_path(),
-            ];
-        }
+        $faculty = $user->employee->department('teacher', StructureType::FACULTY->value);
+        $department = $user->employee->department('teacher', StructureType::DEPARTMENT->value);
 
         $data = compact('top3_att', 'top3_dep', 'top3_fac', 'top3_ins');
 
@@ -121,6 +42,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Article::class)
+            ->with('article')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -131,6 +53,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Scholarship::class)
+            ->with('scholarship')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -141,6 +64,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Invention::class)
+            ->with('invention')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -151,6 +75,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Startup::class)
+            ->with('startup')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -161,6 +86,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', GrandEconomy::class)
+            ->with('grand_economy')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -171,6 +97,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Olympic::class)
+            ->with('olympic')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -181,6 +108,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', LangCertificate::class)
+            ->with('lang_certificate')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -191,6 +119,7 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Achievement::class)
+            ->with('achievement')
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
 
@@ -200,8 +129,33 @@ class PageController extends Controller
     public function chat(Request $request)
     {
         $user = $request->user();
+        $students = $user->employee->students()->with('user')->get();
 
-        return view('teacher.chat', compact('user'));
+        $chats = $students->map(function ($student) use ($user) {
+            $first_user_id = $user->id;
+            $second_user_id = $student->user->id;
+
+            $chat = Chat::where(function ($query) use ($first_user_id, $second_user_id) {
+                $query->where('user_one_id', $first_user_id)
+                    ->where('user_two_id', $second_user_id);
+            })->orWhere(function ($query) use ($first_user_id, $second_user_id) {
+                $query->where('user_one_id', $second_user_id)
+                    ->where('user_two_id', $first_user_id);
+            })->first();
+
+            if (!$chat) {
+                $chat = Chat::create([
+                    'user_one_id' => $first_user_id,
+                    'user_two_id' => $second_user_id,
+                ]);
+            }
+
+            return $student->chat = $chat;
+        });
+
+        $current_chat = $request->query('chat');
+
+        return view('teacher.chat', compact('user', 'students', 'current_chat'));
     }
 
     public function student_list(Request $request)
@@ -225,8 +179,8 @@ class PageController extends Controller
     public function edit_profile(Request $request)
     {
         $user = $request->user();
-        $current_faculty = $user->employee->department('teacher', StructureType::FACULTY);
-        $faculties = Department::where('structure_code', StructureType::FACULTY)->get();
+        $current_faculty = $user->employee->department('teacher', StructureType::FACULTY->value);
+        $faculties = Department::where('structure_code', StructureType::FACULTY->value)->get();
 
         return view('teacher.edit-profile', compact('user', 'current_faculty', 'faculties'));
     }

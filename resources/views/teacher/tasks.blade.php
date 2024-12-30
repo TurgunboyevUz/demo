@@ -94,7 +94,7 @@
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->student->user->short_fio() }}</td>
                                 <td>{{ $item->description }}</td>
-                                <td><a href="{{ route('download-file', ['uuid' => $item->file->uuid]) }}" target="_blank">{{ $item->file->name }}</a></td>
+                                <td><a href="{{ route('storage.download', ['uuid' => $item->file->uuid]) }}" target="_blank">{{ $item->file->name }}</a></td>
                                 <td>{{ Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                                 <td>
                                     <form action="{{ route('employee.teacher.tasks.destroy') }}" method="POST">

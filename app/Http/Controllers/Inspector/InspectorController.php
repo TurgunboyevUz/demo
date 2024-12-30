@@ -32,7 +32,7 @@ class InspectorController extends Controller
         foreach ($data['score'] as $id => $value) {
             $criteria = Criteria::find($id);
             $criteria->update([
-                'score' => $value
+                'score' => $value,
             ]);
         }
 

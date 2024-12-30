@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Dean;
 
+use App\Enums\StructureType;
 use App\Http\Controllers\Controller;
+use App\Models\Auth\Department;
 use App\Models\Auth\Employee;
 use App\Models\Auth\Student;
 use App\Models\File\DistinguishedScholarship;
@@ -50,10 +52,11 @@ class PageController extends Controller
     public function attach_student(Request $request)
     {
         $user = $request->user();
-        $students = Student::all();
-        $employee = Employee::all();
+        $department = $user->employee->department('dean');
+        $faculties = Department::where('structure_code', StructureType::FACULTY->value)->get();
+        $departments = Department::where('structure_code', StructureType::DEPARTMENT->value)->get();
 
-        return view('dean.attach-student', compact('user', 'students', 'employee'));
+        return view('dean.attach-student', compact('user', 'faculties', 'departments', 'department'));
     }
 
     public function distinguished_scholarship(Request $request)
@@ -63,7 +66,7 @@ class PageController extends Controller
             ->whereIn('type', ['passport', 'rating_book', 'faculty_statement', 'department_recommendation'])
             ->orderByRaw("FIELD(status, 'pending', 'reviewed', 'approved', 'rejected')")
             ->get();
-        
+
         $files = $files->groupBy('fileable_id');
 
         return view('dean.distinguished-scholarship', compact('user', 'files'));

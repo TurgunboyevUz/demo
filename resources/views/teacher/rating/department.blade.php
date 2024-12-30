@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Kafedra bo'yicha Reyting</h3>
                             <div class="ml-auto d-flex">
-                                <button id="excelDownload" class="btn btn-success">
+                                <button id="excelDownload" class="btn btn-success" onclick="window.location = '{{ route('excel.department') }}';">
                                     <i class="fas fa-file-excel"></i> Excel yuklash
                                 </button>
                             </div>

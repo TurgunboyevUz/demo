@@ -10,34 +10,98 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const checkAll = document.getElementById("checkAll");
+    const checkItems = document.querySelectorAll(".checkItem");
+
+    checkAll.addEventListener("change", function () {
+        checkItems.forEach((item) => {
+            item.checked = this.checked;
+        });
+    });
+
+    checkItems.forEach((item) => {
+        item.addEventListener("change", function () {
+            checkAll.checked = Array.from(checkItems).every((item) => item.checked);
+        });
+    });
+});
+
+$(document).ready(function () {
+    $("#zipDownload").on("click", function () {
+        const selectedUuids = [];
+
+        $(".checkItem:checked").each(function () {
+            const uuid = $(this).data("uuid");
+            
+            if (Array.isArray(uuid)) {
+                selectedUuids.push(...uuid);
+            }else{
+                selectedUuids.push(uuid);
+            }
+        });
+
+        $(".checkItem:checked")
+            .map(function () {
+                return $(this).closest("tr").find("[data-uuid]").data("uuid");
+            })
+            .get();
+
+        if (selectedUuids.length === 0) {
+            alert("Iltimos yuklab olish uchun kamida 1 ta faylni tanlang!");
+            return;
+        }
+
+        const downloadUrl = $(this).data("url");
+        const csrfToken = $(this).data("csrf");
+        const name = $(this).data("name");
+
+        $.ajax({
+            url: downloadUrl,
+            type: "POST",
+
+            data: {
+                uuids: selectedUuids,
+                name: name,
+                _token: csrfToken
+            },
+            xhrFields: {
+                responseType: "blob", // Handle binary data
+            },
+            success: function (data, status, xhr) {
+                const filename = xhr.getResponseHeader("Content-Disposition")
+                    ? xhr.getResponseHeader("Content-Disposition").split("filename=")[1]
+                    : "download.zip";
+                const blob = new Blob([data], { type: "application/zip" });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = filename.replace(/"/g, "");
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+                alert("ZIP faylni yuklab olish jarayonida xatolik yuzaga keldi!");
+            },
+        });
+    });
+});
+
+
 $(function() {
     $("table").each(function() {
-        var e = $(this).DataTable({
-            responsive: true,
-            autoWidth: false,
-            language: {
-                url: uzLocaleFile
-            }
-        });
-
-        var t = $(this).find(".checkAll");
-
-        t.click(function() {
-            $(this).closest("table").find("tr").each(function() {
-                var e = $(this).find("input.checkItem");
-                e.prop("checked", t.prop("checked"));
+        // Skip initialization for tables with id 'ListofProfessorsandStudents' or 'assignedTable'
+        if ($(this).attr('id') !== "ListofProfessorsandStudents" && $(this).attr('id') !== "assignedTable" && !$.fn.dataTable.isDataTable(this)) {
+            $(this).DataTable({
+                responsive: true,
+                autoWidth: false,
+                language: {
+                    url: uzLocaleFile
+                }
             });
-        });
-
-        $(this).find("#zipDownload").click(function() {
-            var e = $(this).closest("table").find(".checkItem:checked").length;
-            if (e > 0) {
-                alert("Fayl yuklanish boshlandi");
-                console.log("ZIP yuklash boshlandi");
-            } else {
-                alert("Siz biror talaba tanlamagansiz");
-            }
-        });
+        }
     });
 
     $(".confirmAction").click(function(e) {

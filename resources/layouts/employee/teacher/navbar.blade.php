@@ -1,3 +1,37 @@
+@php
+    use App\Models\Chat\Chat;
+    use App\Models\Chat\Message;
+
+    $messages = Message::where('seen', 0)
+        ->whereIn('chat_id', function ($query) use ($user) {
+            $query->select('id')
+                ->from('chats')
+                ->where(function ($subQuery) use($user) {
+                    $subQuery->where('user_one_id', $user->id)
+                            ->orWhere('user_two_id', $user->id);
+                });
+        })
+        ->where('user_id', '!=', $user->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    $messages = $messages->unique(function ($message) {
+        return $message->chat_id;
+    });
+    
+    $messages = $messages->map(function ($message) use($user) {
+        $sender = $message->user->id == $message->chat->first_user->id ? $message->chat->first_user : $message->chat->second_user;
+
+        return [
+            'id' => $message->chat_id,
+            'fio' => $sender->short_fio(),
+            'picture_path' => $sender->picture_path(),
+            'message' => $message->content,
+            'sended_at' => Carbon\Carbon::parse($message->created_at)->diffForHumans(),
+        ];
+    })->take(3);
+@endphp
+
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -10,21 +44,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <font size='3px'><i class="far fa-bell"></i></font>
-                <span class="badge badge-warning navbar-badge">3</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-header">3 Bildirishnomalar</span>
-                <div class="dropdown-divider"></div>
-                <a href="teacher-notification.html" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 1 ta yangi xabar
-                </a>
-            </div>
-        </li>
-
         <!-- Language Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -42,27 +61,26 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <font size='3px'><i class="fas fa-comments"></i></font>
-                <span class="badge badge-danger navbar-badge">5</span>
+                <span class="badge badge-danger navbar-badge">{{ count($messages) }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-header">Talabalar yuborgan xabarlari</span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <div class="media">
-                        <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">Nora Silvester
-                                <span class="float-right text-sm text-warning">
-                                    <i class="fas fa-star"></i>
-                                </span>
-                            </h3>
-                            <p class="text-sm">The subject goes here</p>
-                            <p class="text-sm text-muted">
-                                <i class="far fa-clock mr-1"></i> 4 Hours Ago
-                            </p>
+                @foreach ($messages as $message)
+                    <a href="{{ route('employee.teacher.chat', ['chat'=> $message['id']]) }}" class="dropdown-item">
+                        <div class="media">
+                            <img src="{{ $message['picture_path'] }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    {{ $message['fio'] }}
+                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">{{ $message['message'] }}</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{ $message['sended_at'] }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                @endforeach
                 <div class="dropdown-divider"></div>
                 <a href="teacher-messages.html" class="dropdown-item dropdown-footer">Barchasini ko'rish</a>
             </div>

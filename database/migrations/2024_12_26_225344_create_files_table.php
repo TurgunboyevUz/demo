@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->nullableMorphs('fileable');
 
+            $table->foreignId('education_year_id')->nullable()->constrained('education_years')->cascadeOnDelete();
+
             $table->integer('student_score')->default(0);
             $table->integer('teacher_score')->default(0);
 

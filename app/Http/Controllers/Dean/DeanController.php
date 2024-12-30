@@ -4,33 +4,58 @@ namespace App\Http\Controllers\Dean;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dean\StoreProfileRequest;
-use App\Models\Auth\Employee;
+use App\Models\Auth\Department;
 use App\Models\Auth\Student;
 use Illuminate\Http\Request;
 
 class DeanController extends Controller
 {
-    public function student_employee(Request $request)
+    public function student_list(Request $request, $faculty)
     {
-        $students = Student::with(['user', 'faculty', 'specialty', 'group', 'employee'])->get();
-        $employees = Employee::with('user')->get();
+        $faculty = Department::where('id', $faculty)->first();
+        $data = $faculty->students()->with(['user', 'faculty', 'direction', 'group'])->get();
 
         return response()->json([
             'success' => true,
-            'message' => 'Success',
-            'status' => 200,
-            'data' => [
-                'students' => $students,
-                'employees' => $employees,
-            ],
-        ], 200);
+            'data' => $data,
+        ]);
+    }
+
+    public function department_list(Request $request, $faculty)
+    {
+        $faculty = Department::where('id', $faculty)->first();
+        $data = $faculty->departments;
+
+        return response()->json([
+            'success' => true,
+            'data' => $data,
+        ]);
+    }
+
+    public function employee_list(Request $request, $department)
+    {
+        $department = Department::where('id', $department)->first();
+        $data = $department->employees()->with('user')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $data,
+        ]);
     }
 
     public function attach_student(Request $request)
     {
+        $data = $request->data;
+
+        foreach ($data as $item) {
+            $student = Student::find($item['student_id']);
+            $student->employee_id = $item['employee_id'];
+            $student->save();
+        }
+
         return response()->json([
             'success' => true,
-            'data' => $request->all(),
+            'data' => [],
         ]);
     }
 

@@ -63,10 +63,9 @@
 
                     <!-- F.I.SH (agar jamoaviy tanlansa) -->
                     <div class="col-12 mb-3" id="teamMembers" style="display: none;">
-                        <label for="teamMemberName" class="form-label">
-                            <i class="fas fa-user"></i> F.I.SH
-                        </label>
+                        <label for="teamMemberName" class="form-label"> <i class="fas fa-user"></i> F.I.SH </label>
                         <input type="text" id="teamMemberName" name="team_members" class="form-control" placeholder="Ishtirokchilar ismi, sharifi">
+                        
                         @if($errors->has('team_members'))
                         <span class="text-danger">{{ $errors->first('team_members') }}</span>
                         @endif
@@ -77,13 +76,14 @@
                         <label for="location" class="form-label">
                             <i class="fas fa-map-marker-alt"></i> O'tkazilgan joyi
                         </label>
-                        <select id="location" class="form-control" name="location" required>
+                        <select id="location" class="form-control" name="location_id" required>
                             <option value="" disabled selected>Tanlang</option>
-                            <option value="tashkent">Toshkent</option>
-                            <option value="andijan">Andijon</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
                         </select>
-                        @if($errors->has('location'))
-                        <span class="text-danger">{{ $errors->first('location') }}</span>
+                        @if($errors->has('location_id'))
+                        <span class="text-danger">{{ $errors->first('location_id') }}</span>
                         @endif
                     </div>
 
@@ -145,7 +145,7 @@
                         <td>{{ $item->type() }}</td>
                         <td>{{ $item->criteria->name }}</td>
                         <td>{{ $item->team_members() }}</td>
-                        <td>{{ $item->location() }}</td>
+                        <td>{{ $item->getLocation() }}</td>
                         <td>{{ $item->title }}</td>
                         <td>{!! $item->file->download_tag() !!}</td>
 

@@ -10,9 +10,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Nomdor Stipendiyaga tushgan arizalar ro'yxati</h3>
+                            <h3 class="card-title">Nomdor stipendiyaga tushgan arizalar ro'yxati</h3>
                             <div class="ml-auto d-flex">
-                                <button id="excelDownload" class="btn btn-success">
+                                <button id="excelDownload" class="btn btn-success" onclick="window.location = '{{ route('excel.distinguished-scholarship') }}';">
                                     <i class="fas fa-file-excel"></i> Excel yuklash
                                 </button>
                             </div>
@@ -39,7 +39,7 @@
 
                                         @foreach($files as $item)
                                         <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
+                                            <td><input type="checkbox" class="checkItem" data-uuid='{{ json_encode([$item[0]->uuid, $item[1]->uuid, $item[2]->uuid, $item[3]->uuid]) }}'></td>
                                             <td>{{ $id++ }}</td>
                                             <td><img src="{{ $item[0]->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
 

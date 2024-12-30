@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('structure_code');
             $table->string('structure_type');
 
+            $table->foreignId('parent_id')->nullable();
+
             $table->timestamps();
         });
     }

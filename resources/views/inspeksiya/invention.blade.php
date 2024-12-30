@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Barcha Ixtro/DGU/Foydali Model</h3>
                             <div class="ml-auto d-flex">
-                                <button id="zipDownload" class="btn btn-success">
+                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}" data-csrf="{{ csrf_token() }}" data-name="inventions">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
                                 </button>
                             </div>
@@ -59,7 +59,7 @@
 
                                         @foreach ($files as $item)
                                         <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
+                                            <td><input type="checkbox" class="checkItem" data-uuid="{{ $item->uuid }}"></td>
                                             <td>{{ $id++ }}</td>
                                             <td><img src="{{ $item->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                             <td>{{ $item->user->fio() }}</td>
@@ -70,7 +70,7 @@
                                             <td>{{ $item->invention->authors }}</td>
                                             <td>{{ $item->invention->publish_params }}</td>
                                             <td>{{ $item->invention->education_year->name }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td>{!! $item->download_tag() !!}</td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'reviewed')
                                             <td>

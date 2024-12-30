@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Institutdagi Talabalar Reytingi</h3>
                             <div class="ml-auto d-flex">
-                                <button id="excelDownload" class="btn btn-success">
+                                <button id="excelDownload" class="btn btn-success" onclick="window.location = '{{ route('excel.general-institute') }}';">
                                     <i class="fas fa-file-excel"></i> Excel yuklash
                                 </button>
                             </div>
@@ -56,7 +56,7 @@
                                             <td>{{ $student['level'] }}-kurs</td>
                                             <td>{{ $student['teacher'] }}</td>
                                             <td>{{ $student['faculty'] }}</td>
-                                            <td>{{ $student['specialty'] }}</td>
+                                            <td>{{ $student['direction'] }}</td>
                                             <td>{{ $student['total_score'] }}</td>
                                         </tr>    
                                         @endforeach

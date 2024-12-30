@@ -11,8 +11,12 @@ Route::get('edit-profile', [PageController::class, 'edit_profile']);
 Route::get('attach-student', [PageController::class, 'attach_student']);
 Route::get('distinguished-scholarship', [PageController::class, 'distinguished_scholarship']);
 
+Route::get('/department-list/{faculty}', [DeanController::class, 'department_list']);
+Route::get('/student-list/{faculty}', [DeanController::class, 'student_list']);
+Route::get('/employee-list/{department}', [DeanController::class, 'employee_list']);
+
 Route::post('edit-profile', [DeanController::class, 'edit_profile']);
-Route::post('attach-student', [DeanController::class, 'attach_student']);
+Route::post('/attach-student', [DeanController::class, 'attach_student']);
 
 Route::prefix('rating')->group(function () {
     Route::get('faculty', [RatingController::class, 'faculty']);

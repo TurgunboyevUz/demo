@@ -51,7 +51,7 @@
                         <label for="participant" class="form-label">
                             <i class="fas fa-users"></i> Ishtirokchilar
                         </label>
-                        <select id="participant" class="form-control" name="participant" required onchange="toggleTeamInputs()">
+                        <select id="participants" class="form-control" name="participant" required onchange="toggleTeamInputs()">
                             <option value="" disabled selected>Tanlang</option>
                             <option value="team">Jamoaviy</option>
                             <option value="individual">Yakkalik</option>
@@ -67,6 +67,7 @@
                             <i class="fas fa-user"></i> F.I.SH
                         </label>
                         <input type="text" id="teamMemberName" class="form-control" name="team_members" placeholder="Ishtirokchilar ismi, sharifi">
+                        
                         @if($errors->has('team_members'))
                         <span class="text-danger">{{ $errors->first('team_members') }}</span>
                         @endif
@@ -77,13 +78,15 @@
                         <label for="location" class="form-label">
                             <i class="fas fa-map-marker-alt"></i> O'tkazilgan joyi
                         </label>
-                        <select id="location" class="form-control" name="location" required>
+                        <select id="location" class="form-control" name="location_id" required>
                             <option value="" disabled selected>Tanlang</option>
-                            <option value="tashkent">Toshkent</option>
-                            <option value="andijan">Andijon</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
                         </select>
-                        @if($errors->has('location'))
-                        <span class="text-danger">{{ $errors->first('location') }}</span>
+                        
+                        @if($errors->has('location_id'))
+                        <span class="text-danger">{{ $errors->first('location_id') }}</span>
                         @endif
                     </div>
 
@@ -150,7 +153,7 @@
                         <td>{{ $item->type() }}</td>
                         <td>{{ $item->criteria->name }}</td>
                         <td>{{ $item->team_members() }}</td>
-                        <td>{{ $item->location() }}</td>
+                        <td>{{ $item->getLocation() }}</td>
                         <td>{{ $item->document_type() }}</td>
                         <td>{!! $item->file->download_tag() !!}</td>
                         <td>

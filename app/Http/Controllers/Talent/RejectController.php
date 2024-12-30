@@ -32,7 +32,7 @@ class RejectController extends Controller
 
     public function toast($file_type)
     {
-        toast($file_type . ' rad etildi!', 'info', 'top-end')->width('25rem')
+        toast($file_type.' rad etildi!', 'info', 'top-end')->width('25rem')
             ->background('#f5f6f7')
             ->showCloseButton()
             ->timerProgressBar();

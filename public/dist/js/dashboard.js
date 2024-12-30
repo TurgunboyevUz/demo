@@ -47,27 +47,3 @@ darkModeToggle.addEventListener('click', async () => {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-document.querySelectorAll('.professor-option').forEach(option => {
-  option.addEventListener('click', function() {
-    document.querySelectorAll('.professor-option').forEach(opt => opt.classList.remove('selected'));
-    this.classList.add('selected');
-    const value = this.getAttribute('data-value');
-    console.log('Tanlangan professor:', value);
-  });
-});
-
-document.getElementById('professorForm').addEventListener('submit', async function(event) {
-  event.preventDefault();
-  Toastify({
-    text: "<i class='fas fa-check'></i> Professor muvaffaqiyatli tanlandi!",
-    duration: 3000,
-    gravity: "top",
-    position: "right",
-    backgroundColor: "#4CAF50",
-    stopOnFocus: true
-  }).showToast();
-  await sleep(2000);
-  window.location.reload();
-});
-

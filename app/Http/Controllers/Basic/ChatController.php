@@ -9,59 +9,62 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    public function sendMessage(Request $request)
+    public function getMessages(Request $request, Chat $chat)
     {
-        $validated = $request->validate([
-            'chat_id' => 'required|exists:chats,id',
-            'user_id' => 'required|exists:users,id',
-            'content' => 'required|string',
-        ]);
+        $user = $request->user();
 
-        $chat = Chat::findOrFail($validated['chat_id']);
+        if ($chat->user_one_id == $user->id or $chat->user_two_id == $user->id) {
+            try {
+                $chat->messages()->where('user_id', '!=', $user->id)->update(['seen' => true]);
+                $messages = $chat->messages()->with('user')->orderBy('created_at', 'asc')->get();
 
-        if (!in_array($validated['user_id'], [$chat->user_one_id, $chat->user_two_id])) {
-            return response()->json(['error' => 'User not part of this chat'], 403);
+                $html = view('chat.messages', compact('user', 'messages'))->render();
+
+                return response()->json([
+                    'success' => true,
+                    'messages' => $html,
+                ]);
+            } catch (\Throwable $e) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $e->getMessage(),
+                ], 401);
+            }
+        } else {
+            return response()->json(['success' => false], 401);
         }
-
-        $message = Message::create([
-            'chat_id' => $validated['chat_id'],
-            'user_id' => $validated['user_id'],
-            'content' => $validated['content'],
-        ]);
-
-        return response()->json($message, 201);
     }
 
-    public function getMessages(Request $request)
+    public function sendMessage(Request $request, Chat $chat)
     {
-        dd($request->user());
-
-        $validated = $request->validate([
-            'chat_id' => 'required|exists:chats,id',
+        $request->validate([
+            'message' => 'required|string|max:255',
         ]);
 
-        $messages = Message::where('chat_id', $validated['chat_id'])
-            ->orderBy('created_at', 'asc')
-            ->get();
+        $user = $request->user();
 
-        return response()->json($messages, 200);
+        $message = new Message();
+        $message->chat_id = $chat->id;
+        $message->user_id = $user->id;
+        $message->content = $request->message;
+        $message->save();
+
+        return response()->json(['success' => true]);
     }
 
-    public function deleteMessage(Request $request)
+    public function deleteMessage(Request $request, Chat $chat)
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'message_id' => 'required|exists:messages,id',
-            'user_id' => 'required|exists:users,id',
         ]);
 
-        $message = Message::findOrFail($validated['message_id']);
+        $message = Message::find($data['message_id']);
 
-        if ($message->user_id !== $validated['user_id']) {
-            return response()->json(['error' => 'Unauthorized'], 403);
+        if ($message->user_id == $request->user()->id) {
+            $message->delete();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false], 401);
         }
-
-        $message->delete();
-
-        return response()->json(['success' => 'Message deleted'], 200);
     }
 }

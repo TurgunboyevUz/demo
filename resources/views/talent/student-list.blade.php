@@ -56,7 +56,7 @@
                                                 <td>{{ $student->faculty->name }}</td>
                                                 <td>{{ $student->direction->name }}</td>
                                                 <td>{{ $student->level }}</td>
-                                                <td>{{ $student->user->getFiles()->sum('student_score') }}</td>
+                                                <td>{{ $student->user->student_files()->sum('student_score') }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

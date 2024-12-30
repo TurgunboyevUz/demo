@@ -25,8 +25,9 @@
                 <div class="card-header">
                     <h3 class="card-title">Talabalar ma'lumotlari</h3>
                     <div class="float-right">
-                        <button class="btn btn-success btn-sm mr-2" id="excel-download"><i class="fas fa-file-excel"></i> Excel Yuklash</button>
-                        <button class="btn btn-primary btn-sm" id="zip-download"><i class="fas fa-file-archive"></i> ZIP Yuklash</button>
+                        <button class="btn btn-success btn-sm mr-2" id="excel-download" onclick="window.location = '{{ route('excel.attached-students') }}';">
+                            <i class="fas fa-file-excel"></i> Excel Yuklash
+                        </button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -87,33 +88,32 @@
                             <tr>
                                 <td class="text-center"><input type="checkbox" class="student-checkbox"></td>
                                 <td>{{ $i++ }}</td>
-                                <td><img src="{{ $student['picture_path'] }}" alt="Avatar" class="img-circle elevation-2" style="width: 50px; height: 50px;"></td>
+                                <td><img src="{{ $student['picture_path'] }}" alt="Avatar" class="img-circle elevation-2" style="width: 50px; height: 50px;" loading="lazy"></td>
                                 <td>{{ $student['fio'] }}</td>
                                 <td>{{ $student['level'] }}-kurs</td>
-                                <td>{{ $student['specialty'] }}</td>
-                                <td>{{ $student['articles']['scopus'] }}</td>
-                                <td>{{ $student['articles']['local'] }}</td>
-                                <td>{{ $student['articles']['global'] }}</td>
-                                <td>{{ $student['articles']['thesis'] }}</td>
-                                <td>{{ $student['scholarships']['institute'] }}</td>
-                                <td>{{ $student['scholarships']['region'] }}</td>
-                                <td>{{ $student['scholarships']['republic'] }}</td>
-                                <td>{{ $student['inventions']['invention'] }}</td>
-                                <td>{{ $student['inventions']['dgu'] }}</td>
-                                <td>{{ $student['inventions']['model'] }}</td>
-                                <td>{{ $student['startups']['startup'] }}</td>
-                                <td>{{ $student['startups']['contest'] }}</td>
-                                <td>{{ $student['grands']['grand'] }}</td>
-                                <td>{{ $student['grands']['economy'] }}</td></td>
-                                <td>{{ $student['olympics']['institute'] }}</td>
-                                <td>{{ $student['olympics']['region'] }}</td>
-                                <td>{{ $student['olympics']['republic'] }}</td>
-                                <td>{{ $student['lang']['ru'] }}</td>
-                                <td>{{ $student['lang']['en'] }}</td>
-                                <td>{{ $student['lang']['de'] }}</td>
-                                <td>{{ $student['achievements'] }}</td>
-                                <td>{{ $student['total_score'] }} ball</td>
-                                <!-- <td><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> O'chirish</button></td> -->
+                                <td>{{ $student['direction'] }}</td>
+                                <td>{{ $student['articles']['scopus'] ?? 0 }}</td>
+                                <td>{{ $student['articles']['local'] ?? 0 }}</td>
+                                <td>{{ $student['articles']['global'] ?? 0 }}</td>
+                                <td>{{ $student['articles']['thesis'] ?? 0 }}</td>
+                                <td>{{ $student['scholarships']['institute'] ?? 0 }}</td>
+                                <td>{{ $student['scholarships']['region'] ?? 0 }}</td>
+                                <td>{{ $student['scholarships']['republic'] ?? 0 }}</td>
+                                <td>{{ $student['inventions']['invention'] ?? 0 }}</td>
+                                <td>{{ $student['inventions']['dgu'] ?? 0 }}</td>
+                                <td>{{ $student['inventions']['model'] ?? 0 }}</td>
+                                <td>{{ $student['startups']['startup'] ?? 0 }}</td>
+                                <td>{{ $student['startups']['contest'] ?? 0 }}</td>
+                                <td>{{ $student['grands']['grand'] ?? 0 }}</td>
+                                <td>{{ $student['grands']['economy'] ?? 0 }}</td>
+                                <td>{{ $student['olympics']['institute'] ?? 0 }}</td>
+                                <td>{{ $student['olympics']['region'] ?? 0 }}</td>
+                                <td>{{ $student['olympics']['republic'] ?? 0 }}</td>
+                                <td>{{ $student['lang']['ru'] ?? 0 }}</td>
+                                <td>{{ $student['lang']['en'] ?? 0 }}</td>
+                                <td>{{ $student['lang']['de'] ?? 0 }}</td>
+                                <td>{{ $student['achievements'] ?? 0 }}</td>
+                                <td>{{ $student['total_score'] ?? 0 }} ball</td>
                             </tr>
                             @endforeach
                         </tbody>

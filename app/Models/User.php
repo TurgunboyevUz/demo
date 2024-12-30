@@ -31,6 +31,11 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    protected static function booted()
+    {
+        //
+    }
+
     public function full_name()
     {
         return $this->name.' '.$this->surname.' '.$this->patronymic;
@@ -48,7 +53,7 @@ class User extends Authenticatable
 
     public function picture_path()
     {
-        return asset('storage/' . $this->picture_path);
+        return asset('storage/'.$this->picture_path);
     }
 
     public function employee()
@@ -121,17 +126,12 @@ class User extends Authenticatable
         return $this->hasMany(Task::class, 'student_id', 'id');
     }
 
-    public function chat()
+    public function teacher_files()
     {
-        return $this->hasOne(Chat::class, 'user_one_id', 'id');
+        return $this->hasMany(File::class, 'teacher_id', 'id');
     }
 
-    public function chats()
-    {
-        return $this->hasMany(Chat::class, 'user_one_id', 'id');
-    }
-
-    public function getFiles()
+    public function student_files()
     {
         return $this->hasMany(File::class, 'uploaded_by', 'id');
     }

@@ -148,10 +148,10 @@
                         @foreach($data as $key => $item)
                         <tr>
                             <td>{{ $item[0]->user->fio() }}</td>
-                            <td><td>{!! $item[0]->download_tag() !!}</td></td>
-                            <td><td>{!! $item[1]->download_tag() !!}</td></a></td>
-                            <td><td>{!! $item[2]->download_tag() !!}</td></a></td>
-                            <td><td>{!! $item[3]->download_tag() !!}</td></a></td>
+                            <td>{!! $item[0]->download_tag() !!}</td>
+                            <td>{!! $item[1]->download_tag() !!}</td>
+                            <td>{!! $item[2]->download_tag() !!}</td>
+                            <td>{!! $item[3]->download_tag() !!}</td>
 
                             <td><span class="badge badge-{{ $item[0]->status()['color'] }}">{{ $item[0]->status()['name'] }}</span></td>
                             @if($item[0]->status == 'pending')

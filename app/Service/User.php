@@ -59,7 +59,7 @@ class User
     public function student(array $response, $user)
     {
         $level = str_replace('-kurs', '', $response['data']['level']['name']);
-        $address = $response['data']['province']['name'] . ' ' . $response['data']['district']['name'] . ' ' . $response['data']['address'];
+        $address = $response['data']['address'];
 
         $student = Student::updateOrCreate(['user_id' => $user->id], [
             'faculty_id' => $this->faculty($response),
@@ -94,36 +94,7 @@ class User
         ]);
 
         foreach ($items as $item) {
-            $role = $this->role($item['employee_type']['name'], $item['staff_position']['name']);
-
-            if (!$role) {
-                continue;
-            }
-
-            if ($role == 'teacher') {
-                $employee->update(['specialty_id' => $this->specialty($item)]);
-            }
-
-            $department_id = Department::firstOrCreate(
-                ['code' => $item['department']['code']],
-                ['name' => $item['department']['name']]
-            )->id;
-
-            $role_id = Role::where('name', $role)->first()->id;
-
-            if ($employee->departments()->where('department_id', $department_id)->where('role_id', $role_id)->exists()) {
-                continue;
-            }
-
-            $employee->departments()->attach($department_id, [
-                'role_id' => $role_id,
-
-                'employee_type' => $item['employee_type']['name'],
-                'employee_code' => $item['employee_type']['code'],
-
-                'staff_code' => $item['staff_position']['code'],
-                'staff_position' => $item['staff_position']['name'],
-            ]);
+            $this->department($item, $employee);
         }
 
         $arr = Arr::pluck($response['roles'], 'code');
@@ -177,16 +148,22 @@ class User
 
     public function faculty(array $response)
     {
-        $faculty = Faculty::firstOrCreate(['code' => $response['data']['faculty']['code']], ['name' => $response['data']['faculty']['name']]);
+        $faculty = Department::firstOrCreate(
+            ['code' => $response['data']['faculty']['code']],
+            [
+                'name' => $response['data']['faculty']['name'],
+                'structure_type' => $response['data']['faculty']['structureType']['name'],
+                'structure_code' => $response['data']['faculty']['structureType']['code'],
+            ]);
 
         return $faculty->id;
     }
 
     public function direction(array $response)
     {
-        $specialty = Direction::firstOrCreate(['code' => $response['data']['specialty']['code']], ['name' => $response['data']['specialty']['name']]);
+        $direction = Direction::firstOrCreate(['code' => $response['data']['specialty']['code']], ['name' => $response['data']['specialty']['name']]);
 
-        return $specialty->id;
+        return $direction->id;
     }
 
     public function group(array $response)
@@ -201,6 +178,48 @@ class User
         $specialty = Specialty::firstOrCreate(['name' => ucfirst($response['specialty'])]);
 
         return $specialty->id;
+    }
+
+    public function department(array $response, $employee)
+    {
+        $role = $this->role($response['employee_type']['name'], $response['staff_position']['name']);
+
+        if (!$role) {return;}
+
+        if ($role == 'teacher') {
+            $employee->update(['specialty_id' => $this->specialty($response)]);
+        }
+
+        $department = Department::firstOrCreate(
+            ['code' => $response['department']['code']],
+            ['name' => $response['department']['name']]
+        );
+
+        $role_id = Role::where('name', $role)->first()->id;
+
+        if ($employee->departments()->where('department_id', $department->id)->where('role_id', $role_id)->exists()) {return;}
+
+        $employee->departments()->attach($department->id, [
+            'role_id' => $role_id,
+
+            'employee_type' => $response['employee_type']['name'],
+            'employee_code' => $response['employee_type']['code'],
+
+            'staff_code' => $response['staff_position']['code'],
+            'staff_position' => $response['staff_position']['name'],
+        ]);
+
+        if($role == 'teacher' and $department->faculty()->exists()){
+            $employee->departments()->attach($department->faculty->id, [
+                'role_id' => $role_id,
+
+                'employee_type' => $response['employee_type']['name'],
+                'employee_code' => $response['employee_type']['code'],
+
+                'staff_code' => $response['staff_position']['code'],
+                'staff_position' => $response['staff_position']['name'],
+            ]);
+        }
     }
 
     public function role($employee_type, $staff_position)

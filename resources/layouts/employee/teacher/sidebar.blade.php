@@ -1,3 +1,28 @@
+@php
+    use App\Models\File\File;
+    use App\Models\File\Article;
+    use App\Models\File\Scholarship;
+    use App\Models\File\Invention;
+    use App\Models\File\Startup;
+    use App\Models\File\GrandEconomy;
+    use App\Models\File\Olympic;
+    use App\Models\File\LangCertificate;
+    use App\Models\File\Achievement;
+
+    $counts = [
+        'articles' => File::where('fileable_type', Article::class)->where('status', 'pending')->count(),
+        'scholarships' => File::where('fileable_type', Scholarship::class)->where('status', 'pending')->count(),
+        'inventions' => File::where('fileable_type', Invention::class)->where('status', 'pending')->count(),
+        'startups' => File::where('fileable_type', Startup::class)->where('status', 'pending')->count(),
+        'grand_economies' => File::where('fileable_type', GrandEconomy::class)->where('status', 'pending')->count(),
+        'olympics' => File::where('fileable_type', Olympic::class)->where('status', 'pending')->count(),
+        'lang_certificates' => File::where('fileable_type', LangCertificate::class)->where('status', 'pending')->count(),
+        'achievements' => File::where('fileable_type', Achievement::class)->where('status', 'pending')->count(),
+    ];
+
+    $all_count = collect($counts)->sum();
+@endphp
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
@@ -16,10 +41,8 @@
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-folder"></i>
-                    <p>
-                        Kelib tushgan hujjatlar
-                        <i class="right fas fa-angle-left"></i>
-                        <span class="right badge badge-danger">2</span>
+                    <p> Kelib tushgan hujjatlar <i class="right fas fa-angle-left"></i>
+                        <span class="right badge badge-danger">{{ $all_count }}</span>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -27,7 +50,7 @@
                         <a href="{{ route('employee.teacher.article') }}" class="nav-link">
                             <i class="nav-icon fas fa-upload"></i>
                             <p>Yuklangan Maqolalar
-                                <span class="right badge badge-info">2</span>
+                                <span class="right badge badge-info">{{ $counts['articles'] }}</span>
                             </p>
                         </a>
                     </li>
@@ -35,7 +58,7 @@
                         <a href="{{ route('employee.teacher.scholarship') }}" class="nav-link">
                             <i class="nav-icon fas fa-money-check"></i>
                             <p>Stipendiyat
-                                <span class="right badge badge-info">2</span>
+                                <span class="right badge badge-info">{{ $counts['scholarships'] }}</span>
                             </p>
                         </a>
                     </li>
@@ -43,7 +66,7 @@
                         <a href="{{ route('employee.teacher.invention') }}" class="nav-link">
                             <i class="nav-icon fas fa-lightbulb"></i>
                             <p>Ixtro/DGU/Foydali model
-                                <span class="right badge badge-info">2</span>
+                                <span class="right badge badge-info">{{ $counts['inventions'] }}</span>
                             </p>
                         </a>
                     </li>
@@ -51,7 +74,7 @@
                         <a href="{{ route('employee.teacher.startup') }}" class="nav-link">
                             <i class="nav-icon fas fa-rocket"></i>
                             <p>Startup/Tanlov
-                                <span class="right badge badge-info">2</span>
+                                <span class="right badge badge-info">{{ $counts['startups'] }}</span>
                             </p>
                         </a>
                     </li>
@@ -59,7 +82,7 @@
                         <a href="{{ route('employee.teacher.grand-economy') }}" class="nav-link">
                             <i class="nav-icon fas fa-handshake"></i>
                             <p>Grant/Xo'jalik shartonmalar
-                                <span class="right badge badge-info">2</span>
+                                <span class="right badge badge-info">{{ $counts['grand_economies'] }}</span>
                             </p>
                         </a>
                     </li>
@@ -67,7 +90,7 @@
                         <a href="{{ route('employee.teacher.olympics') }}" class="nav-link">
                             <i class="nav-icon fas fa-medal"></i>
                             <p>Olimpiyadalar
-                                <span class="right badge badge-info">2</span>
+                                <span class="right badge badge-info">{{ $counts['olympics'] }}</span>
                             </p>
                         </a>
                     </li>
@@ -75,19 +98,23 @@
                         <a href="{{ route('employee.teacher.lang-certificate') }}" class="nav-link">
                             <i class="nav-icon fas fa-language"></i>
                             <p>Til Sertifikatlari
-                                <span class="right badge badge-info">2</span>
+                                <span class="right badge badge-info">{{ $counts['lang_certificates'] }}</span>
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('employee.teacher.achievement') }}" class="nav-link active">
+                        <a href="{{ route('employee.teacher.achievement') }}" class="nav-link">
                             <i class="nav-icon fas fa-award"></i>
-                            <p>O’quv yili davomida erishgan <br>boshqa yutuqlari
-                                <span class="right badge badge-info">2</span>
-                            </p>
+                            <p>O’quv yili davomida<br>erishgan boshqa yutuqlari<br><span class="right badge badge-info">{{ $counts['achievements'] }}</span></p>
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('employee.teacher.tasks') }}" class="nav-link">
+                    <i class="nav-icon fas fa-tasks"></i>
+                    <p>Topshiriq yaratish</p>
+                </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('employee.teacher.student-list') }}" class="nav-link">
@@ -135,12 +162,6 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('employee.teacher.tasks') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tasks"></i>
-                    <p>Topshiriq yaratish</p>
-                </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('employee.teacher.chat') }}" class="nav-link">

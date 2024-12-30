@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Barcha Yutuqlar</h3>
                             <div class="ml-auto d-flex">
-                                <button id="zipDownload" class="btn btn-success">
+                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}" data-csrf="{{ csrf_token() }}" data-name="achievements">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
                                 </button>
                             </div>
@@ -59,14 +59,14 @@
 
                                         @foreach($files as $item)
                                         <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
+                                            <td><input type="checkbox" class="checkItem" data-uuid="{{ $item->uuid }}"></td>
                                             <td>{{ $id++ }}</td>
                                             <td><img src="{{ $item->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
                                             <td>{{ $item->user->fio() }}</td>
                                             <td>{{ $item->achievement->type() }}</td>
                                             <td>{{ $item->achievement->criteria->name }}</td>
                                             <td>{{ $item->achievement->team_members() }}</td>
-                                            <td>{{ $item->achievement->location() }}</td>
+                                            <td>{{ $item->achievement->getLocation() }}</td>
                                             <td>{{ $item->achievement->document_type() }}</td>
                                             <td>{!! $item->download_tag() !!}</td>
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Auth\Location;
 use App\Models\Auth\Student;
 use App\Models\Chat\Chat;
 use App\Models\Criteria\Category;
 use App\Models\Criteria\EducationYear;
 use App\Models\File\DistinguishedScholarship;
 use App\Models\File\File;
+use App\Service\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +22,7 @@ class PageController
         $group = $user->student->group->name;
         $faculty = $user->student->faculty->name;
 
-        $group_id = $user->student->group_id;
+        /*$group_id = $user->student->group_id;
         $faculty_id = $user->student->faculty_id;
 
         $groupmates = Student::with('user')->where('group_id', $group_id)->get();
@@ -46,7 +48,7 @@ class PageController
             ->take(3)
             ->get();
 
-        $facultymate_top = $facultymate_top->map(function ($file) use ($faculty) {
+        $facultymate_top = $facultymate_top->map(function ($file) {
             return [
                 'fio' => $file->user->short_fio(),
                 'level' => $file->user->student->level,
@@ -57,6 +59,9 @@ class PageController
         });
 
         $institute_top = File::select('uploaded_by', DB::raw('SUM(student_score) as total_score'))
+            ->whereHas('user', function ($query) {
+                $query->doesntHave('employee'); // Ensure the uploader is not an employee
+            })
             ->groupBy('uploaded_by')
             ->orderBy('total_score', 'desc')
             ->take(3)
@@ -70,7 +75,12 @@ class PageController
                 'total_score' => $file->total_score,
                 'picture_path' => $file->user->picture_path(),
             ];
-        });
+        });*/
+
+        $groupmate_scores = (new Rating($user, 'student'))->unsorted_group();
+        $groupmate_top = (new Rating($user, 'student'))->group(3);
+        $facultymate_top = (new Rating($user, 'student'))->faculty_students(3);
+        $institute_top = (new Rating($user, 'student'))->institute_students(3);
 
         return view('student.dashboard', compact('user', 'groupmate_scores', 'groupmate_top', 'facultymate_top', 'institute_top'));
     }
@@ -116,9 +126,10 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'startup')->first()->criterias;
+        $locations = Location::all();
         $data = $user->startups;
 
-        return view('student.startup', compact('user', 'criterias', 'data'));
+        return view('student.startup', compact('user', 'criterias', 'locations', 'data'));
     }
 
     public function grand_economy(Request $request)
@@ -166,9 +177,10 @@ class PageController
     {
         $user = $request->user();
         $criterias = Category::where('code', 'achievement')->first()->criterias;
+        $locations = Location::all();
         $data = $user->achievements;
 
-        return view('student.achievement', compact('user', 'criterias', 'data'));
+        return view('student.achievement', compact('user', 'criterias', 'locations', 'data'));
     }
 
     public function evaluation_criteria(Request $request)
@@ -183,14 +195,23 @@ class PageController
     {
         $user = $request->user();
         $first_user_id = $user->id;
-        $second_user_id = $user->student->employee->user->id;
+        $second_user_id = $user->student->employee?->user->id;
+
+        if(!$second_user_id) {
+            toast("Sizga professor-o'qituvchi biriktirilmagan", 'error', 'top-end')
+                ->background('#f5f6f7')
+                ->showCloseButton()
+                ->timerProgressBar();;
+
+            return view('student.chat', compact('user'));
+        }
 
         $chat = Chat::where(function ($query) use ($first_user_id, $second_user_id) {
             $query->where('user_one_id', $first_user_id)
-                  ->where('user_two_id', $second_user_id);
+                ->where('user_two_id', $second_user_id);
         })->orWhere(function ($query) use ($first_user_id, $second_user_id) {
-            $query->where('user_one_id', $first_user_id)
-                  ->where('user_two_id', $second_user_id);
+            $query->where('user_one_id', $second_user_id)
+                ->where('user_two_id', $first_user_id);
         })->first();
 
         if (!$chat) {

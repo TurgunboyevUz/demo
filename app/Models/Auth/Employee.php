@@ -15,11 +15,11 @@ class Employee extends Model
     public function departments()
     {
         return $this->belongsToMany(Department::class)
-            ->withPivot(['staff_position', 'employee_type', 'role_id', 'department_id'])
+            ->withPivot(['role_id', 'department_id', 'staff_position', 'employee_type'])
             ->withTimestamps();
     }
 
-    public function department($role_code, $structure_code = StructureType::FACULTY)
+    public function department($role_code, $structure_code = StructureType::FACULTY->value)
     {
         $role = Role::where('name', $role_code)->first();
 

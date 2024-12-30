@@ -3,15 +3,7 @@
 namespace App\Http\Controllers\Talent;
 
 use App\Http\Controllers\Controller;
-use App\Models\File\Achievement;
-use App\Models\File\Article;
 use App\Models\File\DistinguishedScholarship;
-use App\Models\File\GrandEconomy;
-use App\Models\File\Invention;
-use App\Models\File\LangCertificate;
-use App\Models\File\Olympic;
-use App\Models\File\Scholarship;
-use App\Models\File\Startup;
 use Illuminate\Http\Request;
 
 class ApproveController extends Controller

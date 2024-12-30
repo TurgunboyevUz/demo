@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Auth\Direction;
-use App\Models\Auth\Specialty;
 use Illuminate\Database\Seeder;
 
 class DirectionSeeder extends Seeder

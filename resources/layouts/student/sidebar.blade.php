@@ -18,7 +18,7 @@
                 <li class="nav-item">
                     <a href="{{ route('student.assignments') }}" class="nav-link">
                         <i class="nav-icon fas fa-tasks"></i>
-                        <p>Berilgan topshiriqlar <span class="right badge badge-primary">2</span></p>
+                        <p>Berilgan topshiriqlar <span class="right badge badge-primary">{{ $user->student->tasks()->count() }}</span></p>
                     </a>
                 </li>
                 <!-- Maqolalar Yuklash Dropdown Menu -->
@@ -71,15 +71,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('student.distinguished-scholarship') }}" class="nav-link">
-                        <i class="nav-icon fas fa-trophy"></i>
-                        <p>Nomdor stipendiyaga ariza topshirish</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('student.achievement') }}" class="nav-link">
                         <i class="nav-icon fas fa-award"></i>
                         <p>O’quv yili davomida erishgan <br>boshqa yutuqlari</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('student.distinguished-scholarship') }}" class="nav-link">
+                        <i class="nav-icon fas fa-trophy"></i>
+                        <p>Nomdor stipendiyaga ariza topshirish</p>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -23,7 +23,6 @@ Route::get('student-list', [PageController::class, 'student_list']);
 Route::get('evaluation-criteria', [PageController::class, 'evaluation_criteria']);
 Route::get('edit-profile', [PageController::class, 'edit_profile']);
 
-
 Route::post('article/approve', [ApproveController::class, 'article']);
 Route::post('scholarship/approve', [ApproveController::class, 'scholarship']);
 Route::post('invention/approve', [ApproveController::class, 'invention']);

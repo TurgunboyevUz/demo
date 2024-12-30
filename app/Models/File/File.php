@@ -2,49 +2,23 @@
 
 namespace App\Models\File;
 
+use App\Models\Criteria\EducationYear;
+use App\Models\Scopes\FileEducationYearScope;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    protected $fillable = [
-        'uuid',
-        'name',
-        'path',
-        'mime_type',
-        'size',
-        'uploaded_by',
-        'type',
-        'status', //pending, reviewed, approved, declined etc..
-    ];
+    protected $guarded = [];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new FileEducationYearScope);
+    }
 
     public function fileable()
     {
         return $this->morphTo();
-    }
-
-    public function status()
-    {
-        $statuses = [
-            'pending' => [
-                'name' => 'Kutilmoqda',
-                'color' => 'warning',
-            ],
-            'reviewed' => [
-                'name' => 'Tasdiqlanmoqda',
-                'color' => 'info',
-            ],
-            'approved' => [
-                'name' => 'Tasdiqlandi',
-                'color' => 'success',
-            ],
-            'rejected' => [
-                'name' => 'Rad etildi',
-                'color' => 'danger',
-            ],
-        ];
-
-        return $statuses[$this->status];
     }
 
     public function user()
@@ -61,6 +35,11 @@ class File extends Model
     public function inspector()
     {
         return $this->belongsTo(User::class, 'inspector_id');
+    }
+
+    public function education_year()
+    {
+        return $this->belongsTo(EducationYear::class);
     }
 
     public function achievement()
@@ -113,6 +92,30 @@ class File extends Model
         return $this->belongsTo(Task::class, 'fileable_id', 'id');
     }
 
+    public function status()
+    {
+        $statuses = [
+            'pending' => [
+                'name' => 'Kutilmoqda',
+                'color' => 'warning',
+            ],
+            'reviewed' => [
+                'name' => 'Tasdiqlanmoqda',
+                'color' => 'info',
+            ],
+            'approved' => [
+                'name' => 'Tasdiqlandi',
+                'color' => 'success',
+            ],
+            'rejected' => [
+                'name' => 'Rad etildi',
+                'color' => 'danger',
+            ],
+        ];
+
+        return $statuses[$this->status];
+    }
+
     public function download_link()
     {
         return route('storage.download', ['uuid' => $this->uuid]);
@@ -120,6 +123,6 @@ class File extends Model
 
     public function download_tag()
     {
-        return '<a href="' . $this->download_link() . '" target="_blank">' . $this->name . '</a>';
+        return '<a href="'.$this->download_link().'" target="_blank">'.$this->name.'</a>';
     }
 }

@@ -37,7 +37,7 @@ class FileController extends Controller
         $user = $request->user();
         $data = $request->validated();
 
-        if (! $user->employee->department('teacher', StructureType::FACULTY)) {
+        if (! $user->employee->department('teacher', StructureType::FACULTY->value)) {
             $role_id = Role::where('name', 'teacher')->first()->id;
             $user->employee->departments()->attach($data['faculty_id'], [
                 'role_id' => $role_id,

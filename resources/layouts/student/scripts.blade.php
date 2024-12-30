@@ -38,7 +38,7 @@
     });
 
     function toggleTeamInputs() {
-        const participants = document.getElementById('participant');
+        const participants = document.getElementById('participants');
         const teamMembers = document.getElementById('teamMembers');
 
         if (participants.value === 'team') {

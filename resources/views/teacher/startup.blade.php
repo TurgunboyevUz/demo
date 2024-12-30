@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Barcha Startup/Tanlov Yutuqlari</h3>
                             <div class="ml-auto d-flex">
-                                <button id="zipDownload" class="btn btn-success">
+                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}" data-csrf="{{ csrf_token() }}" data-name="startups">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash </button>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                             <td>{{ $item->startup->type() }}</td>
                                             <td>{{ $item->startup->criteria->name }}</td>
                                             <td>{{ $item->startup->team_members() }}</td>
-                                            <td>{{ $item->startup->location() }}</td>
+                                            <td>{{ $item->startup->getLocation() }}</td>
                                             <td>{{ $item->startup->title }}</td>
                                             <td>{!! $item->download_tag() !!}</td>
                                             <td>

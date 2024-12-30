@@ -15,11 +15,11 @@ class StoreStartupRequest extends FormRequest
     {
         return [
             'criteria_id' => 'required|exists:criterias,id',
+            'location_id' => 'required|exists:locations,id',
             'title' => 'required|string|max:255',
             'type' => 'required|in:startup,contest',
             'participant' => 'required|in:individual,team',
             'team_members' => 'nullable|string',
-            'location' => 'required|in:tashkent,andijan',
             'file' => 'required|mimes:pdf',
         ];
     }

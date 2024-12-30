@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Barcha biriktirilgan talabalar Maqolalari</h3>
                             <div class="ml-auto d-flex">
-                                <button id="zipDownload" class="btn btn-success">
+                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}" data-csrf="{{ csrf_token() }}" data-name="distinguished_scholarships">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
                                 </button>
                             </div>
@@ -55,15 +55,15 @@
 
                                         @foreach($files as $key => $item)
                                         <tr>
-                                            <td><input type="checkbox" class="checkItem"></td>
+                                            <td><input type="checkbox" class="checkItem" data-uuid='{{ json_encode([$item[0]->uuid, $item[1]->uuid, $item[2]->uuid, $item[3]->uuid]) }}'></td>
                                             <td>{{ $id++ }}</td>
                                             <td><img src="{{ $item[0]->user->picture_path() }}" alt="User" class="img-circle" style="height: 30px;"></td>
 
                                             <td>{{ $item[0]->user->fio() }}</td>
-                                            <td><td>{!! $item[0]->download_tag() !!}</td></td>
-                                            <td><td>{!! $item[1]->download_tag() !!}</td></td>
-                                            <td><td>{!! $item[2]->download_tag() !!}</td></td>
-                                            <td><td>{!! $item[3]->download_tag() !!}</td></td>
+                                            <td>{!! $item[0]->download_tag() !!}</td>
+                                            <td>{!! $item[1]->download_tag() !!}</td>
+                                            <td>{!! $item[2]->download_tag() !!}</td>
+                                            <td>{!! $item[3]->download_tag() !!}</td>
 
                                             <td><span class="badge badge-{{ $item[0]->status()['color'] }}">{{ $item[0]->status()['name'] }}</span></td>
                                             @if($item[0]->status == 'pending')

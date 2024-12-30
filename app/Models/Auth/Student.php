@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $table = 'students';
-
     protected $guarded = [];
 
     public function user()
@@ -24,7 +22,7 @@ class Student extends Model
 
     public function faculty()
     {
-        return $this->belongsTo(Faculty::class);
+        return $this->belongsTo(Department::class);
     }
 
     public function direction()

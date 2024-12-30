@@ -16,12 +16,12 @@ return new class extends Migration
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('criteria_id')->constrained('criterias')->cascadeOnDelete();
+            $table->foreignId('location_id')->constrained('locations')->cascadeOnDelete();
 
             $table->string('title');
             $table->enum('type', ['startup', 'contest']);
             $table->enum('participant', ['individual', 'team']);
             $table->text('team_members')->nullable();
-            $table->enum('location', ['tashkent', 'andijan']);
 
             $table->timestamps();
         });

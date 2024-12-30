@@ -8,7 +8,7 @@ Artisan::command('tree', function () {
     ];
 
     $path = base_path();
-    $tree = exec("tree --prune -I '" . implode('|', $exclude) . "' $path", $output);
+    $tree = exec("tree --prune -I '".implode('|', $exclude)."' $path", $output);
 
     foreach ($output as $line) {
         $this->comment($line);
@@ -26,7 +26,7 @@ Artisan::command('pint', function () {
 Artisan::command('cp-migrate', function () {
     $glob = glob(database_path('tables/*.php'));
 
-    $map = array(
+    $map = [
         'create_users_table',
         'create_cache_table',
         'create_permission_tables',
@@ -56,16 +56,16 @@ Artisan::command('cp-migrate', function () {
         'create_scholarships_table',
         'create_startups_table',
         'create_tasks_table',
-    );
+    ];
 
     foreach ($map as $item) {
-        $file = array_filter($glob, function($file) use ($item) {
+        $file = array_filter($glob, function ($file) use ($item) {
             return strpos(basename($file), $item) !== false;
         });
 
         $file = array_shift($file);
 
-        copy($file, database_path('migrations/' . now()->format('Y_m_d_His_') . $item . '.php'));
+        copy($file, database_path('migrations/'.now()->format('Y_m_d_His_').$item.'.php'));
 
         sleep(3);
     }

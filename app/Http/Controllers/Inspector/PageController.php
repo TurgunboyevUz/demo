@@ -15,6 +15,7 @@ use App\Models\File\LangCertificate;
 use App\Models\File\Olympic;
 use App\Models\File\Scholarship;
 use App\Models\File\Startup;
+use App\Service\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,49 +26,8 @@ class PageController extends Controller
         $user = $request->user();
         $department = $user->employee->department('inspeksiya');
 
-        $students = File::select('uploaded_by', DB::raw('SUM(student_score) as total_student_score'))
-            ->where('teacher_id', '!=', null)
-            ->groupBy('uploaded_by')
-            ->orderBy('total_student_score', 'desc')
-            ->take(3)
-            ->get();
-
-        $employees = File::select('teacher_id', DB::raw('SUM(teacher_score) as total_teacher_score'))
-            ->where('teacher_id', '!=', null)
-            ->groupBy('teacher_id')
-            ->orderBy('total_teacher_score', 'desc')
-            ->take(3)
-            ->get();
-
-        $top3_stu = [];
-
-        foreach ($students as $student) {
-            $top3_stu[] = [
-                'fio' => $student->user->short_fio(),
-                'level' => $student->user->student->level,
-                'direction' => $student->user->student->direction->name,
-
-                'total_score' => $student->total_student_score,
-                'picture_path' => $student->user->picture_path(),
-            ];
-        }
-
-        $top3_ins = [];
-        foreach ($employees as $employee) {
-            $user = $employee->teacher;
-
-            $department = $user->employee->department('teacher', StructureType::DEPARTMENT);
-            $faculty = $user->employee->department('teacher', StructureType::FACULTY);
-
-            $top3_ins[] = [
-                'fio' => $user->short_fio(),
-                'faculty' => $faculty->name ?? 'Tanlanmagan',
-                'department' => $department->name,
-                
-                'total_score' => $employee->total_teacher_score,
-                'picture_path' => $user->picture_path(),
-            ];
-        }
+        $top3_stu = (new Rating($user))->getRating(Rating::ALL, Rating::STUDENT)->take(3);
+        $top3_ins = (new Rating($user))->getRating(Rating::ALL, Rating::TEACHER)->take(3);
 
         $data = compact('top3_stu', 'top3_ins');
 
@@ -78,7 +38,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Article::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.article', compact('user', 'files'));
@@ -88,7 +49,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Scholarship::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.scholarship', compact('user', 'files'));
@@ -98,7 +60,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Invention::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.invention', compact('user', 'files'));
@@ -108,7 +71,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Startup::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.startup', compact('user', 'files'));
@@ -118,7 +82,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', GrandEconomy::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.grand-economy', compact('user', 'files'));
@@ -128,7 +93,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Olympic::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.olympics', compact('user', 'files'));
@@ -138,7 +104,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', LangCertificate::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.lang-certificate', compact('user', 'files'));
@@ -148,7 +115,8 @@ class PageController extends Controller
     {
         $user = $request->user();
         $files = File::where('fileable_type', Achievement::class)
-            ->orderByRaw("FIELD(status, 'reviewed', 'pending', 'approved', 'rejected')")
+            ->where('status', '!=', 'pending')
+            ->orderByRaw("FIELD(status, 'reviewed', 'approved', 'rejected')")
             ->get();
 
         return view('inspeksiya.achievement', compact('user', 'files'));

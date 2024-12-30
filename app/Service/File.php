@@ -30,7 +30,8 @@ class File
 
     protected $user;
 
-    public function __construct() {}
+    public function __construct()
+    {}
 
     public function user(Request $request)
     {
@@ -115,7 +116,7 @@ class File
         $startup->type = $data['type'];
         $startup->participant = $data['participant'];
         $startup->team_members = $data['team_members'];
-        $startup->location = $data['location'];
+        $startup->location_id = $data['location_id'];
         $startup->save();
 
         $startup->upload_file($request, 'startups');
@@ -214,7 +215,7 @@ class File
         $achievement->type = $data['type'];
         $achievement->participant = $data['participant'];
         $achievement->team_members = $data['team_members'];
-        $achievement->location = $data['location'];
+        $achievement->location_id = $data['location_id'];
         $achievement->document_type = $data['document_type'];
         $achievement->save();
 

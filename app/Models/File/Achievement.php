@@ -2,6 +2,7 @@
 
 namespace App\Models\File;
 
+use App\Models\Auth\Location;
 use App\Models\User;
 use App\Traits\Fileable;
 use Illuminate\Database\Eloquent\Model;
@@ -35,9 +36,12 @@ class Achievement extends Model
 
     public function location()
     {
-        $arr = ['tashkent' => 'Toshkent', 'andijan' => 'Andijon'];
+        return $this->belongsTo(Location::class);
+    }
 
-        return $arr[$this->location];
+    public function getLocation()
+    {
+        return $this->location->name;
     }
 
     public function document_type()

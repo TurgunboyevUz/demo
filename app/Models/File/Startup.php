@@ -2,6 +2,7 @@
 
 namespace App\Models\File;
 
+use App\Models\Auth\Location;
 use App\Traits\Fileable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,8 +30,11 @@ class Startup extends Model
 
     public function location()
     {
-        $arr = ['tashkent' => 'Toshkent', 'andijan' => 'Andijan'];
+        return $this->belongsTo(Location::class);
+    }
 
-        return $arr[$this->location];
+    public function getLocation()
+    {
+        return $this->location->name;
     }
 }

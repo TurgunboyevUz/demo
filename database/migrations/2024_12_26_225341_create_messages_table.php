@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->text('content');
 
+            $table->boolean('seen')->default(0);
+
             $table->timestamps();
         });
     }

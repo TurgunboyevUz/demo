@@ -1,3 +1,9 @@
+@php
+    use App\Models\File\File;
+    use App\Models\File\DistinguishedScholarship;
+
+    $count = File::where('fileable_type', DistinguishedScholarship::class)->where('status', 'reviewed')->count();
+@endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
@@ -17,7 +23,7 @@
                 <a href="{{ route('employee.talent.distinguished-scholarship') }}" class="nav-link">
                     <i class="nav-icon fas fa-trophy"></i>
                     <p> Nomdor stipendiyaga arizalar
-                        <span class="right badge badge-info">2</span>
+                        <span class="right badge badge-info">{{ $count }}</span>
                     </p>
                 </a>
             </li>

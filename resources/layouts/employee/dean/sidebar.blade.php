@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('employee.teacher.rating.general-institute') }}" class="nav-link">
+                        <a href="{{ route('employee.dean.rating.general-institute') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Talabalarni institut bo'yicha reytingi</p>
                         </a>

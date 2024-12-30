@@ -15,10 +15,11 @@ class StoreAchievementRequest extends FormRequest
     {
         return [
             'criteria_id' => ['required', 'integer', 'exists:criterias,id'],
+            'location_id' => ['required', 'exists:locations,id'],
             'type' => ['required', 'string', 'in:sport,cultural'],
             'participant' => ['required', 'string', 'in:individual,team'],
             'team_members' => ['nullable', 'string'],
-            'location' => ['required', 'string', 'in:tashkent,andijan'],
+            
             'document_type' => ['required', 'string', 'in:certificate,diploma'],
             'file' => ['required', 'file', 'mimes:pdf'],
         ];

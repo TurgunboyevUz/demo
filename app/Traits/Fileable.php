@@ -3,13 +3,20 @@
 namespace App\Traits;
 
 use App\Models\Criteria\Criteria;
+use App\Models\Criteria\EducationYear;
 use App\Models\File\File;
+use App\Models\Scopes\FileEducationYearScope;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 trait Fileable
 {
+    protected static function booted()
+    {
+        static::addGlobalScope(new FileEducationYearScope());
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'uploaded_by', 'id');
@@ -38,6 +45,11 @@ trait Fileable
     public function criteria()
     {
         return $this->belongsTo(Criteria::class);
+    }
+
+    public function education_year()
+    {
+        return $this->file->education_year;
     }
 
     public function status()
@@ -72,6 +84,8 @@ trait Fileable
 
         $path = $file->store($directory, 'public');
 
+        $edu_year = EducationYear::where('is_current', true)->first();
+
         return $this->file()->create([
             'uuid' => (string) Str::uuid(),
             'name' => $name,
@@ -80,6 +94,8 @@ trait Fileable
             'size' => $file->getSize(),
             'type' => $key,
             'uploaded_by' => $request->user()->id,
+
+            'education_year_id' => $edu_year->id,
         ]);
     }
 }
