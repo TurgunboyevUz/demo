@@ -59,6 +59,17 @@ class DeanController extends Controller
         ]);
     }
 
+    public function detach_student(Request $request)
+    {
+        $student = Student::find($request->id);
+        $student->employee_id = null;
+        $student->save();
+
+        $this->toast('Talaba muvaffaqiyatli o\'chirildi!');
+
+        return redirect()->back();
+    }
+
     public function edit_profile(StoreProfileRequest $request)
     {
         $user = $request->user();

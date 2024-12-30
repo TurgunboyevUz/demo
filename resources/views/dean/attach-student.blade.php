@@ -55,7 +55,6 @@
                             </tr>
                         </thead>
                         <tbody id="assignedTableBody">
-                            <!-- Dinamik jadval -->
                         </tbody>
                     </table>
                     <center>
@@ -105,6 +104,7 @@
                 background: "#f5f6f7",
                 timerProgressBar: true,
                 showCloseButton: true,
+                showConfirmButton: false,
                 timer: 4000
             });
         }
@@ -197,6 +197,7 @@
         });
 
         const assignedPairs = new Set();
+
         $('#professorList, #studentList').on('click', function() {
             const selectedProfessor = $('#professorList .active');
             const selectedStudent = $('#studentList .active');

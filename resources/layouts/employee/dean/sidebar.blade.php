@@ -13,10 +13,16 @@
                     <p>Bosh sahifa</p>
                 </a>
             </li>
-            <li class="nav-item has-treeview">
+            <li class="nav-item">
                 <a href="{{ route('employee.dean.attach-student') }}" class="nav-link">
                     <i class="nav-icon fas fa-user-friends"></i>
                     <p> Talabani biriktirish</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('employee.dean.attached-students') }}" class="nav-link">
+                    <i class="nav-icon fas fa-link"></i>
+                    <p> Biriktirilgan talabalar ro'yxati</p>
                 </a>
             </li>
             <li class="nav-item has-treeview">

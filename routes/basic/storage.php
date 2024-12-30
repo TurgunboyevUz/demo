@@ -11,6 +11,7 @@ Route::prefix('storage')->group(function () {
 
 Route::prefix('excel')->group(function () {
     Route::get('/attached-students', [ExcelController::class, 'attached_students']);
+    Route::get('/attached-students-list', [ExcelController::class, 'attached_students_list']);
     Route::get('/distinguished-scholarship', [ExcelController::class, 'distinguished_scholarship']);
 
     Route::get('/department', [ExcelController::class, 'department']);

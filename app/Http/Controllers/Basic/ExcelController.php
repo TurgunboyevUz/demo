@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Basic;
 
 use App\Exports\AttachedStudentExport;
+use App\Exports\AttachedStudentListExport;
 use App\Exports\DepartmentExport;
 use App\Exports\DistinguishedScholarshipExport;
 use App\Exports\FacultyExport;
@@ -20,6 +21,13 @@ class ExcelController extends Controller
         $class = new AttachedStudentExport($request);
 
         return Excel::download($class, 'attached_students.xlsx');
+    }
+
+    public function attached_students_list(Request $request)
+    {
+        $class = new AttachedStudentListExport($request);
+
+        return Excel::download($class, 'attached_students_list.xlsx');
     }
 
     public function distinguished_scholarship(Request $request)

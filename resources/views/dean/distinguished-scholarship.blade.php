@@ -25,7 +25,7 @@
                                             <th style="width: 5%;"><input type="checkbox" id="checkAll"></th>
                                             <th style="width: 5%;">#</th>
                                             <th>Rasmi</th>
-                                            <th>Talaba nomi</th>
+                                            <th>Talaba ismi, familiyasi</th>
                                             <th>Pasport nusxasi</th>
                                             <th>Reyting daftarchasi</th>
                                             <th>Fakultet bayonnomasi</th>

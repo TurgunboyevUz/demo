@@ -59,6 +59,22 @@ class PageController extends Controller
         return view('dean.attach-student', compact('user', 'faculties', 'departments', 'department'));
     }
 
+    public function attached_students(Request $request)
+    {
+        $user = $request->user();
+        $department = $user->employee->department('dean');
+        $students = Student::with(['user', 'employee.user', 'employee.departments', 'direction', 'group',
+            'faculty' => function ($query) use ($department) {
+                $query->where('id', $department->id);
+            }])->get();
+
+        $students = $students->filter(function ($student) {
+            return $student->employee != null;
+        });
+
+        return view('dean.attached-students', compact('user', 'students', 'department'));
+    }
+
     public function distinguished_scholarship(Request $request)
     {
         $user = $request->user();
