@@ -65,8 +65,8 @@
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'reviewed')
                                             <td>
-                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->olympic->id }}" data-url="{{ route('employee.inspeksiya.olympic.approve') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->olympic->id }}" data-url="{{ route('employee.inspeksiya.olympic.reject') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-ban"></i></button>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->olympic->id }}" data-url="{{ route('employee.inspeksiya.olympics.approve') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->olympic->id }}" data-url="{{ route('employee.inspeksiya.olympics.reject') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-ban"></i></button>
                                             </td>
                                             @elseif($item->status == 'rejected')
                                             <td>
