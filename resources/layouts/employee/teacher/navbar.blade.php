@@ -82,7 +82,7 @@
                     </a>
                 @endforeach
                 <div class="dropdown-divider"></div>
-                <a href="teacher-messages.html" class="dropdown-item dropdown-footer">Barchasini ko'rish</a>
+                <a href="{{ route('employee.teacher.chat') }}" class="dropdown-item dropdown-footer">Barchasini ko'rish</a>
             </div>
         </li>
 

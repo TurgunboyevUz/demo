@@ -34,6 +34,7 @@ class GeneralFacultyExport implements FromCollection, WithMapping, WithHeadings,
 
         $department = $user->employee->department($role, StructureType::FACULTY->value);
         $students = File::select('uploaded_by', DB::raw('SUM(student_score) as total_student_score'))
+            ->where('teacher_id', '!=', null)
             ->groupBy('uploaded_by')
             ->orderBy('total_student_score', 'desc')
             ->get();

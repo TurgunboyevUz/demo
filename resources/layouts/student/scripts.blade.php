@@ -9,6 +9,9 @@
 <!-- Dashboard JS -->
 <script src="{{ asset('dist/js/dashboard.js') }}"></script>
 
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const currentUrl = window.location.href; // Get the current URL
@@ -20,6 +23,18 @@
             } else {
                 link.classList.remove('active'); // Ensure other links do not have 'active'
             }
+        });
+    });
+
+    $(function() {
+        $("table").each(function() {
+            $(this).DataTable({
+                responsive: true,
+                autoWidth: false,
+                language: {
+                    url: "{{ asset('dist/js/uzbek.json') }}"
+                }
+            });
         });
     });
 

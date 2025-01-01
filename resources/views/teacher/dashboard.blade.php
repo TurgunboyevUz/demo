@@ -117,6 +117,9 @@
                                 </div>
                                 <div class="card-body scrollable-card-body">
                                     <div class="list-group">
+                                        @if(count($data['top3_att']) == 0)
+                                            <h5 class="text-center">O'qituvchiga biriktirilgan talabalar mavjud emas.</h5>
+                                        @endif
                                         @foreach($data['top3_att'] as $item)
                                         <div class="list-group-item d-flex align-items-start mb-3">
                                             <img src="{{ $item['picture_path'] }}" alt="User Avatar" class="img-circle elevation-2" style="width: 60px; height: 60px;">

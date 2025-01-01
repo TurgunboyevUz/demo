@@ -1,4 +1,4 @@
-@extends('layouts::employee.dean.app')
+@extends('layouts::student.app')
 
 @section('content')
 <div class="content-wrapper">
@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Talabalarni institut bo'yicha umumiy reytingi</h1>
+                    <h1 class="m-0">Fakultet bo'yicha umumiy reyting</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item active">Talabalarni institut bo'yicha umumiy reytingi</li>
+                        <li class="breadcrumb-item active">Fakultet bo'yicha umumiy reyting</li>
                     </ol>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Institutdagi Talabalar Reytingi</h3>
+                            <h3 class="card-title">Fakultetdagi talabalar reytingi</h3>
                             <div class="ml-auto d-flex">
-                                <button id="excelDownload" class="btn btn-success" onclick="window.location = '{{ route('excel.general-faculty', ['role' => 'dean']) }}';">
+                                <button id="excelDownload" class="btn btn-success" onclick="window.location = '{{ route('excel.student-faculty') }}';">
                                     <i class="fas fa-file-excel"></i> Excel yuklash
                                 </button>
                             </div>
@@ -41,19 +41,17 @@
                                             <th style="width: 3%;">#</th>
                                             <th>Talaba FIO</th>
                                             <th>Kursi</th>
-                                            <th>Kimga biriktirilgan</th>
                                             <th>Yo'nalishi</th>
                                             <th>Umumiy ball</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $i = 1; @endphp
-                                        @foreach($students as $student)
+                                        @foreach($data as $student)
                                         <tr>
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $student['fio'] }}</td>
                                             <td>{{ $student['level'] }}-kurs</td>
-                                            <td>{{ $student['teacher'] }}</td>
                                             <td>{{ $student['direction'] }}</td>
                                             <td>{{ $student['total_score'] }}</td>
                                         </tr>    

@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 
-class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles, WithMapping
+class StudentInstituteExport implements FromCollection, WithHeadings, WithStyles, WithMapping
 {
     use ExcelStyle;
 
@@ -41,7 +41,6 @@ class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles
             $arr[] = [
                 'fio' => $data->short_fio(),
                 'level' => $data->student->level,
-                'teacher' => $data->student->employee->user->short_fio(),
                 'faculty' => $data->student->faculty->name,
                 'direction' => $data->student->direction->name,
                 'total_score' => $student->total_student_score,
@@ -57,7 +56,6 @@ class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles
             $this->index++,
             $user['fio'],
             $user['level'],
-            $user['teacher'],
             $user['faculty'],
             $user['direction'],
             $user['total_score']
@@ -70,7 +68,6 @@ class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles
             '#',
             'Talaba ism, familiyasi',
             'Kursi',
-            'O\'qituvchi',
             'Fakultet',
             'Yo\'nalishi',
             'Jami ball'

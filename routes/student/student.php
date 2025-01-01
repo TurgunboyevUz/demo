@@ -41,6 +41,11 @@ $routes = function () {
     Route::delete('lang-certificate/destroy', [FileController::class, 'destroy_lang_certificate']);
     Route::delete('distinguished-scholarship/destroy', [FileController::class, 'destroy_distinguished_scholarship']);
     Route::delete('achievement/destroy', [FileController::class, 'destroy_achievement']);
+
+    Route::prefix('/rating')->group(function () {
+        Route::get('faculty', [PageController::class, 'faculty_rating']);
+        Route::get('institute', [PageController::class, 'institute_rating']);
+    });
 };
 
 Route::prefix('student')->middleware(['auth', 'role:student'])->group($routes);

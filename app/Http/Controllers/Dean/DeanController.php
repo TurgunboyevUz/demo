@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dean\StoreProfileRequest;
 use App\Models\Auth\Department;
 use App\Models\Auth\Student;
+use App\Models\File\File;
 use Illuminate\Http\Request;
 
 class DeanController extends Controller
@@ -62,8 +63,13 @@ class DeanController extends Controller
     public function detach_student(Request $request)
     {
         $student = Student::find($request->id);
-        $student->employee_id = null;
-        $student->save();
+        $employee = $student->employee;
+
+        $student->update(['employee_id' => null]);
+        
+        File::where('teacher_id', $employee->user_id)->where('uploaded_by', $student->user_id)->update([
+            'teacher_score' => 0
+        ]);
 
         $this->toast('Talaba muvaffaqiyatli o\'chirildi!');
 

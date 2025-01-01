@@ -10,6 +10,8 @@ use App\Exports\FacultyExport;
 use App\Exports\GeneralFacultyExport;
 use App\Exports\GeneralInstituteExport;
 use App\Exports\InstituteExport;
+use App\Exports\StudentFacultyExport;
+use App\Exports\StudentInstituteExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -70,5 +72,19 @@ class ExcelController extends Controller
         $class = new GeneralInstituteExport($request);
 
         return Excel::download($class, 'general_institute.xlsx');
+    }
+
+    public function student_faculty(Request $request)
+    {
+        $class = new StudentFacultyExport($request);
+
+        return Excel::download($class, 'student_faculty.xlsx');
+    }
+
+    public function student_institute(Request $request)
+    {
+        $class = new StudentInstituteExport($request);
+
+        return Excel::download($class, 'student_institute.xlsx');
     }
 }

@@ -20,4 +20,7 @@ Route::prefix('excel')->group(function () {
 
     Route::get('/general-faculty', [ExcelController::class, 'general_faculty']);
     Route::get('/general-institute', [ExcelController::class, 'general_institute']);
+
+    Route::get('/student-faculty', [ExcelController::class, 'student_faculty']);
+    Route::get('/student-institute', [ExcelController::class, 'student_institute']);
 });

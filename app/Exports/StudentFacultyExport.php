@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Enums\StructureType;
 use App\Models\File\File;
 use App\Traits\ExcelStyle;
 use Illuminate\Http\Request;
@@ -10,8 +11,9 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles, WithMapping
+class StudentFacultyExport implements FromCollection, WithMapping, WithHeadings, WithStyles
 {
     use ExcelStyle;
 
@@ -23,10 +25,13 @@ class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles
         $this->request = $request;
     }
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
+        $user = $this->request->user();
+        $faculty = $user->student->faculty;
+
         $students = File::select('uploaded_by', DB::raw('SUM(student_score) as total_student_score'))
             ->where('teacher_id', '!=', null)
             ->groupBy('uploaded_by')
@@ -36,13 +41,15 @@ class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles
         $arr = [];
 
         foreach ($students as $student) {
+            if ($student->user->student->faculty->code != $faculty->code) {
+                continue;
+            }
+
             $data = $student->user;
 
             $arr[] = [
                 'fio' => $data->short_fio(),
                 'level' => $data->student->level,
-                'teacher' => $data->student->employee->user->short_fio(),
-                'faculty' => $data->student->faculty->name,
                 'direction' => $data->student->direction->name,
                 'total_score' => $student->total_student_score,
             ];
@@ -51,29 +58,25 @@ class GeneralInstituteExport implements FromCollection, WithHeadings, WithStyles
         return collect($arr);
     }
 
-    public function map($user): array
-    {
-        return [
-            $this->index++,
-            $user['fio'],
-            $user['level'],
-            $user['teacher'],
-            $user['faculty'],
-            $user['direction'],
-            $user['total_score']
-        ];
-    }
-
     public function headings(): array
     {
         return [
             '#',
             'Talaba ism, familiyasi',
             'Kursi',
-            'O\'qituvchi',
-            'Fakultet',
             'Yo\'nalishi',
             'Jami ball'
+        ];
+    }
+
+    public function map($student): array
+    {
+        return [
+            $this->index++,
+            $student['fio'],
+            $student['level'],
+            $student['direction'],
+            $student['total_score']
         ];
     }
 }

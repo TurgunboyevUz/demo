@@ -22,61 +22,6 @@ class PageController
         $group = $user->student->group->name;
         $faculty = $user->student->faculty->name;
 
-        /*$group_id = $user->student->group_id;
-        $faculty_id = $user->student->faculty_id;
-
-        $groupmates = Student::with('user')->where('group_id', $group_id)->get();
-        $facultymates = Student::with('user')->where('faculty_id', $faculty_id)->get();
-
-        $groupmate_scores = $groupmates->map(function ($student) use ($group) {
-            $total_score = File::select(DB::raw('SUM(student_score) as total_score'))->first();
-
-            return [
-                'fio' => $student->user->short_fio(),
-                'group' => $group,
-                'total_score' => $total_score->total_score,
-                'picture_path' => $student->user->picture_path(),
-            ];
-        });
-
-        $groupmate_top = $groupmate_scores->sortByDesc('total_score')->take(3)->toArray();
-
-        $facultymate_top = File::select('uploaded_by', DB::raw('SUM(student_score) as total_score'))
-            ->whereIn('uploaded_by', $facultymates->pluck('user_id'))
-            ->groupBy('uploaded_by')
-            ->orderBy('total_score', 'desc')
-            ->take(3)
-            ->get();
-
-        $facultymate_top = $facultymate_top->map(function ($file) {
-            return [
-                'fio' => $file->user->short_fio(),
-                'level' => $file->user->student->level,
-                'direction' => $file->user->student->direction->name,
-                'total_score' => $file->total_score,
-                'picture_path' => $file->user->picture_path(),
-            ];
-        });
-
-        $institute_top = File::select('uploaded_by', DB::raw('SUM(student_score) as total_score'))
-            ->whereHas('user', function ($query) {
-                $query->doesntHave('employee'); // Ensure the uploader is not an employee
-            })
-            ->groupBy('uploaded_by')
-            ->orderBy('total_score', 'desc')
-            ->take(3)
-            ->get();
-
-        $institute_top = $institute_top->map(function ($file) {
-            return [
-                'fio' => $file->user->short_fio(),
-                'faculty' => $file->user->student->faculty->name,
-                'direction' => $file->user->student->direction->name,
-                'total_score' => $file->total_score,
-                'picture_path' => $file->user->picture_path(),
-            ];
-        });*/
-
         $groupmate_scores = (new Rating($user, 'student'))->unsorted_group();
         $groupmate_top = (new Rating($user, 'student'))->group(3);
         $facultymate_top = (new Rating($user, 'student'))->faculty_students(3);
@@ -181,6 +126,22 @@ class PageController
         $data = $user->achievements;
 
         return view('student.achievement', compact('user', 'criterias', 'locations', 'data'));
+    }
+
+    public function faculty_rating(Request $request)
+    {
+        $user = $request->user();
+        $data = (new Rating($user, 'student'))->getRating(Rating::FACULTY, Rating::STUDENT)->take();
+
+        return view('student.rating.faculty', compact('user', 'data'));
+    }
+
+    public function institute_rating(Request $request)
+    {
+        $user = $request->user();
+        $data = (new Rating($user, 'student'))->getRating(Rating::ALL, Rating::STUDENT)->take();
+
+        return view('student.rating.institute', compact('user', 'data'));
     }
 
     public function evaluation_criteria(Request $request)

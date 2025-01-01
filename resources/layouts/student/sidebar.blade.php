@@ -82,6 +82,27 @@
                         <p>Nomdor stipendiyaga ariza topshirish</p>
                     </a>
                 </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p> Statistika <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('student.rating.faculty') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Fakultet reytingi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.rating.institute') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Institut reytingi</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('student.evaluation-criteria') }}" class="nav-link">
                         <i class="nav-icon fas fa-star"></i>

@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const currentUrl = window.location.href; // Get the current URL
-    const navLinks = document.querySelectorAll('.nav-link'); // Select all navigation links
+    const currentUrl = window.location.href;
+    const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         if (link.href === currentUrl) {
-            link.classList.add('active'); // Add 'active' class to the matching link
+            link.classList.add('active');
         } else {
-            link.classList.remove('active'); // Ensure other links do not have 'active'
+            link.classList.remove('active');
         }
     });
 });
@@ -66,7 +66,7 @@ $(document).ready(function () {
                 _token: csrfToken
             },
             xhrFields: {
-                responseType: "blob", // Handle binary data
+                responseType: "blob",
             },
             success: function (data, status, xhr) {
                 const filename = xhr.getResponseHeader("Content-Disposition")
@@ -92,7 +92,6 @@ $(document).ready(function () {
 
 $(function() {
     $("table").each(function() {
-        // Skip initialization for tables with id 'ListofProfessorsandStudents' or 'assignedTable'
         if ($(this).attr('id') !== "ListofProfessorsandStudents" && $(this).attr('id') !== "assignedTable" && !$.fn.dataTable.isDataTable(this)) {
             $(this).DataTable({
                 responsive: true,

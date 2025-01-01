@@ -16,7 +16,7 @@ class RatingController extends Controller
         $user = $request->user();
         $employees = (new Rating($user))->getRating(Rating::ALL, Rating::TEACHER)->take();
 
-        return view('inspeksiya.rating.institute', compact('user', 'employees'));
+        return view('talent.rating.institute', compact('user', 'employees'));
     }
 
     public function general_institute(Request $request)
@@ -25,6 +25,6 @@ class RatingController extends Controller
 
         $students = (new Rating($user))->getRating(Rating::ALL, Rating::STUDENT)->take();
 
-        return view('inspeksiya.rating.general-institute', compact('user', 'students'));
+        return view('talent.rating.general-institute', compact('user', 'students'));
     }
 }
