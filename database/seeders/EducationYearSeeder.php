@@ -16,18 +16,22 @@ class EducationYearSeeder extends Seeder
             [
                 'name' => '2024-2025',
                 'status' => true,
+                'is_current' => true
             ],
             [
                 'name' => '2025-2026',
                 'status' => false,
+                'is_current' => false
             ],
             [
                 'name' => '2026-2027',
                 'status' => false,
+                'is_current' => false
             ],
             [
                 'name' => '2027-2028',
                 'status' => false,
+                'is_current' => false
             ],
         ]);
     }
