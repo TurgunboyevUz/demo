@@ -1,3 +1,5 @@
+<!-- Uzbek locale -->
+<script>uzLocaleFile = "{{ asset('dist/js/uzbek.json') }}"</script>
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Loader JS -->
@@ -11,7 +13,7 @@
 <!-- Datatable JS -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-
-<script>uzLocaleFile = "{{ asset('dist/js/uzbek.json') }}"</script>
-
-<script src="{{ asset('js/scripts.js')}}"></script>
+<!-- Sweetalert JS -->
+<script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+<!-- Employee JS -->
+<script src="{{ asset('js/employee/main.js')}}"></script>

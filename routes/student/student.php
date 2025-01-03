@@ -48,4 +48,4 @@ $routes = function () {
     });
 };
 
-Route::prefix('student')->middleware(['auth', 'role:student'])->group($routes);
+Route::prefix('student')->middleware(['auth', 'locale', 'role:student'])->group($routes);

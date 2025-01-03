@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Barcha biriktirilgan talabalar Maqolalari</h3>
                             <div class="ml-auto d-flex">
-                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}" data-csrf="{{ csrf_token() }}" data-name="distinguished_scholarships">
+                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}"  data-name="distinguished_scholarships">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
                                 </button>
                             </div>
@@ -68,8 +68,8 @@
                                             <td><span class="badge badge-{{ $item[0]->status()['color'] }}">{{ $item[0]->status()['name'] }}</span></td>
                                             @if($item[0]->status == 'pending')
                                             <td>
-                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $key }}" data-url="{{ route('employee.talent.distinguished-scholarship.approve') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $key }}" data-url="{{ route('employee.talent.distinguished-scholarship.reject') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-ban"></i></button>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $key }}" data-url="{{ route('employee.talent.distinguished-scholarship.approve') }}" ><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $key }}" data-url="{{ route('employee.talent.distinguished-scholarship.reject') }}" ><i class="fas fa-ban"></i></button>
                                             </td>
                                             @elseif($item[0]->status == 'rejected')
                                             <td>

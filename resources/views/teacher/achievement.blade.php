@@ -28,7 +28,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Barcha Yutuqlar</h3>
                             <div class="ml-auto d-flex">
-                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}" data-csrf="{{ csrf_token() }}" data-name="achievements">
+                                <button id="zipDownload" class="btn btn-success" data-url="{{ route('storage.zip') }}"  data-name="achievements">
                                     <i class="fas fa-file-archive"></i> ZIP Yuklash
                                 </button>
                             </div>
@@ -72,8 +72,8 @@
                                             <td><span class="badge badge-{{ $item->status()['color'] }}">{{ $item->status()['name'] }}</span></td>
                                             @if($item->status == 'pending')
                                             <td>
-                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->achievement->id }}" data-url="{{ route('employee.teacher.achievement.review') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-check"></i></button>
-                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->achievement->id }}" data-url="{{ route('employee.teacher.achievement.reject') }}" data-csrf="{{ csrf_token() }}"><i class="fas fa-ban"></i></button>
+                                                <button class="btn btn-sm btn-success confirmAction" data-id="{{ $item->achievement->id }}" data-url="{{ route('employee.teacher.achievement.review') }}" ><i class="fas fa-check"></i></button>
+                                                <button class="btn btn-sm btn-danger cancelAction" data-id="{{ $item->achievement->id }}" data-url="{{ route('employee.teacher.achievement.reject') }}" ><i class="fas fa-ban"></i></button>
                                             </td>
                                             @elseif($item->status == 'rejected')
                                             <td>

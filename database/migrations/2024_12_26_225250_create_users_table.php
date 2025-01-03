@@ -11,6 +11,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
+            $table->string('locale')->default('uz-la');
+
             $table->string('hemis_id');
             $table->foreignId('gender_id')->nullable();
             $table->foreignId('nation_id')->nullable();
